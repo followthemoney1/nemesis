@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "539590835829",
+    "firebase_url": "https://sportnews-8bbab.firebaseio.com",
+    "project_id": "sportnews-8bbab",
+    "storage_bucket": "sportnews-8bbab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539590835829:android:255549845f00b32a2bc23c",
+        "android_client_info": {
+          "package_name": "com.leaditteam.sport_news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539590835829-fe0rft9eud91b39se8pivvs2iud0j27r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ66dA-GmA7gF0uyMT_RnwjTPjslKs-RU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539590835829-fe0rft9eud91b39se8pivvs2iud0j27r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "539590835829-vte8e0qrl56erjapgecea12fpipkqsmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sportu"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539590835829:android:2cf389863aa08c5b2bc23c",
+        "android_client_info": {
+          "package_name": "com.sportu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539590835829-fe0rft9eud91b39se8pivvs2iud0j27r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ66dA-GmA7gF0uyMT_RnwjTPjslKs-RU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539590835829-fe0rft9eud91b39se8pivvs2iud0j27r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "539590835829-vte8e0qrl56erjapgecea12fpipkqsmn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sportu"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

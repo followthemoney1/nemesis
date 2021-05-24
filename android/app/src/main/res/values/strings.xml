@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SportsU</string>
+    <string name="default_notification_channel_id" translatable="false">channel_notification_sportu</string>
+
+    <string name="facebook_app_id_key">320262919082244</string>
+    <string name="fb_login_protocol_scheme">fb320262919082244</string><!--sportforecastss-->
+    <string name="notification_ch_name">SportsU app notification channel</string>
+
+</resources>
