@@ -11,6 +11,8 @@ import 'package:sport_news/ui/home/home_page.dart';
 import 'package:sport_news/ui/news_detail/news_detail_page.dart';
 import 'package:sport_news/ui/user_suggestion/user_suggestion.dart';
 
+import 'di/root_binding.dart';
+
 typedef PathWidgetBuilder = Widget Function(BuildContext, String);
 
 class Path {
@@ -43,11 +45,7 @@ class RouteConfiguration {
     GetPage(
       name: HomePage.tag,
       page: () => HomePage(),
-      // binding: BindingsBuilder(
-      //   () => Get.lazyPut<SignUpController>(
-      //     () => SignUpController(Get.find(), Get.find()),
-      //   ),
-      // ),
+      binding: RootBinding(),
     ),
     GetPage(
       name: AdminPanel.page,
@@ -58,15 +56,14 @@ class RouteConfiguration {
         ),
       ),
     ),
-    GetPage(
-      name: CreateTeam.page,
-      page: () => CreateTeam(),
-      binding: BindingsBuilder(
-        () => Get.lazyPut<CreateTeamController>(
-          () => CreateTeamController(Get.find()),
-        ),
-      ),
-    ),
+    // GetPage(
+    //   name: CreateTeam.page,
+    //   page: () => CreateTeam(),
+    //   binding: BindingsBuilder(
+    //     () => 
+    //     ),
+    //   ),
+    // ),
   ];
 
   static List<Path> paths = [
@@ -90,10 +87,10 @@ class RouteConfiguration {
       AdminPanel.page,
       (context, match) => AdminPanel(),
     ),
-    Path(
-      CreateTeam.page,
-      (context, match) => CreateTeam(),
-    ),
+    // Path(
+    //   CreateTeam.page,
+    //   (context, match) => CreateTeam(),
+    // ),
   ];
 //
 //  static List<Path> paths = [

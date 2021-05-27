@@ -55,6 +55,7 @@ dependencies:
   #facebook_deeplinks: ^0.1.0
   flutter_facebook_app_links: ^1.1.1+4
   get:
+  
 
 dev_dependencies:
   flutter_test:

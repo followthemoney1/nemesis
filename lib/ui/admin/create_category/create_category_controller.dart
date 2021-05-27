@@ -8,7 +8,8 @@ import 'package:sport_news/managers/firebase_manager.dart';
 
 class CreateCategoryController extends GetxController {
   FirebaseManager firebaseManager;
-  CreateCategoryController(this.firebaseManager);
+
+  CreateCategoryController({this.firebaseManager});
 
   TextEditingController teamName = TextEditingController();
 
@@ -28,12 +29,13 @@ class CreateCategoryController extends GetxController {
   }
 
   selectCategory(GameCategory c) {
-    this.chosenCategory = c;
+    chosenCategory = c;
     update();
   }
 
   loadCategory() async {
     categoryes = await firebaseManager.getGameCategoryes();
+    // chosenCategory = categoryes.first;
     print(categoryes.length);
     update();
   }

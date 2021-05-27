@@ -5,7 +5,8 @@ class GameCategory extends Equatable {
   String id;
   String name;
   String snapshotID;
-
+  GameCategory();
+  
   GameCategory.fromSnapshot(DocumentSnapshot snapshot) {
     this.snapshotID = snapshot.id;
     this.id = snapshot['id'];

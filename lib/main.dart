@@ -11,6 +11,8 @@ import 'package:sport_news/routes.dart';
 import 'package:sport_news/style/locale/localization_delegate.dart';
 import 'package:sport_news/style/theme/gallery_option.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
+import 'package:sport_news/ui/admin/admin_panel.dart';
+import 'package:sport_news/ui/admin/admin_panel_controller.dart';
 import 'package:sport_news/ui/filter/filter/filter_bloc.dart';
 import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/home/home_b/home_bloc.dart';
@@ -70,7 +72,7 @@ firstInit() async {
 
 class SimpleBlocObserver extends BlocObserver {
   @override
-  void onTransition(Bloc bloc,  transition) {
+  void onTransition(Bloc bloc, transition) {
     super.onTransition(bloc, transition);
   }
 }
@@ -102,48 +104,48 @@ class _SportNewsState extends State<SportNews> {
   @override
   Widget build(BuildContext context) {
     return OKToast(
-        /// set toast style, optional
-        child: ModelBinding(
-          initialModel: GalleryOptions(
-            textScaleFactor: systemTextScaleFactorOption,
-            customTextDirection: CustomTextDirection.localeBased,
-            // locale: Locale('ru'),
-            timeDilation: timeDilation,
-            platform: defaultTargetPlatform,
-            isTestMode: true,
-          ),
-          child: Builder(builder: (context) {
-            return FeatureDiscovery(
-              child: GetMaterialApp(
-                localeResolutionCallback:
-                    (Locale locale, Iterable<Locale> supportedLocales) {
-                  return locale;
-                },
-                getPages: RouteConfiguration.pages,
-                // onGenerateRoute: RouteConfiguration.onGenerateRoute,
-                initialBinding: InitialBinding(),
-                initialRoute: HomePage.tag,
-                debugShowCheckedModeBanner: false,
-                themeMode: _themeMode != null
-                    ? _themeMode
-                    : GalleryOptions.of(context).themeMode,
-                theme: NewsThemeData.lightThemeData.copyWith(
-                  platform: GalleryOptions.of(context).platform,
-                ),
-                darkTheme: NewsThemeData.darkThemeData.copyWith(
-                  platform: GalleryOptions.of(context).platform,
-                ),
-                localizationsDelegates: [
-                  ...NewsLocalizationsDelegate.localizationsDelegates,
-                ],
-                supportedLocales: [
-                  ...NewsLocalizationsDelegate.supportedLocales
-                ],
-              ),
-            );
-          }),
+      /// set toast style, optional
+      child: ModelBinding(
+        initialModel: GalleryOptions(
+          textScaleFactor: systemTextScaleFactorOption,
+          customTextDirection: CustomTextDirection.localeBased,
+          // locale: Locale('ru'),
+          timeDilation: timeDilation,
+          platform: defaultTargetPlatform,
+          isTestMode: true,
         ),
-      
+        child: Builder(builder: (context) {
+          return FeatureDiscovery(
+            child: GetMaterialApp(
+              
+              localeResolutionCallback:
+                  (Locale locale, Iterable<Locale> supportedLocales) {
+                return locale;
+              },
+              smartManagement: SmartManagement.full,
+              getPages: RouteConfiguration.pages,
+              // onGenerateRoute: RouteConfiguration.onGenerateRoute,
+              initialBinding: InitialBinding(),
+              // initialRoute: HomePage.tag,
+              initialRoute: AdminPanel.page,
+              debugShowCheckedModeBanner: false,
+              themeMode: _themeMode != null
+                  ? _themeMode
+                  : GalleryOptions.of(context).themeMode,
+              theme: NewsThemeData.lightThemeData.copyWith(
+                platform: GalleryOptions.of(context).platform,
+              ),
+              darkTheme: NewsThemeData.darkThemeData.copyWith(
+                platform: GalleryOptions.of(context).platform,
+              ),
+              localizationsDelegates: [
+                ...NewsLocalizationsDelegate.localizationsDelegates,
+              ],
+              supportedLocales: [...NewsLocalizationsDelegate.supportedLocales],
+            ),
+          );
+        }),
+      ),
     );
   }
 }
