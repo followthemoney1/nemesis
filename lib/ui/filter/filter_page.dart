@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_news/style/locale/localization.dart';
@@ -20,7 +21,7 @@ class _FilterPageState extends State<FilterPage> {
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,
-            title: Text(NewsLocalizations.of(context).filters)),
+            title: AutoSizeText(NewsLocalizations.of(context).filters)),
         body: BlocBuilder<FilterBloc, FilterState>(
             bloc: BlocProvider.of<FilterBloc>(context)..add(FilterEvent.init),
             builder: (context, state) {
@@ -56,7 +57,8 @@ class _FilterPageState extends State<FilterPage> {
                                           state.selectedCategories.contains(
                                               state.allCategories[index]));
                                 },
-                                title: Text(state.allCategories[index].title),
+                                title: AutoSizeText(
+                                    state.allCategories[index].title),
                               );
                             },
                           ),
@@ -77,7 +79,8 @@ class _FilterPageState extends State<FilterPage> {
                                     .filterNews(state.selectedCategories);
                                 Navigator.pop(context);
                               },
-                              child: Text(NewsLocalizations.of(context).select,
+                              child: AutoSizeText(
+                                  NewsLocalizations.of(context).select,
                                   style: Theme.of(context)
                                       .textTheme
                                       .button

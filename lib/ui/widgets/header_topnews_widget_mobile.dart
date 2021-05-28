@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -99,12 +100,12 @@ class _HeaderTopNewsWidgetMobileState extends State<HeaderTopNewsWidgetMobile>
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
+                  AutoSizeText(
                     NewsLocalizations.of(context).topNews,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   Expanded(
-                    child: Text(
+                    child: AutoSizeText(
                       el.creationDate,
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -138,7 +139,7 @@ class _HeaderTopNewsWidgetMobileState extends State<HeaderTopNewsWidgetMobile>
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Text(
+                    child: AutoSizeText(
                       el.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -156,8 +157,7 @@ class _HeaderTopNewsWidgetMobileState extends State<HeaderTopNewsWidgetMobile>
       ).paddingAll(PADDING_LR_MEDIUM),
     ).addOnTap(
       onTap: () {
-        _tapOnCard(
-            isDesktop: isDesktop,  newsElement: el, context: context);
+        _tapOnCard(isDesktop: isDesktop, newsElement: el, context: context);
       },
     );
   }

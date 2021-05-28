@@ -12,7 +12,6 @@ class AdminPanel extends GetView<AdminPanelController> {
 
   @override
   Widget build(BuildContext context) {
-    AutoSizeText()
     return Scaffold(
         body: Row(
           children: [

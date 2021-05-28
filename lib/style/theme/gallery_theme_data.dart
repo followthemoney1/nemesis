@@ -108,7 +108,7 @@ class NewsThemeData {
   );
 
   static const ColorScheme darkColorScheme = ColorScheme(
-    primary: Colors.white,
+    primary: Colors.teal,
     primaryVariant: Color(0xFF5D3DF3),
     secondary: Color(0xFFFF9500),
     secondaryVariant: Color(0xFFFFCC00),

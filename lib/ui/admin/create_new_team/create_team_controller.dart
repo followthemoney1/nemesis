@@ -12,15 +12,41 @@ class CreateTeamController extends GetxController {
 
   CreateTeamController(this.firebaseManager);
 
-  LocalTeam team = LocalTeam();
+  LocalTeam selectedTeam = LocalTeam();
+  LocalTeam createTeam = LocalTeam();
+
+  List<LocalTeam> _teams = <LocalTeam>[].obs;
+  List<LocalTeam> get teams => _teams;
+  set teams(List<LocalTeam> c) {
+    _teams.clear();
+    _teams.addAll(c);
+  }
 
   @override
   Future<void> onInit() async {
     super.onInit();
-  
+    await loadTeams();
   }
 
-
-  void publish(){
+   selectTeam(LocalTeam c) {
+    selectedTeam = c;
+    update();
   }
+
+  loadTeams() async {
+    teams = await firebaseManager.getTeams();
+    selectedTeam = teams.first;
+    print(teams.length);
+    update();
+  }
+
+  addNewTeam() async {
+    if (!createTeam.isBlank) {
+      await firebaseManager.addNewTeam(createTeam);
+      Get.snackbar("Added", "teamName.value ${selectedTeam.name}");
+    } else {
+      Get.snackbar("Error", "teamName.value is empty");
+    }
+  }
+
 }

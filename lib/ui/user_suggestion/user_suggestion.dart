@@ -97,7 +97,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                         right: PADDING_LR_MEDIUM),
                 AnimatedSwitcher(
                         duration: const Duration(milliseconds: 800),
-                        child: Text(
+                        child: AutoSizeText(
                           topDescription.elementAt(steps - 1),
                           key: ValueKey(topDescription.elementAt(steps - 1)),
                           style: Theme.of(context).textTheme.bodyText2,
@@ -163,7 +163,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text(
+                                                AutoSizeText(
                                                   steps.toString(),
                                                   style: Theme.of(context)
                                                       .textTheme
@@ -174,7 +174,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                                                 ),
                                                 Opacity(
                                                   opacity: 0.6,
-                                                  child: Text(
+                                                  child: AutoSizeText(
                                                     NewsLocalizations.of(
                                                             context)
                                                         .lastPage,
@@ -212,8 +212,8 @@ class _UserSuggestionState extends State<UserSuggestion>
 
   discoveryNextPress() {
     return DescribedFeatureOverlay(
-      title: Text(NewsLocalizations.of(context).steps),
-      description: Text(NewsLocalizations.of(context).clickHere),
+      title: AutoSizeText(NewsLocalizations.of(context).steps),
+      description: AutoSizeText(NewsLocalizations.of(context).clickHere),
       featureId: 'next_arrow',
       tapTarget: const Icon(Icons.arrow_forward),
       textColor: Theme.of(context).colorScheme.background,
@@ -242,8 +242,8 @@ class _UserSuggestionState extends State<UserSuggestion>
       alignment: Alignment.centerRight,
       child: DescribedFeatureOverlay(
         contentLocation: ContentLocation.above,
-        title: Text(NewsLocalizations.of(context).tellMe),
-        description: Text(text),
+        title: AutoSizeText(NewsLocalizations.of(context).tellMe),
+        description: AutoSizeText(text),
         featureId: steps.toString(),
         tapTarget: Container(
           child: CardItemWidget(

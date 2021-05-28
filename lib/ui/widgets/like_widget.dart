@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,7 +60,7 @@ class _LikeWidgetState extends State<LikeWidget> {
                     top: 6,
                     bottom: 6),
               ),
-              Text(
+              AutoSizeText(
                 likeCount,
                 style: Theme.of(context).textTheme.caption,
                 maxLines: 3,

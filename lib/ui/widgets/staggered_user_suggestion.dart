@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_news/data/network/categories.dart';
@@ -140,7 +141,7 @@ class CardItemWidgetState extends State<CardItemWidget>
                 child: AnimatedDefaultTextStyle(
                     duration: const Duration(milliseconds: 100),
                     style: selected ? selectedStyle : unselectedStyle,
-                    child: Text(
+                    child: AutoSizeText(
                       widget.el.name,
                       maxLines: 1,
                     ).paddingAll(selected ? 14 : 8)),

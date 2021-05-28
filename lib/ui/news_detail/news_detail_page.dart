@@ -160,7 +160,6 @@ class _NewsDetailPageState extends State<NewsDetailPage>
         //developer.log('arguments = ${arguments.toJson()}');
       });
       assert(arguments != null);
-     
 
       if (arguments.isWebView) {
         openUrl();
@@ -401,7 +400,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Expanded(
-          child: Text(
+          child: AutoSizeText(
             news.creationDate,
             textAlign: TextAlign.left,
             style:

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_news/pr_extension.dart';
 
@@ -54,7 +55,7 @@ class _GradientButtonState extends State<GradientButton>
                     borderRadius: BorderRadius.circular(widget.padding),
                   ),
                   color: (animation.value as Color),
-                  child: Text(
+                  child: AutoSizeText(
                     widget.innerText,
                     style: Theme.of(context)
                         .textTheme

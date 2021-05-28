@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_news/style/locale/localization.dart';
@@ -82,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage>
                       clicked = true;
                     },
                     child: Row(children: [
-                      Text(NewsLocalizations.of(context).colorSelection,
+                      AutoSizeText(NewsLocalizations.of(context).colorSelection,
                           style: Theme.of(context).textTheme.bodyText2),
                       Spacer(),
                       state.colorValue
@@ -138,7 +139,7 @@ class _SettingsPageState extends State<SettingsPage>
                       onPressed: () => BlocProvider.of<SettingsBloc>(context)
                           .add(SettingsEvent.resetRecommendations),
                       child: Row(children: [
-                        Text(
+                        AutoSizeText(
                             NewsLocalizations.of(context).resetRecommendations),
                         Spacer(),
                         Icon(Icons.arrow_forward_ios,
@@ -149,7 +150,7 @@ class _SettingsPageState extends State<SettingsPage>
                       rightPadding: true,
                       onPressed: () {},
                       child: Row(children: [
-                        Text(
+                        AutoSizeText(
                             NewsLocalizations.of(context).pointsOfNotification),
                         Spacer(),
                         Switch.adaptive(
@@ -181,7 +182,7 @@ class _SettingsPageState extends State<SettingsPage>
                 Icon(Icons.brightness_1, color: firstColor),
                 Icon(Icons.brightness_1, color: secondColor)
               ]),
-              Text(themeName,
+              AutoSizeText(themeName,
                   style: Theme.of(context)
                       .textTheme
                       .overline

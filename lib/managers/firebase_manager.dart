@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:sport_news/data/local/local_team.dart';
 import 'package:sport_news/data/network/categories.dart';
 import 'package:sport_news/data/network/firebase_languages.dart';
 import 'package:sport_news/data/network/firebase_news.dart';
@@ -15,6 +16,7 @@ import 'package:http/http.dart' as http;
 import 'package:sport_news/data/network_new/game_category.dart';
 
 final GAME_CATEGORY = 'game_categoryes';
+final ALL_TEAMS = 'all_teams';
 
 class FirebaseManager {
   FirebaseFirestore database = FirebaseFirestore.instance;
@@ -42,6 +44,19 @@ class FirebaseManager {
     }).toList();
 
     return categoryes;
+  }
+
+  Future<List<LocalTeam>> getTeams() async {
+    final doc = await database.collection(ALL_TEAMS).get();
+    final teams = doc.docs.map((snapshot) {
+      return LocalTeam.fromSnapshot(snapshot);
+    }).toList();
+
+    return teams;
+  }
+
+  addNewTeam(LocalTeam team) async {
+    await database.collection(ALL_TEAMS).add(team.toMap());
   }
 
   addNewCategory(String category) async {

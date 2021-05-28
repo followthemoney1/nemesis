@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,7 +77,7 @@ class CardListNewsState extends State<CardListNews> {
                   tag: el.heroName + "name_",
                   child: Material(
                     type: MaterialType.transparency,
-                    child: Text(
+                    child: AutoSizeText(
                       el.title,
                       style: Theme.of(context).textTheme.headline6,
                       maxLines: 2,
@@ -113,7 +114,7 @@ class CardListNewsState extends State<CardListNews> {
       Flexible(
         flex: 3,
         child: el.channelType == 'rss' || el.channelType == 'tg'
-            ? Text(
+            ? AutoSizeText(
                 el.channelName,
                 style: Theme.of(context)
                     .textTheme
@@ -126,7 +127,7 @@ class CardListNewsState extends State<CardListNews> {
       ),
       Flexible(
         flex: 2,
-        child: Text(
+        child: AutoSizeText(
           el.creationDate,
           textAlign: TextAlign.right,
           style: Theme.of(context)
