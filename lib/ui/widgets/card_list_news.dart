@@ -3,6 +3,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_news/data/network/firebase_news.dart';
+import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:sport_news/managers/app_type_checker.dart';
 import 'package:sport_news/managers/campaign_manager.dart';
 import 'package:sport_news/pr_extension.dart';
@@ -13,7 +14,7 @@ import '../../constants.dart';
 import 'like_widget.dart';
 
 class CardListNews extends StatefulWidget {
-  final FirebaseNews el;
+  final MatchEvent el;
 
   const CardListNews({@required this.el});
 
@@ -24,61 +25,79 @@ class CardListNews extends StatefulWidget {
 }
 
 class CardListNewsState extends State<CardListNews> {
-  var el;
+  MatchEvent match;
 
   @override
   void initState() {
     super.initState();
-    el = widget.el;
+    match = widget.el;
+    print(match.matchStreamUrl);
   }
 
   @override
   Widget build(BuildContext context) {
     final isDesktop = isDisplayDesktop(context);
+
     // final key = GlobalKey(debugLabel: el.title);
-    bool imageNonEmpty = el.images.length > 0 && el.images.first != null;
     return Card(
       color: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14.0),
+        borderRadius: BorderRadius.circular(6),
       ),
       // key: key,
       elevation: 8,
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Flexible(
-              flex: isDesktop ? 4 : 2,
-              child: Material(
+            flex: 2,
+            child: Stack(alignment: AlignmentDirectional.topCenter, children: [
+              Container(
+                width: double.infinity,
+                child: Material(
                   type: MaterialType.transparency,
                   child: Hero(
-                      tag: el.heroName + "image_",
-                      child: Container(
-                        width: isDesktop ? 600 : 100,
-                        height: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(14)),
-                          child: ExtendedImage.network(
-                              imageNonEmpty ? el?.images?.first?.url : "",
-                              fit: BoxFit.cover,
-                              cache: true,
-                              retries: 3,
-                              filterQuality: FilterQuality.low,
-                              loadStateChanged: loadImageStateFunction),
-                        ),
-                      ).paddingOnly(right: 6)))),
+                    tag: match.snapshotId + "image_",
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                      child: ExtendedImage.network('',
+                          fit: BoxFit.cover,
+                          cache: true,
+                          retries: 3,
+                          filterQuality: FilterQuality.low,
+                          loadStateChanged: loadImageStateFunction),
+                    ),
+                  ),
+                ),
+              ).paddingOnly(bottom: 13),
+              Positioned(
+                  bottom: 0,
+                  child: Chip(
+                      elevation: 4,
+                      label: AutoSizeText(
+                        match.isStarted().b,
+                        maxLines: 1,
+                        minFontSize: 8,
+                        style: Theme.of(context).textTheme.subtitle1.copyWith(
+                            fontSize: 14,
+                            color: match.isStarted().a
+                                ? Colors.red
+                                : Colors.white60),
+                      ),),)
+            ]),
+          ),
           Flexible(
-            flex: 5,
+            flex: 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Hero(
-                  tag: el.heroName + "name_",
+                  tag: match.snapshotId + "name_",
                   child: Material(
                     type: MaterialType.transparency,
                     child: AutoSizeText(
-                      el.title,
+                      match.bo.toString(),
                       style: Theme.of(context).textTheme.headline6,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -86,14 +105,14 @@ class CardListNewsState extends State<CardListNews> {
                     ),
                   ),
                 ),
-                Flexible(
-                  child: LikeWidget(
-                    firebaseNews: el,
-                  ),
-                ),
-                Flexible(
-                  child: cardHintWidget(el, context),
-                ),
+                // Flexible(
+                //   child: LikeWidget(
+                //     firebaseNews: el.snapshotId,
+                //   ),
+                // ),
+                // Flexible(
+                //   child: cardHintWidget(el, context),
+                // ),
               ],
             ).paddingOnly(
                 left: PADDING_LR_VERY_SMALL, right: PADDING_LR_MEDIUM),
@@ -101,12 +120,11 @@ class CardListNewsState extends State<CardListNews> {
         ],
       ),
     ).addOnTap(onTap: () {
-      _tapOnCard(isDesktop: isDesktop, newsElement: el);
+      // _tapOnCard(isDesktop: isDesktop, newsElement: el);
     }).paddingOnly(
-        left: 10,
-        right: 10,
-        top: isDesktop ? 20 : 10,
-        bottom: isDesktop ? 30 : 10);
+      left: isDesktop ? 10 : 2,
+      top: isDesktop ? 10 : 2,
+    );
   }
 
   cardHintWidget(FirebaseNews el, BuildContext context) {

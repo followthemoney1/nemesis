@@ -49,12 +49,12 @@ class NewsThemeData {
         toggleableActiveColor: Colors.white,
         colorScheme: colorScheme,
         bottomAppBarColor: _bottomAppBarColor,
-        textTheme: _textTheme.apply(displayColor: colorScheme.primary),
+        textTheme: _textThemeGoogle.apply(displayColor: colorScheme.primary),
 //      // Matches manifest.json colors and background color.
         primaryColor: colorScheme.primary,
         cardColor: colorScheme.onBackground,
         appBarTheme: AppBarTheme(
-          textTheme: _textTheme.apply(bodyColor: colorScheme.primary),
+          textTheme: _textThemeGoogle.apply(bodyColor: colorScheme.primary),
           color: colorScheme.background,
           elevation: 0,
           iconTheme: IconThemeData(color: colorScheme.secondary),
@@ -82,7 +82,8 @@ class NewsThemeData {
             _lightFillColor.withOpacity(0.80),
             _darkFillColor,
           ),
-          contentTextStyle: _textTheme.subtitle1.apply(color: _darkFillColor),
+          contentTextStyle:
+              _textThemeGoogle.subtitle1.apply(color: _darkFillColor),
         ),
         dialogBackgroundColor: colorScheme.surface,
         cursorColor: colorScheme.secondary,
@@ -133,56 +134,6 @@ class NewsThemeData {
   static const _heavy = FontWeight.w800;
   static const _black = FontWeight.w900;
 
-  static final TextTheme _textTheme = TextTheme(
-    headline1: TextStyle(
-        fontFamily: 'SFProDisplay',
-        fontWeight: _bold,
-        fontSize: 40.0,
-        letterSpacing: 1.21),
-    headline2: TextStyle(
-        fontFamily: 'SFProDisplay',
-        fontWeight: _bold,
-        fontSize: 28,
-        letterSpacing: 1.29),
-    headline3: TextStyle(
-        fontFamily: 'SFProText',
-        fontWeight: _bold,
-        fontSize: 22.0,
-        letterSpacing: 1.45),
-    headline4: TextStyle(
-        fontFamily: 'SFProDisplay',
-        fontWeight: _bold,
-        fontSize: 20,
-        letterSpacing: 1.9),
-    bodyText1: TextStyle(
-        fontFamily: 'SFProDisplay',
-        fontWeight: _regular,
-        fontSize: 17.0,
-        letterSpacing: -2.41),
-    button: TextStyle(
-        fontFamily: 'SFProDisplay',
-        fontWeight: _semibold,
-        fontSize: 17.0,
-        letterSpacing: 0),
-    subtitle1: TextStyle(
-        fontFamily: 'SFProText',
-        fontWeight: _regular,
-        fontSize: 15.0,
-        letterSpacing: -1.6),
-    caption: TextStyle(
-        fontFamily: 'SFProDisplay', fontWeight: _regular, fontSize: 12.0),
-    overline: TextStyle(
-        fontFamily: 'SFProText',
-        fontWeight: _regular,
-        fontSize: 11.0,
-        letterSpacing: 0.64),
-    subtitle2:
-        TextStyle(fontFamily: 'SFProText', fontWeight: _bold, fontSize: 15.0),
-    bodyText2: TextStyle(
-        fontFamily: 'SFProText',
-        fontWeight: _regular,
-        fontSize: 17.0,
-        letterSpacing: -0.24),
-    headline6: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 16.0),
-  );
-}
+  static final TextTheme _textThemeGoogle = GoogleFonts.comfortaaTextTheme();
+
+  }

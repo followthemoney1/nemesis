@@ -13,15 +13,12 @@ import 'package:sport_news/style/theme/gallery_option.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/admin/admin_panel.dart';
 import 'package:sport_news/ui/admin/admin_panel_controller.dart';
-import 'package:sport_news/ui/filter/filter/filter_bloc.dart';
 import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/home/home_b/home_bloc.dart';
 import 'package:sport_news/ui/home/home_page.dart';
 import 'package:sport_news/ui/news_detail/news_detail/news_detail_bloc.dart';
 import 'package:sport_news/ui/news_detail/news_detail_page.dart';
-import 'package:sport_news/ui/news_list/news_list/news_list_bloc.dart';
-import 'package:sport_news/ui/recommendations/recommendations/recommendations_bloc.dart';
-import 'package:sport_news/ui/saved_news/bloc/saved_news/saved_news_bloc.dart';
+
 import 'package:sport_news/ui/settings/settings/settings_bloc.dart';
 import 'package:sport_news/ui/user_suggestion/bloc/user_suggestion/user_suggestion_bloc.dart';
 import 'package:streams_channel/streams_channel.dart';
@@ -33,48 +30,13 @@ import 'managers/firebase_manager.dart';
 import 'managers/shared_preference_manager.dart';
 
 void main() async {
-  //GoogleFonts.config.allowRuntimeFetching = false;
-  await firstInit();
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider<HomeBloc>(
-        create: (BuildContext context) => HomeBloc(),
-      ),
-      BlocProvider<NewsListBloc>(
-        create: (BuildContext context) => NewsListBloc(),
-      ),
-      BlocProvider<UserSuggestionBloc>(
-        create: (BuildContext context) => UserSuggestionBloc(),
-      ),
-      BlocProvider<SavedNewsBloc>(
-        create: (BuildContext context) => SavedNewsBloc(),
-      ),
-      BlocProvider<SettingsBloc>(
-        create: (BuildContext context) => SettingsBloc(),
-      ),
-      BlocProvider<RecommendationsBloc>(
-        create: (BuildContext context) => RecommendationsBloc(),
-      ),
-      BlocProvider<FilterBloc>(
-        create: (BuildContext context) => FilterBloc(),
-      ),
-    ],
-    child: SportNews(),
-  ));
-}
-
-firstInit() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = SimpleBlocObserver();
-  // await SharedPreferenceManager().init();
-  // await FirebaseManager().init();
-}
 
-class SimpleBlocObserver extends BlocObserver {
-  @override
-  void onTransition(Bloc bloc, transition) {
-    super.onTransition(bloc, transition);
-  }
+  GoogleFonts.config.allowRuntimeFetching = true;
+
+  runApp(
+    SportNews(),
+  );
 }
 
 class SportNews extends StatefulWidget {
@@ -117,7 +79,6 @@ class _SportNewsState extends State<SportNews> {
         child: Builder(builder: (context) {
           return FeatureDiscovery(
             child: GetMaterialApp(
-              
               localeResolutionCallback:
                   (Locale locale, Iterable<Locale> supportedLocales) {
                 return locale;
@@ -126,8 +87,8 @@ class _SportNewsState extends State<SportNews> {
               getPages: RouteConfiguration.pages,
               // onGenerateRoute: RouteConfiguration.onGenerateRoute,
               initialBinding: InitialBinding(),
-              // initialRoute: HomePage.tag,
-              initialRoute: AdminPanel.page,
+              initialRoute: HomePage.tag,
+              // initialRoute: AdminPanel.page,
               debugShowCheckedModeBanner: false,
               themeMode: _themeMode != null
                   ? _themeMode

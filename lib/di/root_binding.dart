@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:sport_news/ui/admin/create_category/create_category_controller.dart';
+import 'package:sport_news/ui/news_list/news_list_controller.dart';
 
 class RootBinding implements Bindings {
   @override
@@ -11,6 +12,7 @@ class RootBinding implements Bindings {
     // Get.create<CreateCategoryController>(() => c);
     // Get.put<CreateCategoryController>(c, tag: c.tag);
     // Get.create<CreateTeamController>(() => CreateTeamController(Get.find()));
+    Get.lazyPut(() => MatchesListController(firebaseManager: Get.find()));
     print("root binding");
   }
 }

@@ -24,7 +24,7 @@ class CreateTeam extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         child: GetBuilder<CreateTeamController>(
           tag: tag,
-          init: CreateTeamController(Get.find()),
+          init: CreateTeamController(Get.find(),tag: tag),
           builder: (controller) => Container(
             child: Padding(
               padding: EdgeInsets.all(

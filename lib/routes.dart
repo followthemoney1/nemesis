@@ -6,7 +6,6 @@ import 'package:sport_news/ui/admin/admin_panel.dart';
 import 'package:sport_news/ui/admin/admin_panel_controller.dart';
 import 'package:sport_news/ui/admin/create_new_team/create_new_team.dart';
 import 'package:sport_news/ui/admin/create_new_team/create_team_controller.dart';
-import 'package:sport_news/ui/filter/filter_page.dart';
 import 'package:sport_news/ui/home/home_page.dart';
 import 'package:sport_news/ui/news_detail/news_detail_page.dart';
 import 'package:sport_news/ui/user_suggestion/user_suggestion.dart';
@@ -52,7 +51,7 @@ class RouteConfiguration {
       page: () => AdminPanel(),
       binding: BindingsBuilder(
         () => Get.lazyPut<AdminPanelController>(
-          () => AdminPanelController(),
+          () => AdminPanelController(firebase: Get.find(),)
         ),
       ),
     ),
@@ -79,10 +78,10 @@ class RouteConfiguration {
       UserSuggestion.tag, //+ r'/([\w-]+)$',
       (context, match) => UserSuggestion(),
     ),
-    Path(
-      FilterPage.tag, //+ r'/([\w-]+)$',
-      (context, match) => FilterPage(),
-    ),
+    // Path(
+    //   FilterPage.tag, //+ r'/([\w-]+)$',
+    //   (context, match) => FilterPage(),
+    // ),
     Path(
       AdminPanel.page,
       (context, match) => AdminPanel(),
