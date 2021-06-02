@@ -19,7 +19,7 @@ dependencies:
   #firebase_database: 6.1.2
   cloud_firestore:
   firebase_analytics:
-  firebase_auth:
+  firebase_auth: "^1.2.0"
   firebase_storage:
   #firebase_crashlytics: ^0.1.4+1
   flare_flutter: ^2.0.6
@@ -29,15 +29,15 @@ dependencies:
   step_progress_indicator: ^1.0.0
   feature_discovery: ^0.14.0
   flutter_staggered_animations: "^1.0.0"
-  equatable: ^2.0.0
+  equatable: ^2.0.2
   #ui \ code
   bloc: ^7.0.0
   flutter_bloc: ^7.0.0
   auto_size_text: ^2.1.0
-  url_launcher: ^6.0.4
+  url_launcher: ^6.0.5
   oktoast: ^3.0.0
   stream_transform: ^2.0.0
-  shared_preferences: ^2.0.5
+  shared_preferences: ^2.0.6
   rx_shared_preferences: ^2.1.0
 
   #other
@@ -48,15 +48,20 @@ dependencies:
   flutter_svg: ^0.22.0
   extended_image: ^4.1.0
   flutter_swiper: ^1.1.6
-  flutter_widget_from_html_core: ^0.6.1+1
+  #flutter_widget_from_html_core: ^0.6.1+1
   streams_channel: 0.3.0
   flutter_inappwebview: ^5.3.2
   #deeplinks
   #facebook_deeplinks: ^0.1.0
-  flutter_facebook_app_links: ^1.1.1+4
+  #flutter_facebook_app_links: ^1.1.1+4
   get:
   flutter_datetime_picker: ^1.5.1
+  google_sign_in: ^5.0.4
 
+dependency_overrides:
+  
+ 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

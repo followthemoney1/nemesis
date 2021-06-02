@@ -8,15 +8,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:html/parser.dart';
 
-String parseHtmlString(String htmlString) {
-  var document = parse(htmlString);
-
-  String parsedString = parse(document.body.text).documentElement.text;
-
-  return parsedString;
-}
 
 launchURL(String url, {autolaunch = true}) async {
   if (await canLaunch(url)) {

@@ -5,7 +5,6 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:sport_news/data/network/firebase_news.dart';
@@ -275,27 +274,27 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                                               : VisibilityFlag.gone),
                                 ]).paddingOnly(top: PADDING_TOP_SMALL),
 
-                                AnimatedSize(
-                                  vsync: this,
-                                  duration: const Duration(milliseconds: 400),
-                                  child: HtmlWidget(
-                                    arguments.text,
-                                    hyperlinkColor:
-                                        NewsThemeData.buttonMainColor,
-                                    onTapUrl: (link) {
-                                      //developer.log('launch link = ${link}');
-                                      launchURL(link);
-                                    },
-                                    textStyle: GoogleFonts.roboto(
-                                        textStyle: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2
-                                            .copyWith(
-                                                fontWeight: FontWeight.w300)),
-                                  ).paddingOnly(
-                                      top: PADDING_TOP_MEDIUM,
-                                      bottom: PADDING_TOP_MEDIUM),
-                                ),
+                                // AnimatedSize(
+                                //   vsync: this,
+                                //   duration: const Duration(milliseconds: 400),
+                                //   child: HtmlWidget(
+                                //     arguments.text,
+                                //     hyperlinkColor:
+                                //         NewsThemeData.buttonMainColor,
+                                //     onTapUrl: (link) {
+                                //       //developer.log('launch link = ${link}');
+                                //       launchURL(link);
+                                //     },
+                                //     textStyle: GoogleFonts.roboto(
+                                //         textStyle: Theme.of(context)
+                                //             .textTheme
+                                //             .bodyText2
+                                //             .copyWith(
+                                //                 fontWeight: FontWeight.w300)),
+                                //   ).paddingOnly(
+                                //       top: PADDING_TOP_MEDIUM,
+                                //       bottom: PADDING_TOP_MEDIUM),
+                                // ),
 
                                 arguments.isWebView
                                     ? Container(

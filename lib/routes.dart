@@ -6,11 +6,13 @@ import 'package:sport_news/ui/admin/admin_panel.dart';
 import 'package:sport_news/ui/admin/admin_panel_controller.dart';
 import 'package:sport_news/ui/admin/create_new_team/create_new_team.dart';
 import 'package:sport_news/ui/admin/create_new_team/create_team_controller.dart';
+import 'package:sport_news/ui/auth/auth_controller.dart';
 import 'package:sport_news/ui/home/home_page.dart';
 import 'package:sport_news/ui/news_detail/news_detail_page.dart';
 import 'package:sport_news/ui/user_suggestion/user_suggestion.dart';
 
 import 'di/root_binding.dart';
+import 'ui/auth/auth_page.dart';
 
 typedef PathWidgetBuilder = Widget Function(BuildContext, String);
 
@@ -50,16 +52,17 @@ class RouteConfiguration {
       name: AdminPanel.page,
       page: () => AdminPanel(),
       binding: BindingsBuilder(
-        () => Get.lazyPut<AdminPanelController>(
-          () => AdminPanelController(firebase: Get.find(),)
-        ),
+        () => Get.lazyPut<AdminPanelController>(() => AdminPanelController(
+              firebase: Get.find(),
+            )),
       ),
     ),
     // GetPage(
-    //   name: CreateTeam.page,
-    //   page: () => CreateTeam(),
+    //   name: AuthPage.page,
+    //   page: () => AuthPage(),
     //   binding: BindingsBuilder(
-    //     () => 
+    //     () => Get.lazyPut<AuthController>(
+    //       () => AuthController(firebaseManager: Get.find()),
     //     ),
     //   ),
     // ),

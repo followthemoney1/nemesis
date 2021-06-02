@@ -69,15 +69,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Header(
-        child: Center(
+      body:  Center(
           // key: mainWidgetKey,
           child: Stack(
             children: [
               Positioned(
-                top: 0,
+                top: Header.topHeight,
                 bottom: 0,
-                left: FluidNavBar.nominalWidth,
+                left: Header.topHeight,
                 right: 0,
                 child: SafeArea(
                   top: true,
@@ -87,14 +86,21 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Positioned(
+                top: 0,
+                right: 0,
+                left:0,
+                child:Header(
+              ),),
+              Positioned(
                 bottom: 0,
                 top: 0,
                 left: 0,
                 //right: 0,
                 child: FluidNavBar(onChange: _onItemTapped),
               )
+
             ],
-          ),
+          
         ),
       ),
       // bottomNavigationBar: FluidNavBar(onChange: _onItemTapped),

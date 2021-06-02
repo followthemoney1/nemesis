@@ -52,7 +52,7 @@ class NewsThemeData {
         textTheme: _textThemeGoogle.apply(displayColor: colorScheme.primary),
 //      // Matches manifest.json colors and background color.
         primaryColor: colorScheme.primary,
-        cardColor: colorScheme.onBackground,
+        cardColor: Color(0xFF323a45),//colorScheme.onBackground,
         appBarTheme: AppBarTheme(
           textTheme: _textThemeGoogle.apply(bodyColor: colorScheme.primary),
           color: colorScheme.background,
@@ -63,7 +63,7 @@ class NewsThemeData {
         iconTheme: IconThemeData(color: colorScheme.secondary),
         canvasColor: colorScheme.background,
         scaffoldBackgroundColor: colorScheme.background,
-        highlightColor: Colors.transparent,
+        highlightColor: colorScheme.primary,
         accentColor: colorScheme.primary,
         focusColor: focusColor,
         buttonColor: buttonMainColor,
@@ -86,7 +86,7 @@ class NewsThemeData {
               _textThemeGoogle.subtitle1.apply(color: _darkFillColor),
         ),
         dialogBackgroundColor: colorScheme.surface,
-        cursorColor: colorScheme.secondary,
+      
         errorColor: saveButtonColor,
         hintColor: colorScheme.primary.withOpacity(0.3),
         splashColor: Colors.transparent);
@@ -109,13 +109,13 @@ class NewsThemeData {
   );
 
   static const ColorScheme darkColorScheme = ColorScheme(
-    primary: Colors.teal,
+    primary: Color(0xFF03a9f4),
     primaryVariant: Color(0xFF5D3DF3),
-    secondary: Color(0xFFFF9500),
+    secondary: Color(0xFFf1f1f1),
     secondaryVariant: Color(0xFFFFCC00),
-    background: Color(0xFF181822),
-    surface: Color(0x0DFFFFFF),
-    onBackground: Color(0xFF26262E), // White with 0.05 opacity
+    background: Color(0xFF2b2f36),
+    surface: Color(0xFF323a45),
+    onBackground: Color(0xFF323a45), // White with 0.05 opacity
     error: _darkFillColor,
     onError: _darkFillColor,
     onPrimary: _darkFillColor,
@@ -124,15 +124,6 @@ class NewsThemeData {
     brightness: Brightness.dark,
   );
 
-  static const _ultralight = FontWeight.w100;
-  static const _thin = FontWeight.w200;
-  static const _light = FontWeight.w300;
-  static const _regular = FontWeight.w400;
-  static const _medium = FontWeight.w500;
-  static const _semibold = FontWeight.w600;
-  static const _bold = FontWeight.w700;
-  static const _heavy = FontWeight.w800;
-  static const _black = FontWeight.w900;
 
   static final TextTheme _textThemeGoogle = GoogleFonts.comfortaaTextTheme();
 

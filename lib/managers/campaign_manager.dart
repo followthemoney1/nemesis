@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter_facebook_app_links/flutter_facebook_app_links.dart';
 import 'package:sport_news/data/network/firebase_news.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 import 'package:sport_news/managers/shared_preference_manager.dart';
@@ -22,23 +21,7 @@ class CampaignManager {
 
   _init() {}
 
-  ///MARK: old method
-  Future<void> getFbDeepLink() async {
-    final fbLinks = await FlutterFacebookAppLinks.initFBLinks();
-    final link = fbLinks == null ? '' : fbLinks['deeplink'];
-    final params = (link != null && link.length > 0 && link.contains("?"))
-        ? link.split("?")[1]
-        : link;
-    developer.log('fb deeplink data = $params');
-    if (params != null &&
-        params.length > 0 &&
-        await sharedPreferenceManager.getDeepLinkData() != null) {
-      sharedPreferenceManager.saveDeepLinkData(params);
-      developer.log('fb deeplink initialUrl = $params');
-    }
-
-    //developer.log('fb deeplink from local storage = ${await sharedPreferenceManager.getDeepLinkData()}');
-  }
+ 
 
   // Future<void> getFbDeepLink() async {
   //   FacebookDeeplinks().onDeeplinkReceived.listen((data) {

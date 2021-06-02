@@ -25,7 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   init() async {
-    campaignManager.getFbDeepLink();
+   
 
     //  AppsflyerSdk appsFlyerSdk = AppsflyerSdk(appsFlyerOptions);
     //  appsFlyerSdk

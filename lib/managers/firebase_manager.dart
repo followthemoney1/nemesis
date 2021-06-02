@@ -4,8 +4,10 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sport_news/data/local/local_team.dart';
 import 'package:sport_news/data/network/categories.dart';
 import 'package:sport_news/data/network/firebase_languages.dart';
@@ -22,6 +24,7 @@ final MATCHES = "all_matches";
 
 class FirebaseManager {
   FirebaseFirestore database = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   String currentLanguage;
   FirebaseLanguages langKey;
@@ -37,6 +40,76 @@ class FirebaseManager {
     }
     // if (langKey == null) langKey = await getFirebaseLangKeyByLang();
     // if (newData == null) newData = await getNewsGroupsWithReturn();
+
+    await FirebaseAuth.instance.setPersistence(Persistence.SESSION);
+  }
+
+  //registration
+  Future<UserCredential> signInWithGoogle() async {
+    final googleUser = await GoogleSignIn(
+            // hostedDomain: "http://localhost",
+            clientId:
+                "151991726103-n2b1id464ohqdqjgtmrgeimpd92ierbr.apps.googleusercontent.com")
+        .signIn();
+
+    if (googleUser != null) {
+      final googleAuth = await googleUser.authentication;
+      // log(googleUser.toString());
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      return await auth.signInWithCredential(credential);
+    }
+  }
+
+  Future<String> createUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      return '';
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+        return 'weak-password';
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+        return 'email-already-in-use';
+      }
+    } catch (e) {
+      print(e);
+      return e.toString();
+    }
+  }
+
+//login
+  Future<String> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: "barry.allen@example.com",
+              password: "SuperSecretPassword!");
+      return '';
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        return 'user-not-found';
+      } else if (e.code == 'user-not-found') {
+        print('Wrong password provided for that user.');
+        return 'user-not-found';
+      }
+    }
+  }
+
+  Future<User> checkLoginState() async {
+    return auth.currentUser;
+  }
+
+  Stream<User> subscribeToLogginState() {
+    return auth.authStateChanges();
   }
 
 //MARK: match
@@ -44,7 +117,7 @@ class FirebaseManager {
     await database.collection(MATCHES).add(match.toMap());
   }
 
-  Future<List<MatchEvent>> getMatches() async{
+  Future<List<MatchEvent>> getMatches() async {
     final doc = await database.collection(MATCHES).get();
     final matches = doc.docs.map((snapshot) {
       return MatchEvent.fromSnapshot(snapshot);

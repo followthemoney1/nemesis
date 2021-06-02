@@ -42,10 +42,10 @@ class CardListNewsState extends State<CardListNews> {
     return Card(
       color: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(3),
       ),
       // key: key,
-      elevation: 8,
+      elevation: 6,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -59,7 +59,7 @@ class CardListNewsState extends State<CardListNews> {
                   child: Hero(
                     tag: match.snapshotId + "image_",
                     child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                      borderRadius: BorderRadius.all(Radius.circular(3)),
                       child: ExtendedImage.network('',
                           fit: BoxFit.cover,
                           cache: true,
