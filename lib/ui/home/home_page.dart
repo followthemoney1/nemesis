@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:sport_news/managers/campaign_manager.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 import 'package:sport_news/managers/shared_preference_manager.dart';
@@ -15,7 +14,6 @@ import 'package:sport_news/ui/news_list/news_list_page.dart';
 import 'package:sport_news/ui/settings/settings_page.dart';
 import 'package:sport_news/ui/user_suggestion/user_suggestion.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_nav_bar.dart';
-import 'package:streams_channel/streams_channel.dart';
 import 'dart:developer' as developer;
 
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
@@ -26,7 +24,7 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   static final tag = '/home';
 
@@ -44,7 +42,7 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedMenuItem = 0;
 
-  SharedPreferenceManager sharedPreferenceManager = SharedPreferenceManager();
+  SharedPreferenceManager sharedPreferenceManager = Get.find<SharedPreferenceManager>();
   // GlobalKey mainWidgetKey = GlobalKey();
   @override
   void initState() {

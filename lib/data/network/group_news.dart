@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseGroupNews {
-  String group;
-  String icon;
-  String key;
-  List<FirebaseGroup> groupList;
-  List<FirebaseGroup> categoryList;
+  String? group;
+  String? icon;
+  String? key;
+  List<FirebaseGroup>? groupList;
+  List<FirebaseGroup>? categoryList;
 
   FirebaseGroupNews(this.key, this.group, this.icon, this.groupList);
 

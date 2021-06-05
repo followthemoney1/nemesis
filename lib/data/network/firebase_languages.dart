@@ -3,8 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseLanguages {
-  String language;
-  String groupKey;
+  String? language;
+  String? groupKey;
   FirebaseLanguages({this.language, this.groupKey});
 
   // FirebaseLanguages.fromSnapshot(DocumentSnapshot snapshot)

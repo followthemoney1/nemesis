@@ -17,7 +17,7 @@ import '../../constants.dart';
 class LikeWidget extends StatefulWidget {
   final FirebaseNews firebaseNews;
   const LikeWidget({
-    @required this.firebaseNews,
+    required this.firebaseNews,
   });
   @override
   _LikeWidgetState createState() => _LikeWidgetState();
@@ -34,13 +34,13 @@ class _LikeWidgetState extends State<LikeWidget> {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: widget.firebaseNews.heroName + "like_hero_widget_text_temp_tag",
+      tag: widget.firebaseNews.heroName! + "like_hero_widget_text_temp_tag",
       child: BlocBuilder<LikeBloc, bool>(
         bloc: _bloc,
         builder: (context, state) {
           var likeCount;
-          if (widget.firebaseNews.likeCount > 1000) {
-            likeCount = "${widget.firebaseNews.likeCount / 1000}";
+          if (widget.firebaseNews.likeCount! > 1000) {
+            likeCount = "${widget.firebaseNews.likeCount! / 1000}";
           } else {
             likeCount = widget.firebaseNews.likeCount.toString();
           }
@@ -84,7 +84,7 @@ class LikeBloc extends Cubit<bool> {
 
   init() {}
   getLiked(FirebaseNews news) {
-    _sharedPreferenceManager.getLikeNewsRX(news.key).listen((liked) {
+    _sharedPreferenceManager.getLikeNewsRX(news.key!).listen((liked) {
       if (liked == null) liked = false;
 
       news.likedByUserTemp = liked;
@@ -93,14 +93,14 @@ class LikeBloc extends Cubit<bool> {
   }
 
   like(FirebaseNews news) async {
-    news.likeCount = news.likeCount + (state ? -1 : 1);
+    news.likeCount = news.likeCount! + (state ? -1 : 1);
     news.likedByUserTemp = !state;
     emit(news.likedByUserTemp);
     _runUpdate(news);
   }
 
   _runUpdate(FirebaseNews news) {
-    _sharedPreferenceManager.likeNews(news.key, news.likedByUserTemp);
+    _sharedPreferenceManager.likeNews(news.key!, news.likedByUserTemp);
     // _firebaseManager.updateFirebaseNewsKeyValue(
     //     valName: 'like_count', val: news.likeCount, newsKey: news.key);
   }

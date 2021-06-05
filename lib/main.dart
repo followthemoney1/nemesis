@@ -21,7 +21,6 @@ import 'package:sport_news/ui/news_detail/news_detail_page.dart';
 
 import 'package:sport_news/ui/settings/settings/settings_bloc.dart';
 import 'package:sport_news/ui/user_suggestion/bloc/user_suggestion/user_suggestion_bloc.dart';
-import 'package:streams_channel/streams_channel.dart';
 import 'dart:developer' as developer;
 import 'constants.dart';
 import 'di/initial_binding.dart';
@@ -80,7 +79,7 @@ class _SportNewsState extends State<SportNews> {
           return FeatureDiscovery(
             child: GetMaterialApp(
               localeResolutionCallback:
-                  (Locale locale, Iterable<Locale> supportedLocales) {
+                  (Locale? locale, Iterable<Locale> supportedLocales) {
                 return locale;
               },
               smartManagement: SmartManagement.full,
@@ -92,12 +91,12 @@ class _SportNewsState extends State<SportNews> {
               debugShowCheckedModeBanner: false,
               themeMode: _themeMode != null
                   ? _themeMode
-                  : GalleryOptions.of(context).themeMode,
+                  : GalleryOptions.of(context)!.themeMode!,
               theme: NewsThemeData.lightThemeData.copyWith(
-                platform: GalleryOptions.of(context).platform,
+                platform: GalleryOptions.of(context)!.platform,
               ),
               darkTheme: NewsThemeData.darkThemeData.copyWith(
-                platform: GalleryOptions.of(context).platform,
+                platform: GalleryOptions.of(context)!.platform,
               ),
               localizationsDelegates: [
                 ...NewsLocalizationsDelegate.localizationsDelegates,

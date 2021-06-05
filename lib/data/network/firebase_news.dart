@@ -5,34 +5,34 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sport_news/pr_extension.dart';
 
 class FirebaseNews {
-  String key;
-  String title;
-  String channelId;
-  String channelKey;
-  String channelType;
-  String creationDate;
-  DateTime timeStamp;
-  String groupKey;
-  bool isPublished;
-  String text;
-  int likeCount;
+  String? key;
+  String? title;
+  String? channelId;
+  String? channelKey;
+  String? channelType;
+  late String creationDate;
+  late DateTime timeStamp;
+  String? groupKey;
+  bool? isPublished;
+  String? text;
+  int? likeCount;
   List<FirebaseImagesNews> images = [];
-  String heroName;
-  int articleClicked;
-  int articleClickedAndroid;
-  int articleClickedIOS;
+  String? heroName;
+  int? articleClicked;
+  int? articleClickedAndroid;
+  int? articleClickedIOS;
 
   bool likedByUserTemp = false;
-  String categoryKey;
-  bool isWebView;
-  String source;
-  String webViewUrl;
-  int webViewShowTime;
-  int webViewClicked;
-  int webViewClickedAndroid;
-  int webViewClickedIOS;
-  bool isViewed;
-  String channelName;
+  String? categoryKey;
+  bool? isWebView;
+  String? source;
+  String? webViewUrl;
+  int? webViewShowTime;
+  int? webViewClicked;
+  int? webViewClickedAndroid;
+  int? webViewClickedIOS;
+  bool? isViewed;
+  String? channelName;
   FirebaseNews(
       this.key,
       this.title,
@@ -108,7 +108,7 @@ class FirebaseNews {
     //   heroName = Random().nextInt(60000).toString().trimSpaceAndLCase();
   }
 
-  FirebaseNews.fromMap({Map<dynamic, dynamic> snapshot, String k}) {
+  FirebaseNews.fromMap({Map<dynamic, dynamic>? snapshot, String? k}) {
     if (snapshot == null) return;
     key = k;
     title = snapshot["title"] ?? "";
@@ -149,10 +149,10 @@ class FirebaseNews {
       });
     }
 
-    heroName = (groupKey +
-            text +
-            channelType +
-            key +
+    heroName = (groupKey! +
+            text! +
+            channelType! +
+            key! +
             Random().nextInt(10000).toString())
         .trimSpaceAndLCase();
     if (heroName == null)
@@ -187,7 +187,7 @@ class FirebaseNews {
 
 class FirebaseImagesNews {
   String key;
-  String url;
+  String? url;
 
   FirebaseImagesNews(this.key, this.url);
 }

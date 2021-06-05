@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LocalUser {
-  String snapshotId;
-  String nickName;
-  double points;
+  String? snapshotId;
+  String? nickName;
+  double? points;
   LocalUser();
   LocalUser.fromSnapshot(DocumentSnapshot snapshot) {
     this.snapshotId = snapshot.id;

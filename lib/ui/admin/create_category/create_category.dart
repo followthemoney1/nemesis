@@ -4,15 +4,16 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_news/data/network_new/game_category.dart';
+import 'package:sport_news/managers/firebase_manager.dart';
 import 'package:sport_news/ui/admin/create_category/create_category_controller.dart';
 
 class CreateCategory extends StatelessWidget {
-  Function(GameCategory) pickedCategory;
+  Function(GameCategory?) pickedCategory;
   final String tag;
 
   CreateCategory(
-      {@required this.tag,
-      @required Function(GameCategory) this.pickedCategory})
+      {required this.tag,
+      required Function(GameCategory?) this.pickedCategory})
       : super();
 
   @override
@@ -24,7 +25,7 @@ class CreateCategory extends StatelessWidget {
         color: Theme.of(context).colorScheme.primary,
         child: GetBuilder<CreateCategoryController>(
           tag: tag,
-          init: CreateCategoryController(firebaseManager: Get.find()),
+          init: CreateCategoryController(firebaseManager: Get.find<FirebaseManager>()),
           builder: (controller) => Column(children: [
             TextFormField(
               controller: controller.teamName,
@@ -41,7 +42,7 @@ class CreateCategory extends StatelessWidget {
                     return DropdownMenuItem<GameCategory>(
                       value: value,
                       child: AutoSizeText(
-                        value.name,
+                        value.name!,
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                     );
@@ -51,9 +52,9 @@ class CreateCategory extends StatelessWidget {
                     minFontSize: 12,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
-                  onChanged: (GameCategory value) {
+                  onChanged: (GameCategory? value) {
                     controller.selectCategory(value);
-                    print('${controller} ' + controller.chosenCategory.name);
+                    print('${controller} ' + controller.chosenCategory!.name!);
                     pickedCategory(value);
                   },
                 ),

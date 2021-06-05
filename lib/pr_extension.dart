@@ -9,7 +9,11 @@ import 'package:sport_news/ui/widgets/visibility.dart';
  * Created by Dmitry Diachenko on Feb 18, 2020
  * powered by leaditteam.com
  **/
-
+extension FileExtention on FileSystemEntity{
+  String get name {
+    return this.path.split("/").last;
+  }
+}
 extension BuildC on BuildContext{
   bool get isDesktop => (Platform.isAndroid || Platform.isIOS) && MediaQuery.of(this).size.width < 800;
 }
@@ -60,11 +64,11 @@ extension WidgetExtension on Widget {
 
 
 
-  Widget addOnTap({@required Function onTap, Function onLongPress}) {
+  Widget addOnTap({required Function onTap, Function? onLongPress}) {
     return GestureDetector(
       child: Container(child: this),
-      onTap: onTap,
-      onLongPress: onLongPress,
+      onTap: onTap as void Function()?,
+      onLongPress: onLongPress as void Function()?,
     );
   }
 
@@ -77,7 +81,7 @@ extension WidgetExtension on Widget {
   }
 
   Widget addOnTapAnimation(
-      {@required Function onTap, int animation_miliseconds = 200}) {
+      {required Function onTap, int animation_miliseconds = 200}) {
     return AnimatedWidgetOnClick(
       child: this,
       onTap: onTap,

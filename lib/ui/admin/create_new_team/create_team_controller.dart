@@ -9,10 +9,10 @@ import 'package:sport_news/managers/firebase_manager.dart';
 
 class CreateTeamController extends GetxController {
   FirebaseManager firebaseManager;
-  final String tag;
+  final String? tag;
   CreateTeamController(this.firebaseManager, {this.tag});
 
-  LocalTeam selectedTeam = LocalTeam();
+  LocalTeam? selectedTeam = LocalTeam();
   LocalTeam createTeam = LocalTeam();
 
   List<LocalTeam> _teams = <LocalTeam>[].obs;
@@ -28,7 +28,7 @@ class CreateTeamController extends GetxController {
     await loadTeams();
   }
 
-  selectTeam(LocalTeam c) {
+  selectTeam(LocalTeam? c) {
     selectedTeam = c;
     update();
   }
@@ -41,9 +41,9 @@ class CreateTeamController extends GetxController {
   }
 
   addNewTeam() async {
-    if (!createTeam.isBlank) {
+    if (!createTeam.isBlank!) {
       await firebaseManager.addNewTeam(team:createTeam);
-      Get.snackbar("Added", "teamName.value ${selectedTeam.name}");
+      Get.snackbar("Added", "teamName.value ${selectedTeam!.name}");
     } else {
       Get.snackbar("Error", "teamName.value is empty");
     }

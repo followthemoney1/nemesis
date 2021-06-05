@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class ExpandItemPageTransition extends StatelessWidget {
   const ExpandItemPageTransition({
-    Key key,
-    @required this.source,
-    @required this.child,
+    Key? key,
+    required this.source,
+    required this.child,
   })  : assert(source != null),
         assert(child != null),
         super(key: key);
@@ -16,13 +16,13 @@ class ExpandItemPageTransition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Animation<double> animation = ModalRoute.of(context).animation;
+    final Animation<double>? animation = ModalRoute.of(context)!.animation;
     final double topDisplayPadding = MediaQuery.of(context).padding.top;
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final Animation<double> positionAnimation = CurvedAnimation(
-          parent: animation,
+          parent: animation!,
           curve: Curves.linearToEaseOut,
         );
 
@@ -69,7 +69,7 @@ class ExpandItemPageTransition extends StatelessWidget {
                         child: child,
                       ),
                     ),
-                    builder: (BuildContext context, Widget child) {
+                    builder: (BuildContext context, Widget? child) {
                       return Transform.translate(
                         offset: contentOffset.value,
                         child: child,

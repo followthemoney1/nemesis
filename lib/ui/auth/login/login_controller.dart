@@ -6,10 +6,10 @@ import 'package:sport_news/managers/firebase_manager.dart';
 
 class LoginController extends GetxController with SingleGetTickerProviderMixin {
   FirebaseManager firebaseManager;
-  LoginController({@required this.firebaseManager});
+  LoginController({required this.firebaseManager});
 
-  AnimationController animationController;
-  Animation animation;
+  AnimationController? animationController;
+  late Animation animation;
 
   UserRegistration user = UserRegistration();
   GlobalKey<FormState> formKey = GlobalKey();
@@ -23,15 +23,15 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     animation = ColorTween(
       begin: Colors.black.withOpacity(0),
       end: Colors.black.withOpacity(0.6),
-    ).animate(animationController)
+    ).animate(animationController!)
       ..addListener(() {
-        if (animationController.isCompleted) {}
+        if (animationController!.isCompleted) {}
       });
 
     update();
 
     Future.delayed(const Duration(milliseconds: 400), () {
-      animationController..forward();
+      animationController!..forward();
     });
   }
 
@@ -42,7 +42,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   }
 
   loginUser() async {
-    if (!formKey.currentState.validate() ||
+    if (!formKey.currentState!.validate() ||
         user.email.isEmpty ||
         user.password.isEmpty) {
       Get.snackbar(
@@ -62,7 +62,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
   Future<void> googleSignIn() async {
     try {
       final userCred = await firebaseManager.signInWithGoogle();
-      await checkProfile(userCred);
+      await checkProfile(userCred!);
     } on FirebaseException catch (e) {}
   }
 
@@ -74,7 +74,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
 }
 
 class UserRegistration {
-  String email;
-  String password;
-  String nickName;
+  late String email;
+  late String password;
+  String? nickName;
 }

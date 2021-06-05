@@ -5,16 +5,16 @@ class MyTextFormField extends StatelessWidget {
   final String hint;
   final Function(String val) validator;
   final Function(String val) onChange;
-  const MyTextFormField({@required this.hint,@required this.prefixIcon, Key key,@required this.validator,@required this.onChange}) : super(key: key);
+  const MyTextFormField({required this.hint,required this.prefixIcon, Key? key,required this.validator,required this.onChange}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       style: Theme.of(context)
           .textTheme
-          .caption
+          .caption!
           .copyWith(color: Colors.white, fontSize: 10),
-      validator: validator,//(value) => (value.isEmpty) ? '**' : null,
+      validator: validator as String? Function(String?)?,//(value) => (value.isEmpty) ? '**' : null,
       onChanged: onChange,
       decoration: InputDecoration(
         

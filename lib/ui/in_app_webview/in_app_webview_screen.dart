@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class InAppWebView extends StatefulWidget {
-  InAppWebView({Key key}) : super(key: key);
+  InAppWebView({Key? key}) : super(key: key);
 
   @override
   _InAppWebViewState createState() => _InAppWebViewState();

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sport_news/pr_extension.dart';
 
 class BBCReferenceNewsButton extends StatefulWidget {
-  String innerText;
+  String? innerText;
   double padding;
-  BBCReferenceNewsButton({@required this.innerText, @required this.padding});
+  BBCReferenceNewsButton({required this.innerText, required this.padding});
 
   @override
   _BBCReferenceNewsButtonState createState() => _BBCReferenceNewsButtonState();
@@ -13,16 +13,16 @@ class BBCReferenceNewsButton extends StatefulWidget {
 
 class _BBCReferenceNewsButtonState extends State<BBCReferenceNewsButton>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation mainAnimationColor;
-  Animation firstAnimation;
-  Animation secondAnimation;
-  Animation thirdAnimation;
+  late AnimationController _animationController;
+  Animation? mainAnimationColor;
+  Animation? firstAnimation;
+  Animation? secondAnimation;
+  Animation? thirdAnimation;
 
-  ColorTween _colorTween;
-  Animation<Color> _colorTweenAnimation;
-  Color beginColor;
-  Color endColor;
+  ColorTween? _colorTween;
+  Animation<Color>? _colorTweenAnimation;
+  Color? beginColor;
+  Color? endColor;
   @override
   void dispose() {
     _animationController.dispose();
@@ -87,12 +87,12 @@ class _BBCReferenceNewsButtonState extends State<BBCReferenceNewsButton>
                           BorderRadius.all(Radius.circular(widget.padding)),
                       side: BorderSide(
                           width: 2,
-                          color: (mainAnimationColor.value as Color))),
+                          color: (mainAnimationColor!.value as Color))),
                   borderOnForeground: true,
                   color: Colors.transparent,
                   child: Center(
                     child: AutoSizeText(
-                      widget.innerText,
+                      widget.innerText!,
                       maxLines: 2,
                       maxFontSize: 14,
                       minFontSize: 6,
@@ -100,7 +100,7 @@ class _BBCReferenceNewsButtonState extends State<BBCReferenceNewsButton>
                       overflow: TextOverflow.clip,
                       style: Theme.of(context)
                           .textTheme
-                          .headline5
+                          .headline5!
                           .copyWith(fontWeight: FontWeight.w600),
                     ).paddingOnly(left: 6, right: 6),
                   )),

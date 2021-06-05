@@ -6,9 +6,9 @@ import 'package:sport_news/managers/firebase_manager.dart';
 
 class MatchesListController extends GetxController {
   FirebaseManager firebaseManager;
-  MatchesListController({@required this.firebaseManager});
+  MatchesListController({required this.firebaseManager});
 
-  List<MatchEvent> matches = List<MatchEvent>().obs;
+  List<MatchEvent> matches = <MatchEvent>[].obs;
 
   @override
   void onInit() async {

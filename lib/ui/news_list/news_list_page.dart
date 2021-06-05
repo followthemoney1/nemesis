@@ -32,7 +32,7 @@ class MatchesListPage extends GetWidget<MatchesListController> {
 
   mobile() {
     return GetBuilder<MatchesListController>(
-      init: Get.find(),
+      init: Get.find<MatchesListController>(),
       builder: (_) => Container(
         // key: ctkey,
         child: CustomScrollView(
@@ -53,7 +53,7 @@ class MatchesListPage extends GetWidget<MatchesListController> {
     );
   }
 
-  openDetailPage({FirebaseNews newsElement}) {
+  openDetailPage({FirebaseNews? newsElement}) {
     Navigator.of(context).push<void>(
       NewsDetailPage.route(
         context,

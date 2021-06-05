@@ -10,7 +10,7 @@ enum LoggedState { loggin, undefine }
 class HeaderController extends GetxController {
   FirebaseManager firebaseManager;
   UserManager userManager;
-  HeaderController({@required this.firebaseManager, @required this.userManager});
+  HeaderController({required this.firebaseManager, required this.userManager});
 
   LoggedState loginState = LoggedState.undefine;
 

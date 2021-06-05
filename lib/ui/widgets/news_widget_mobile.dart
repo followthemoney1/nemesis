@@ -9,7 +9,7 @@ class NewsWidgetMobile extends StatelessWidget {
   final List<MatchEvent> matches;
   final ScrollController scrollController = ScrollController();
 
-  NewsWidgetMobile({@required this.matches});
+  NewsWidgetMobile({required this.matches});
 
   @override
   Widget build(BuildContext context) {

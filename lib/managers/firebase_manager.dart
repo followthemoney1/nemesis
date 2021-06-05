@@ -20,6 +20,9 @@ import 'package:http/http.dart' as http;
 import 'package:sport_news/data/network_new/game_category.dart';
 import 'package:sport_news/data/network_new/local_user.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
+import 'package:firebase/firebase.dart' as core;
+import 'package:sport_news/pr_extension.dart';
+import 'dart:html' as html;
 
 final GAME_CATEGORY = 'all_game_categoryes';
 final ALL_TEAMS = 'all_teams';
@@ -29,11 +32,11 @@ final USERS = "all_users";
 class FirebaseManager {
   FirebaseFirestore database = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseStorage storage = FirebaseStorage.instance;
+  core.Storage storage = core.storage();
 
-  String currentLanguage;
-  FirebaseLanguages langKey;
-  List<FirebaseGroupNews> newData;
+  String? currentLanguage;
+  FirebaseLanguages? langKey;
+  List<FirebaseGroupNews>? newData;
 
   Future init() async {
     await Firebase.initializeApp();
@@ -50,7 +53,7 @@ class FirebaseManager {
   }
 
   //registration
-  Future<UserCredential> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle() async {
     final googleUser = await GoogleSignIn(
             // hostedDomain: "http://localhost",
             clientId:
@@ -67,10 +70,11 @@ class FirebaseManager {
       );
       return await auth.signInWithCredential(credential);
     }
+    return null;
   }
 
-  Future<Pair<String, User>> createUserWithEmailAndPassword(
-      {String email, String password}) async {
+  Future<Pair<String, User?>> createUserWithEmailAndPassword(
+      {required String email, required String password}) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -87,11 +91,12 @@ class FirebaseManager {
       print(e);
       return Pair(e.toString(), null);
     }
+    return Pair('', null);
   }
 
 //login
   Future<String> signInWithEmailAndPassword(
-      {String email, String password}) async {
+      {required String email, required String password}) async {
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -107,29 +112,30 @@ class FirebaseManager {
     } catch (e) {
       return e.toString();
     }
+    return '';
   }
 
-  Future<User> checkLoginState() async {
+  Future<User?> checkLoginState() async {
     return auth.currentUser;
   }
 
-  Stream<User> subscribeToLogginState() {
+  Stream<User?> subscribeToLogginState() {
     return auth.authStateChanges();
   }
 
 //mark: users data
-  updateUserData({LocalUser user}) async {
+  updateUserData({required LocalUser user}) async {
     await database.collection(USERS).add(user.toMap());
   }
 
-  Future<LocalUser> getUserDataByID({String id}) async {
+  Future<LocalUser> getUserDataByID({String? id}) async {
     final doc = await database.collection(USERS).doc(id).get();
     final users = LocalUser.fromSnapshot(doc);
 
     return users;
   }
 
-  Future<bool> updateUserDataByID({String id, LocalUser user}) async {
+  Future<bool> updateUserDataByID({String? id, required LocalUser user}) async {
     developer.log('user id updating with $id');
     final res = await database.collection(USERS).doc(id).set(user.toMap());
     return true;
@@ -141,7 +147,7 @@ class FirebaseManager {
   // }
 
 //MARK: match
-  createMatch({MatchEvent match}) async {
+  createMatch({required MatchEvent match}) async {
     await database.collection(MATCHES).add(match.toMap());
   }
 
@@ -164,7 +170,7 @@ class FirebaseManager {
     return teams;
   }
 
-  addNewTeam({LocalTeam team}) async {
+  addNewTeam({required LocalTeam team}) async {
     await database.collection(ALL_TEAMS).add(team.toMap());
   }
 
@@ -179,21 +185,20 @@ class FirebaseManager {
     return categoryes;
   }
 
-  addNewCategory({String category}) async {
+  addNewCategory({required String category}) async {
     await database.collection(GAME_CATEGORY).add(
         {"name": category, "id": category.toLowerCase().replaceAll(" ", "_")});
   }
 
-  Future<String> uploadImage({String folder, String name, File file}) async {
-    //  final metadata = SettableMetadata(
-    //     contentType: 'image/png',
-    //     customMetadata: {'picked-file-path': file.path});
-   
-    final task =
-         storage.ref().child(folder).child(name + '.png').putFile(file);
-    // final res = await task.future.whenComplete(() => {
+  Future<String> uploadImage(
+      {required String folder, required html.File file}) async {
+    // final meta = core.UploadMetadata(contentEncoding: "image/png");
 
-    // });
-    // return res.downloadUrl.toString();
+    final task =
+        storage.ref().child(folder).child(file.name).put(file);
+
+    final res = await task.future;
+
+    return (await res.ref.getDownloadURL()).normalizePath().toString();
   }
 }

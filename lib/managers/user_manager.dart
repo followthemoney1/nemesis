@@ -4,9 +4,9 @@ import 'package:sport_news/data/network_new/local_user.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 
 class UserManager {
-  FirebaseManager _firebaseManager;
+  late FirebaseManager _firebaseManager;
 
-  UserManager({@required firebaseManager}) {
+  UserManager({required firebaseManager}) {
     this._firebaseManager = firebaseManager;
   }
 
@@ -15,7 +15,7 @@ class UserManager {
     return result;
   }
 
-  Future<LocalUser> updateFirstCreateUser(User currentUser, {String nickName,}) async {
+  Future updateFirstCreateUser(User currentUser, {String? nickName,}) async {
     final user = LocalUser()
     ..nickName = nickName
     ..snapshotId = currentUser.uid

@@ -8,10 +8,10 @@ import 'package:sport_news/managers/user_manager.dart';
 class RegistrationController extends GetxController with SingleGetTickerProviderMixin {
   FirebaseManager firebaseManager;
   UserManager userManager;
-  RegistrationController({@required this.firebaseManager, @required this.userManager});
+  RegistrationController({required this.firebaseManager, required this.userManager});
 
-  AnimationController animationController;
-  Animation animation;
+  AnimationController? animationController;
+  late Animation animation;
 
   UserRegistration user = UserRegistration();
   GlobalKey<FormState> formKey = GlobalKey();
@@ -25,15 +25,15 @@ class RegistrationController extends GetxController with SingleGetTickerProvider
     animation = ColorTween(
       begin: Colors.black.withOpacity(0),
       end: Colors.black.withOpacity(0.6),
-    ).animate(animationController)
+    ).animate(animationController!)
       ..addListener(() {
-        if (animationController.isCompleted) {}
+        if (animationController!.isCompleted) {}
       });
 
     update();
 
     Future.delayed(const Duration(milliseconds: 400), () {
-      animationController..forward();
+      animationController!..forward();
     });
   }
 
@@ -44,19 +44,19 @@ class RegistrationController extends GetxController with SingleGetTickerProvider
   }
 
   createUser() async {
-    if (!formKey.currentState.validate() ||
+    if (!formKey.currentState!.validate() ||
         user.email.isEmpty ||
-        user.password.isEmpty ||
-        user.nickName.isEmpty) {
+        user.password!.isEmpty ||
+        user.nickName!.isEmpty) {
       Get.snackbar(
           'Some field isn\'t correct', "Please fill all fields in correct way");
       return;
     }
 
     final result = await firebaseManager.createUserWithEmailAndPassword(
-        email:user.email, password:user.password);
+        email:user.email, password:user.password!);
     if (result.a.isEmpty && result.b!=null) {
-      await userManager.updateFirstCreateUser(result.b,nickName: user.nickName);
+      await userManager.updateFirstCreateUser(result.b!,nickName: user.nickName);
       Get.back();
     } else {
       Get.snackbar('Registration Error', result.a);
@@ -66,7 +66,7 @@ class RegistrationController extends GetxController with SingleGetTickerProvider
   Future<void> googleSignIn() async {
     try {
       final userCred = await firebaseManager.signInWithGoogle();
-      await checkProfile(userCred);
+      await checkProfile(userCred!);
     } on FirebaseException catch (e) {}
   }
 
@@ -78,7 +78,7 @@ class RegistrationController extends GetxController with SingleGetTickerProvider
 }
 
 class UserRegistration {
-  String email;
-  String password;
-  String nickName;
+  late String email;
+  String? password;
+  String? nickName;
 }

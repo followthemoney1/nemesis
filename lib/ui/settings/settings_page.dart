@@ -18,12 +18,12 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage>
     with TickerProviderStateMixin {
   bool isSwitched = false;
-  AnimationController _animationController;
-  Animation mainAnimationColor;
-  Color beginColor;
-  Color endColor;
-  AnimationController _colorAnimationController;
-  Animation<Offset> _slideAnimationBoxOne;
+  late AnimationController _animationController;
+  late Animation mainAnimationColor;
+  Color? beginColor;
+  Color? endColor;
+  late AnimationController _colorAnimationController;
+  late Animation<Offset> _slideAnimationBoxOne;
   bool clicked = false;
 
   @override
@@ -69,7 +69,7 @@ class _SettingsPageState extends State<SettingsPage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HeaderTitleMobileWidget(
-                title: NewsLocalizations.of(context).settings),
+                title: NewsLocalizations.of(context)!.settings),
             Padding(
               padding: const EdgeInsets.all(PADDING_LR_MEDIUM),
               child: Container(
@@ -83,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage>
                       clicked = true;
                     },
                     child: Row(children: [
-                      AutoSizeText(NewsLocalizations.of(context).colorSelection,
+                      AutoSizeText(NewsLocalizations.of(context)!.colorSelection!,
                           style: Theme.of(context).textTheme.bodyText2),
                       Spacer(),
                       state.colorValue
@@ -104,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage>
                                             .add(SettingsEvent.pickLightTheme),
                                         NewsThemeData.settingsFirstLightColor,
                                         Theme.of(context).buttonColor,
-                                        NewsLocalizations.of(context).daytime,
+                                        NewsLocalizations.of(context)!.daytime!,
                                         Theme.of(context).backgroundColor),
                                     SizedBox(width: 10),
                                     colorGestureDetector(() {
@@ -113,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage>
                                     },
                                         NewsThemeData.settingsFirstDarkColor,
                                         NewsThemeData.settingsSecondDarkColor,
-                                        NewsLocalizations.of(context).night,
+                                        NewsLocalizations.of(context)!.night!,
                                         Theme.of(context).buttonColor),
                                   ],
                                 ),
@@ -140,7 +140,7 @@ class _SettingsPageState extends State<SettingsPage>
                           .add(SettingsEvent.resetRecommendations),
                       child: Row(children: [
                         AutoSizeText(
-                            NewsLocalizations.of(context).resetRecommendations),
+                            NewsLocalizations.of(context)!.resetRecommendations!),
                         Spacer(),
                         Icon(Icons.arrow_forward_ios,
                             color: NewsThemeData.settingsButtonColor)
@@ -151,11 +151,11 @@ class _SettingsPageState extends State<SettingsPage>
                       onPressed: () {},
                       child: Row(children: [
                         AutoSizeText(
-                            NewsLocalizations.of(context).pointsOfNotification),
+                            NewsLocalizations.of(context)!.pointsOfNotification!),
                         Spacer(),
                         Switch.adaptive(
                             activeTrackColor:
-                                (mainAnimationColor.value as Color),
+                                (mainAnimationColor.value as Color?),
                             value: state.pointsValue,
                             onChanged: (value) =>
                                 BlocProvider.of<SettingsBloc>(context)
@@ -173,7 +173,7 @@ class _SettingsPageState extends State<SettingsPage>
   Widget colorGestureDetector(Function onTap, Color firstColor,
       Color secondColor, String themeName, Color textColor) {
     return GestureDetector(
-        onTap: onTap,
+        onTap: onTap as void Function()?,
         child: Padding(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Column(
@@ -185,7 +185,7 @@ class _SettingsPageState extends State<SettingsPage>
               AutoSizeText(themeName,
                   style: Theme.of(context)
                       .textTheme
-                      .overline
+                      .overline!
                       .apply(color: textColor))
             ],
           ),

@@ -11,18 +11,18 @@ import 'package:sport_news/ui/widgets/visibility.dart';
 import '../../constants.dart';
 
 class SuggestionItem {
-  FirebaseCategories data;
-  String name;
-  int currentWeight = 1;
+  FirebaseCategories? data;
+  String? name;
+  int? currentWeight = 1;
   double width;
   double height;
   double x;
   double y;
-  int iRow;
-  int iColumn;
-  String image;
-  String icon;
-  get selected => currentWeight > 1;
+  late int iRow;
+  late int iColumn;
+  String? image;
+  String? icon;
+  get selected => currentWeight! > 1;
   get superLike => currentWeight == 3;
   get leftTop => x + y;
   get rightTop => y + x + width;
@@ -34,7 +34,7 @@ class SuggestionItem {
   get bottom => y + height;
   get top => y;
 
-  get isExpanded => currentWeight > 1;
+  get isExpanded => currentWeight! > 1;
 
   get color => Colors.black;
   Rect get rect => Rect.fromLTWH(left, top, width, height);
@@ -44,23 +44,23 @@ class SuggestionItem {
     this.name,
     this.image,
     this.icon,
-    this.width,
-    this.height,
+     this.width = 0,
+    this.height= 0,
     this.currentWeight,
-    this.x,
-    this.y,
+    this.x=0,
+    this.y=0,
   });
 }
 
 class CardItemWidget extends StatefulWidget {
-  final Color backgroundColor;
-  final IconData iconData;
+  final Color? backgroundColor;
+  final IconData? iconData;
   final int weight;
-  final double width;
-  final double height;
-  final String name;
-  final SuggestionItem el;
-  final String localImage;
+  final double? width;
+  final double? height;
+  final String? name;
+  final SuggestionItem? el;
+  final String? localImage;
   const CardItemWidget(
       {this.backgroundColor,
       this.iconData,
@@ -85,15 +85,15 @@ class CardItemWidgetState extends State<CardItemWidget>
 
   @override
   Widget build(BuildContext context) {
-    final unselectedStyle = Theme.of(context).textTheme.headline5.copyWith(
+    final unselectedStyle = Theme.of(context).textTheme.headline5!.copyWith(
         color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold);
 
-    final selectedStyle = Theme.of(context).textTheme.headline5.copyWith(
+    final selectedStyle = Theme.of(context).textTheme.headline5!.copyWith(
         foreground: (Paint()..shader = linearGradient),
         fontSize: 18,
         fontWeight: FontWeight.bold);
-    final selected = widget.el.selected;
-    final superLike = widget.el.superLike;
+    final selected = widget.el!.selected;
+    final superLike = widget.el!.superLike;
 
     return Stack(children: [
       Container(
@@ -116,7 +116,7 @@ class CardItemWidgetState extends State<CardItemWidget>
                   borderRadius: BorderRadius.all(Radius.circular(14)),
                   child: widget.localImage == null
                       ? ExtendedImage.network(
-                          widget.el.image,
+                          widget.el!.image!,
                           filterQuality: FilterQuality.low,
                           fit: BoxFit.cover,
                           width: 120,
@@ -126,7 +126,7 @@ class CardItemWidgetState extends State<CardItemWidget>
                           cache: true,
                         )
                       : ExtendedImage.asset(
-                          widget.localImage,
+                          widget.localImage!,
                           filterQuality: FilterQuality.low,
                           fit: BoxFit.cover,
                         )),
@@ -142,7 +142,7 @@ class CardItemWidgetState extends State<CardItemWidget>
                     duration: const Duration(milliseconds: 100),
                     style: selected ? selectedStyle : unselectedStyle,
                     child: AutoSizeText(
-                      widget.el.name,
+                      widget.el!.name!,
                       maxLines: 1,
                     ).paddingAll(selected ? 14 : 8)),
               ),
@@ -155,7 +155,7 @@ class CardItemWidgetState extends State<CardItemWidget>
                     child: Container(
                       width: selected ? 50 : 20,
                       height: selected ? 50 : 20,
-                      child: Image.network(widget.el.icon,
+                      child: Image.network(widget.el!.icon!,
                           color: selected
                               ? NewsThemeData.buttonMainColor
                               : Colors.white),

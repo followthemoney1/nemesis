@@ -14,12 +14,12 @@ class RegistrationPage extends GetView<RegistrationController> {
   final arguments;
   final widgetKey;
 
-  RegistrationPage({Key key, this.arguments, this.widgetKey})
+  RegistrationPage({Key? key, this.arguments, this.widgetKey})
       : //assert(parentContext != null),
         super(key: key);
 
-  static Route<dynamic> route(BuildContext c, GlobalKey key, {@required args}) {
-    final RenderBox box = key.currentContext.findRenderObject();
+  static Route<dynamic> route(BuildContext? c, GlobalKey key, {required args}) {
+    final RenderBox box = key.currentContext!.findRenderObject() as RenderBox;
     final Rect sourceRect = box.localToGlobal(Offset.zero) & box.size;
 
     return PageRouteBuilder<void>(
@@ -41,10 +41,10 @@ class RegistrationPage extends GetView<RegistrationController> {
     return GetBuilder<RegistrationController>(
       init: controller,
       builder: (controller) => AnimatedBuilder(
-        animation: controller.animationController,
+        animation: controller.animationController!,
         builder: (context, child) {
           return Material(
-            color: (controller.animation.value as Color),
+            color: (controller.animation.value as Color?),
             child: Center(
               child: Container(
                 width: 300,
@@ -80,7 +80,7 @@ class RegistrationPage extends GetView<RegistrationController> {
                                     minFontSize: 8,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .subtitle1
+                                        .subtitle1!
                                         .copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
@@ -97,7 +97,7 @@ class RegistrationPage extends GetView<RegistrationController> {
                                   hint: "Create a login",
                                   validator: (v) {
                                     return (v.isEmpty ||
-                                            controller.user.nickName.isEmpty)
+                                            controller.user.nickName!.isEmpty)
                                         ? '***'
                                         : null;
                                   },
@@ -129,7 +129,7 @@ class RegistrationPage extends GetView<RegistrationController> {
                                   hint: "Create a password",
                                   validator: (v) {
                                     return (v.isEmpty ||
-                                            controller.user.password.isPassport)
+                                            controller.user.password!.isPassport)
                                         ? 'A strong password must contain the letters a-z, A-Z, 0-9 digits'
                                         : null;
                                   },
@@ -164,7 +164,7 @@ class RegistrationPage extends GetView<RegistrationController> {
                                     'Registration',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText1
+                                        .bodyText1!
                                         .copyWith(color: Colors.white),
                                   ),
                                 ),
@@ -179,7 +179,7 @@ class RegistrationPage extends GetView<RegistrationController> {
                                   'OR',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headline5
+                                      .headline5!
                                       .copyWith(
                                         color: Colors.white12,
                                         fontWeight: FontWeight.bold,
@@ -199,7 +199,7 @@ class RegistrationPage extends GetView<RegistrationController> {
                                       'Sign In with Google',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1
+                                          .bodyText1!
                                           .copyWith(color: Colors.white),
                                     )),
                                 onPressed: () {

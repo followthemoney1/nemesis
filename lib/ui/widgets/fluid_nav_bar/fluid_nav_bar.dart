@@ -5,13 +5,13 @@ import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_controller.dart';
 
 class FluidNavBar extends GetWidget<FluidController> {
-  Function(int) onChange;
+  Function(int)? onChange;
   final Color backgroundColor = Color(0xFF363c45);
-  FluidNavBar({Function(int) onChange}) {
+  FluidNavBar({Function(int)? onChange}) {
     this.onChange = onChange;
   }
   final controller = Get.put(FluidController());
-  var context;
+  late var context;
   @override
   Widget build(BuildContext context) {
     this.context = context;

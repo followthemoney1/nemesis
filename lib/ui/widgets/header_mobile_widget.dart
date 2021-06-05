@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 
 class HeaderTitleMobileWidget extends StatelessWidget {
-  final String title;
+  final String? title;
 
   HeaderTitleMobileWidget({this.title});
 
@@ -15,14 +15,14 @@ class HeaderTitleMobileWidget extends StatelessWidget {
         left: PADDING_LR_MEDIUM,
         right: PADDING_LR_MEDIUM,
       ),
-      child: AutoSizeText(title,
+      child: AutoSizeText(title!,
           maxLines: 1,
           minFontSize: 26,
           maxFontSize: 46,
           textAlign: TextAlign.center,
           style: Theme.of(context)
               .textTheme
-              .headline1
+              .headline1!
               .apply(letterSpacingDelta: 0.64)),
     );
   }

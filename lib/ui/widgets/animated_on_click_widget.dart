@@ -10,8 +10,8 @@ class AnimatedWidgetOnClick extends StatefulWidget {
   int animation_miliseconds;
 
   AnimatedWidgetOnClick(
-      {@required this.child,
-      @required this.onTap,
+      {required this.child,
+      required this.onTap,
       this.animation_miliseconds = 100});
 
   @override
@@ -20,8 +20,8 @@ class AnimatedWidgetOnClick extends StatefulWidget {
 
 class _AnimatedWidgetOnClickState extends State<AnimatedWidgetOnClick>
     with SingleTickerProviderStateMixin {
-  double _scale;
-  AnimationController _controller;
+  late double _scale;
+  late AnimationController _controller;
 
   @override
   void initState() {

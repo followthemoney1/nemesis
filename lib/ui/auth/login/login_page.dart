@@ -16,12 +16,12 @@ class LoginPage extends GetView<LoginController> {
   final arguments;
   final widgetKey;
 
-  LoginPage({Key key, this.arguments, this.widgetKey})
+  LoginPage({Key? key, this.arguments, this.widgetKey})
       : //assert(parentContext != null),
         super(key: key);
 
-  static Route<dynamic> route(BuildContext c, GlobalKey key, {@required args}) {
-    final RenderBox box = key.currentContext.findRenderObject();
+  static Route<dynamic> route(BuildContext? c, GlobalKey key, {required args}) {
+    final RenderBox box = key.currentContext!.findRenderObject() as RenderBox;
     final Rect sourceRect = box.localToGlobal(Offset.zero) & box.size;
 
     return PageRouteBuilder<void>(
@@ -43,10 +43,10 @@ class LoginPage extends GetView<LoginController> {
     return GetBuilder<LoginController>(
       init: controller,
       builder: (controller) => AnimatedBuilder(
-        animation: controller.animationController,
+        animation: controller.animationController!,
         builder: (context, child) {
           return Material(
-            color: (controller.animation.value as Color),
+            color: (controller.animation.value as Color?),
             child: Center(
               child: Container(
                 width: 300,
@@ -82,7 +82,7 @@ class LoginPage extends GetView<LoginController> {
                                     minFontSize: 8,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .subtitle1
+                                        .subtitle1!
                                         .copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
@@ -135,7 +135,7 @@ class LoginPage extends GetView<LoginController> {
                                     'Sign In',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText1
+                                        .bodyText1!
                                         .copyWith(color: Colors.white),
                                   ),
                                 ),
@@ -150,7 +150,7 @@ class LoginPage extends GetView<LoginController> {
                                   'OR',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headline5
+                                      .headline5!
                                       .copyWith(
                                         color: Colors.white12,
                                         fontWeight: FontWeight.bold,
@@ -170,7 +170,7 @@ class LoginPage extends GetView<LoginController> {
                                       'Sign In with Google',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText1
+                                          .bodyText1!
                                           .copyWith(color: Colors.white),
                                     )),
                                 onPressed: () {

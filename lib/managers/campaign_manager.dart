@@ -44,55 +44,55 @@ class CampaignManager {
   //   //developer.log('fb deeplink from local storage = ${await sharedPreferenceManager.getDeepLinkData()}');
   // }
 
-  generateFinalLink(String siteUrl) async {
-    String platform = Platform.isAndroid ? "android" : "ios";
-    //
-    String additionalParams =
-        await sharedPreferenceManager.getDeepLinkData() ?? '';
-    //
-    additionalParams = additionalParams == null || additionalParams.length < 1
-        ? ''
-        : additionalParams + '&';
-    //
-    final appendDeeplink = siteUrl.contains("?") ? '&' : '?';
-    var link =
-        '${siteUrl}${appendDeeplink}${additionalParams}platform=${platform}';
+  // generateFinalLink(String siteUrl) async {
+  //   String platform = Platform.isAndroid ? "android" : "ios";
+  //   //
+  //   String additionalParams =
+  //       await sharedPreferenceManager.getDeepLinkData() ?? '';
+  //   //
+  //   additionalParams = additionalParams == null || additionalParams.length < 1
+  //       ? ''
+  //       : additionalParams + '&';
+  //   //
+  //   final appendDeeplink = siteUrl.contains("?") ? '&' : '?';
+  //   var link =
+  //       '${siteUrl}${appendDeeplink}${additionalParams}platform=${platform}';
 
-    if (!(await canLaunch(link))) {
-      link = siteUrl;
-    }
-    return link;
-  }
+  //   if (!(await canLaunch(link))) {
+  //     link = siteUrl;
+  //   }
+  //   return link;
+  // }
 
-  Future<bool> updateViewCount({FirebaseNews firebaseNews}) async {
+  Future<bool> updateViewCount({required FirebaseNews firebaseNews}) async {
     //developer.log((await _sharedPreferenceManager.isViewedNews(firebaseNews.key)).toString());
 
-    if (!await sharedPreferenceManager.isViewedNews(firebaseNews.key)) {
-      sharedPreferenceManager.setViewedNews(firebaseNews.key);
-      ++firebaseNews.articleClicked;
-      if (Platform.isAndroid) {
-        ++firebaseNews.articleClickedAndroid;
-      } else {
-        ++firebaseNews.articleClickedIOS;
-      }
+    // if (!await sharedPreferenceManager.isViewedNews(firebaseNews.key!)) {
+    //   sharedPreferenceManager.setViewedNews(firebaseNews.key!);
+    //   ++firebaseNews.articleClicked;
+    //   if (Platform.isAndroid) {
+    //     ++firebaseNews.articleClickedAndroid;
+    //   } else {
+    //     ++firebaseNews.articleClickedIOS;
+    //   }
 
-      // await firebaseManager.updateFirebaseNews(firebaseNews: firebaseNews);
-    }
+    //   // await firebaseManager.updateFirebaseNews(firebaseNews: firebaseNews);
+    // }
 
     return true;
   }
 
-  Future updateLinkViewCount({FirebaseNews firebaseNews}) async {
-    if (!await sharedPreferenceManager.isViewedLink(firebaseNews.key)) {
-      await sharedPreferenceManager.setViewedLink(firebaseNews.key);
+  Future updateLinkViewCount({required FirebaseNews firebaseNews}) async {
+    if (!await sharedPreferenceManager.isViewedLink(firebaseNews.key!)) {
+      await sharedPreferenceManager.setViewedLink(firebaseNews.key!);
 
-      ++firebaseNews.webViewClicked;
-      //mark: update firebase news clicked by platform
-      if (Platform.isAndroid) {
-        ++firebaseNews.webViewClickedAndroid;
-      } else {
-        ++firebaseNews.webViewClickedIOS;
-      }
+      // ++firebaseNews.webViewClicked;
+      // //mark: update firebase news clicked by platform
+      // if (Platform.isAndroid) {
+      //   ++firebaseNews.webViewClickedAndroid;
+      // } else {
+      //   ++firebaseNews.webViewClickedIOS;
+      // }
 
       // await firebaseManager.updateFirebaseNews(firebaseNews: firebaseNews);
     }

@@ -83,7 +83,7 @@ class NewsThemeData {
             _darkFillColor,
           ),
           contentTextStyle:
-              _textThemeGoogle.subtitle1.apply(color: _darkFillColor),
+              _textThemeGoogle.subtitle1!.apply(color: _darkFillColor),
         ),
         dialogBackgroundColor: colorScheme.surface,
       

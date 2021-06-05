@@ -26,12 +26,12 @@ class NewsDetailPage extends StatefulWidget {
   final arguments;
   final widgetKey;
 
-  NewsDetailPage({Key key, this.arguments, this.widgetKey})
+  NewsDetailPage({Key? key, this.arguments, this.widgetKey})
       : //assert(parentContext != null),
         super(key: key);
 
-  static Route<dynamic> route(BuildContext c, GlobalKey key, {@required args}) {
-    final RenderBox box = key.currentContext.findRenderObject();
+  static Route<dynamic> route(BuildContext? c, GlobalKey key, {required args}) {
+    final RenderBox box = key.currentContext!.findRenderObject() as RenderBox;
     final Rect sourceRect = box.localToGlobal(Offset.zero) & box.size;
 
     return PageRouteBuilder<void>(
@@ -57,13 +57,13 @@ class NewsDetailPage extends StatefulWidget {
 class _NewsDetailPageState extends State<NewsDetailPage>
     with TickerProviderStateMixin {
   bool updateArgs = false;
-  FirebaseNews arguments;
+  FirebaseNews? arguments;
   ScrollController scrollController = ScrollController();
   double defaultOffset = 54;
   double padding = 0;
   bool needPadding = true;
-  AnimationController _animationController;
-  Animation animation;
+  AnimationController? _animationController;
+  late Animation animation;
   var titleWidget;
   var isTitleExpanded = false;
   double maxHeight(BuildContext c) => MediaQuery.of(c).size.height;
@@ -72,7 +72,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
   NewsDetailBloc bloc = NewsDetailBloc();
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
@@ -80,7 +80,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       scrollController
         ..addListener(() {
           _scrollListener();
@@ -98,13 +98,13 @@ class _NewsDetailPageState extends State<NewsDetailPage>
     animation = ColorTween(
       begin: Colors.black.withOpacity(0),
       end: Colors.black.withOpacity(0.8),
-    ).animate(_animationController)
+    ).animate(_animationController!)
       ..addListener(() {
-        if (_animationController.isCompleted) {}
+        if (_animationController!.isCompleted) {}
       });
 
     Future.delayed(const Duration(milliseconds: 400), () {
-      _animationController..forward();
+      _animationController!..forward();
     });
   }
 
@@ -136,10 +136,10 @@ class _NewsDetailPageState extends State<NewsDetailPage>
     _getArgs();
 
     return AnimatedBuilder(
-      animation: _animationController,
+      animation: _animationController!,
       builder: (context, child) {
         return Material(
-          color: (animation.value as Color),
+          color: (animation.value as Color?),
           child: body(),
         );
       },
@@ -150,17 +150,17 @@ class _NewsDetailPageState extends State<NewsDetailPage>
     if (!updateArgs) {
       setState(() {
         updateArgs = true;
-        if (ModalRoute.of(context).settings.arguments == null) {
+        if (ModalRoute.of(context)!.settings.arguments == null) {
           arguments = widget.arguments;
         } else {
-          arguments = ModalRoute.of(context).settings.arguments;
+          arguments = ModalRoute.of(context)!.settings.arguments as FirebaseNews?;
         }
         updateTitleText();
         //developer.log('arguments = ${arguments.toJson()}');
       });
       assert(arguments != null);
 
-      if (arguments.isWebView) {
+      if (arguments!.isWebView!) {
         openUrl();
       }
     }
@@ -169,7 +169,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
   body() {
     return BlocListener(
         bloc: bloc,
-        listener: (context, state) {},
+        listener: (context, dynamic state) {},
         child: SafeArea(
             top: true,
             bottom: true,
@@ -235,14 +235,14 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                               borderRadius:
                                   BorderRadius.all(Radius.circular(14)),
                               child: TopImagesDetailScreen(
-                                images: arguments.images,
-                                heroName: arguments.heroName + "image_",
+                                images: arguments!.images,
+                                heroName: arguments!.heroName! + "image_",
                                 topImagesDetailScreenPageController:
                                     topImagesDetailScreenPageController,
                               ),
                             ),
                           ).paddingAll(PADDING_LR_MEDIUM),
-                          dateAndLikeWidgetMobile(news: arguments),
+                          dateAndLikeWidgetMobile(news: arguments!),
                           Container(
                             child: Column(
                               children: [
@@ -250,7 +250,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                                 Row(children: [
                                   Expanded(
                                     child: Hero(
-                                      tag: arguments.heroName + "name_",
+                                      tag: arguments!.heroName! + "name_",
                                       child: Material(
                                         type: MaterialType.transparency,
                                         child: AnimatedSize(
@@ -263,13 +263,13 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                                     ),
                                   ),
                                   BBCReferenceNewsButton(
-                                    innerText: arguments.channelName,
+                                    innerText: arguments!.channelName,
                                     padding: 100,
                                   )
                                       .addOnTap(onTap: () => onTapBBC())
                                       .setVisibility(
-                                          arguments.channelType == 'rss' ||
-                                                  arguments.channelType == 'tg'
+                                          arguments!.channelType == 'rss' ||
+                                                  arguments!.channelType == 'tg'
                                               ? VisibilityFlag.visible
                                               : VisibilityFlag.gone),
                                 ]).paddingOnly(top: PADDING_TOP_SMALL),
@@ -296,11 +296,11 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                                 //       bottom: PADDING_TOP_MEDIUM),
                                 // ),
 
-                                arguments.isWebView
+                                arguments!.isWebView!
                                     ? Container(
                                         child: GradientButton(
                                           innerText:
-                                              NewsLocalizations.of(context)
+                                              NewsLocalizations.of(context)!
                                                   .watchAVideo,
                                           padding: 60,
                                         ).addOnTap(onTap: () => openUrl()),
@@ -321,7 +321,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
   updateTitleText() async {
     if (isTitleExpanded) return;
     if (needPadding) {
-      titleWidget = AutoSizeText(arguments.title,
+      titleWidget = AutoSizeText(arguments!.title!,
           maxFontSize: 26,
           minFontSize: 18,
           maxLines: 2,
@@ -329,7 +329,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
           style: Theme.of(context).textTheme.headline6);
     } else {
       isTitleExpanded = true;
-      titleWidget = AutoSizeText(arguments.title,
+      titleWidget = AutoSizeText(arguments!.title!,
           maxFontSize: 26,
           minFontSize: 18,
           maxLines: 10,
@@ -339,25 +339,25 @@ class _NewsDetailPageState extends State<NewsDetailPage>
   }
 
   openUrl() async {
-    final link =
-        await CampaignManager().generateFinalLink(arguments.webViewUrl);
-    CampaignManager().updateLinkViewCount(firebaseNews: arguments);
-    launchURL(link);
+    // final link =
+    //     await CampaignManager().generateFinalLink(arguments!.webViewUrl!);
+    // CampaignManager().updateLinkViewCount(firebaseNews: arguments!);
+    // launchURL(link);
   }
 
   onTapBBC() {
-    if (arguments.channelType == 'rss') {
-      launchURL(arguments.source);
-    } else if (arguments.channelType == 'tg') {
-      launchURL('https://t.me/${arguments.channelId}');
+    if (arguments!.channelType == 'rss') {
+      launchURL(arguments!.source!);
+    } else if (arguments!.channelType == 'tg') {
+      launchURL('https://t.me/${arguments!.channelId}');
     }
   }
 
   Widget closeWidget() {
     return IconButton(
       onPressed: () {
-        _animationController.duration = Duration(milliseconds: 300);
-        _animationController.reverse().then((value) async {
+        _animationController!.duration = Duration(milliseconds: 300);
+        _animationController!.reverse().then((value) async {
           topImagesDetailScreenPageController.jumpToPage(0);
           Navigator.of(context).pop();
         });
@@ -394,7 +394,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
         ));
   }
 
-  dateAndLikeWidgetMobile({@required FirebaseNews news}) {
+  dateAndLikeWidgetMobile({required FirebaseNews news}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -413,11 +413,11 @@ class _NewsDetailPageState extends State<NewsDetailPage>
 }
 
 class TopImagesDetailScreen extends StatefulWidget {
-  final List<FirebaseImagesNews> images;
-  final String heroName;
-  final PageController topImagesDetailScreenPageController;
+  final List<FirebaseImagesNews>? images;
+  final String? heroName;
+  final PageController? topImagesDetailScreenPageController;
   const TopImagesDetailScreen(
-      {Key key,
+      {Key? key,
       this.images,
       this.heroName,
       this.topImagesDetailScreenPageController})
@@ -456,23 +456,23 @@ class _TopImagesDetailScreenState extends State<TopImagesDetailScreen> {
           pageIndex = position;
           if (pageIndex == 0) {
             return Hero(
-              tag: widget.heroName,
+              tag: widget.heroName!,
               child: _image(
-                widget.images == null || widget.images.length < 1
+                widget.images == null || widget.images!.length < 1
                     ? ""
-                    : widget.images.elementAt(position).url,
+                    : widget.images!.elementAt(position).url!,
               ),
             );
           }
           return _image(
-            widget.images == null || widget.images.length < 1
+            widget.images == null || widget.images!.length < 1
                 ? ""
-                : widget.images.elementAt(position).url,
+                : widget.images!.elementAt(position).url!,
           );
         },
-        itemCount: widget.images == null || widget.images.length < 1
+        itemCount: widget.images == null || widget.images!.length < 1
             ? 0
-            : widget.images.length,
+            : widget.images!.length,
       ),
     );
   }

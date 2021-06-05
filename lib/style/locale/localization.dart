@@ -7,7 +7,7 @@ class NewsLocalizations {
 
   final Locale locale;
 
-  static NewsLocalizations of(BuildContext context) {
+  static NewsLocalizations? of(BuildContext context) {
     return Localizations.of<NewsLocalizations>(context, NewsLocalizations);
   }
 
@@ -79,115 +79,115 @@ class NewsLocalizations {
     },
   };
 
-  String get noNewData {
-    return _localizedValues[locale.languageCode]['noNewData'];
+  String? get noNewData {
+    return _localizedValues[locale.languageCode]!['noNewData'];
   }
 
-  String get noSavedNewsYet {
-    return _localizedValues[locale.languageCode]['noSavedNewsYet'];
+  String? get noSavedNewsYet {
+    return _localizedValues[locale.languageCode]!['noSavedNewsYet'];
   }
 
-  String get titleNews {
-    return _localizedValues[locale.languageCode]['titleNews'];
+  String? get titleNews {
+    return _localizedValues[locale.languageCode]!['titleNews'];
   }
 
-  String get allNews {
-    return _localizedValues[locale.languageCode]['allNews'];
+  String? get allNews {
+    return _localizedValues[locale.languageCode]!['allNews'];
   }
 
-  String get saved {
-    return _localizedValues[locale.languageCode]['saved'];
+  String? get saved {
+    return _localizedValues[locale.languageCode]!['saved'];
   }
 
-  String get recommended {
-    return _localizedValues[locale.languageCode]['recommended'];
+  String? get recommended {
+    return _localizedValues[locale.languageCode]!['recommended'];
   }
 
-  String get settings {
-    return _localizedValues[locale.languageCode]['settings'];
+  String? get settings {
+    return _localizedValues[locale.languageCode]!['settings'];
   }
 
-  String get colorSelection {
-    return _localizedValues[locale.languageCode]['colorSelection'];
+  String? get colorSelection {
+    return _localizedValues[locale.languageCode]!['colorSelection'];
   }
 
-  String get pointsOfNotification {
-    return _localizedValues[locale.languageCode]['pointsOfNotification'];
+  String? get pointsOfNotification {
+    return _localizedValues[locale.languageCode]!['pointsOfNotification'];
   }
 
-  String get resetRecommendations {
-    return _localizedValues[locale.languageCode]['resetRecommendations'];
+  String? get resetRecommendations {
+    return _localizedValues[locale.languageCode]!['resetRecommendations'];
   }
 
-  String get daytime {
-    return _localizedValues[locale.languageCode]['daytime'];
+  String? get daytime {
+    return _localizedValues[locale.languageCode]!['daytime'];
   }
 
-  String get night {
-    return _localizedValues[locale.languageCode]['night'];
+  String? get night {
+    return _localizedValues[locale.languageCode]!['night'];
   }
 
-  String get filters {
-    return _localizedValues[locale.languageCode]['filters'];
+  String? get filters {
+    return _localizedValues[locale.languageCode]!['filters'];
   }
 
-  String get select {
-    return _localizedValues[locale.languageCode]['select'];
+  String? get select {
+    return _localizedValues[locale.languageCode]!['select'];
   }
 
-  String get topNews {
-    return _localizedValues[locale.languageCode]['topNews'];
+  String? get topNews {
+    return _localizedValues[locale.languageCode]!['topNews'];
   }
 
-  String get importantInformation {
-    return _localizedValues[locale.languageCode]['importantInformation'];
+  String? get importantInformation {
+    return _localizedValues[locale.languageCode]!['importantInformation'];
   }
 
-  String get fka {
-    return _localizedValues[locale.languageCode]['fka'];
+  String? get fka {
+    return _localizedValues[locale.languageCode]!['fka'];
   }
 
-  String get tellMe {
-    return _localizedValues[locale.languageCode]['tellMe'];
+  String? get tellMe {
+    return _localizedValues[locale.languageCode]!['tellMe'];
   }
 
-  String get lastPage {
-    return _localizedValues[locale.languageCode]['lastPage'];
+  String? get lastPage {
+    return _localizedValues[locale.languageCode]!['lastPage'];
   }
 
-  String get next {
-    return _localizedValues[locale.languageCode]['next'];
+  String? get next {
+    return _localizedValues[locale.languageCode]!['next'];
   }
 
-  String get steps {
-    return _localizedValues[locale.languageCode]['steps'];
+  String? get steps {
+    return _localizedValues[locale.languageCode]!['steps'];
   }
 
-  String get clickHere {
-    return _localizedValues[locale.languageCode]['clickHere'];
+  String? get clickHere {
+    return _localizedValues[locale.languageCode]!['clickHere'];
   }
 
-  String get watchAVideo {
-    return _localizedValues[locale.languageCode]['watchAVideo'];
+  String? get watchAVideo {
+    return _localizedValues[locale.languageCode]!['watchAVideo'];
   }
 
-  String get selectFavorite {
-    return _localizedValues[locale.languageCode]['selectFavorite'];
+  String? get selectFavorite {
+    return _localizedValues[locale.languageCode]!['selectFavorite'];
   }
 
-  String get finishSettingsUp {
-    return _localizedValues[locale.languageCode]['finishSettingsUp'];
+  String? get finishSettingsUp {
+    return _localizedValues[locale.languageCode]!['finishSettingsUp'];
   }
 
-  String get chooseCategories {
-    return _localizedValues[locale.languageCode]['chooseCategories'];
+  String? get chooseCategories {
+    return _localizedValues[locale.languageCode]!['chooseCategories'];
   }
 
-  String get clickAndLinger {
-    return _localizedValues[locale.languageCode]['clickAndLinger'];
+  String? get clickAndLinger {
+    return _localizedValues[locale.languageCode]!['clickAndLinger'];
   }
 
-  String get justMakeSure {
-    return _localizedValues[locale.languageCode]['justMakeSure'];
+  String? get justMakeSure {
+    return _localizedValues[locale.languageCode]!['justMakeSure'];
   }
 }

@@ -16,7 +16,7 @@ import 'like_widget.dart';
 class CardListNews extends StatefulWidget {
   final MatchEvent el;
 
-  const CardListNews({@required this.el});
+  const CardListNews({required this.el});
 
   @override
   State<StatefulWidget> createState() {
@@ -25,7 +25,7 @@ class CardListNews extends StatefulWidget {
 }
 
 class CardListNewsState extends State<CardListNews> {
-  MatchEvent match;
+  late MatchEvent match;
 
   @override
   void initState() {
@@ -78,7 +78,7 @@ class CardListNewsState extends State<CardListNews> {
                         match.isStarted().b,
                         maxLines: 1,
                         minFontSize: 8,
-                        style: Theme.of(context).textTheme.subtitle1.copyWith(
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                             fontSize: 14,
                             color: match.isStarted().a
                                 ? Colors.red
@@ -133,10 +133,10 @@ class CardListNewsState extends State<CardListNews> {
         flex: 3,
         child: el.channelType == 'rss' || el.channelType == 'tg'
             ? AutoSizeText(
-                el.channelName,
+                el.channelName!,
                 style: Theme.of(context)
                     .textTheme
-                    .overline
+                    .overline!
                     .apply(color: Theme.of(context).bottomAppBarColor),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -150,7 +150,7 @@ class CardListNewsState extends State<CardListNews> {
           textAlign: TextAlign.right,
           style: Theme.of(context)
               .textTheme
-              .overline
+              .overline!
               .apply(color: Theme.of(context).bottomAppBarColor),
           maxLines: 1,
         ),
@@ -159,9 +159,9 @@ class CardListNewsState extends State<CardListNews> {
   }
 
   _tapOnCard({
-    bool isDesktop,
-    GlobalKey key,
-    FirebaseNews newsElement,
+    bool? isDesktop,
+    GlobalKey? key,
+    required FirebaseNews newsElement,
   }) async {
     await CampaignManager().updateViewCount(firebaseNews: newsElement);
 

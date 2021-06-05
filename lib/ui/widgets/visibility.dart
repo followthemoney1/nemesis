@@ -13,8 +13,8 @@ class MyVisibility extends StatelessWidget {
   final Widget removedChild;
 
   MyVisibility({
-    @required this.child,
-    @required this.visibility,
+    required this.child,
+    required this.visibility,
   }) : this.removedChild = Container();
 
   @override

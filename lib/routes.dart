@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sport_news/managers/firebase_manager.dart';
 
 import 'package:sport_news/ui/admin/admin_panel.dart';
 import 'package:sport_news/ui/admin/admin_panel_controller.dart';
@@ -12,7 +13,7 @@ import 'package:sport_news/ui/user_suggestion/user_suggestion.dart';
 
 import 'di/root_binding.dart';
 
-typedef PathWidgetBuilder = Widget Function(BuildContext, String);
+typedef PathWidgetBuilder = Widget Function(BuildContext, String?);
 
 class Path {
   const Path(this.pattern, this.builder);
@@ -51,7 +52,7 @@ class RouteConfiguration {
       page: () => AdminPanel(),
       binding: BindingsBuilder(
         () => Get.lazyPut<AdminPanelController>(() => AdminPanelController(
-              firebase: Get.find(),
+              firebase: Get.find<FirebaseManager>(),
             )),
       ),
     ),
@@ -108,12 +109,12 @@ class RouteConfiguration {
   /// route. Set it on the [MaterialApp.onGenerateRoute] or
   /// [WidgetsApp.onGenerateRoute] to make use of the [paths] for route
   /// matching.
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     for (final path in paths) {
       final regExpPattern = RegExp(path.pattern);
 
-      if (regExpPattern.hasMatch(settings.name)) {
-        final firstMatch = regExpPattern.firstMatch(settings.name);
+      if (regExpPattern.hasMatch(settings.name!)) {
+        final firstMatch = regExpPattern.firstMatch(settings.name!)!;
         final match = (firstMatch.groupCount == 1) ? firstMatch.group(1) : null;
         if (kIsWeb) {
           return NoAnimationMaterialPageRoute<void>(
@@ -137,8 +138,8 @@ class RouteConfiguration {
 
 class NoAnimationMaterialPageRoute<T> extends MaterialPageRoute<T> {
   NoAnimationMaterialPageRoute({
-    @required WidgetBuilder builder,
-    RouteSettings settings,
+    required WidgetBuilder builder,
+    RouteSettings? settings,
   }) : super(builder: builder, settings: settings);
 
   @override

@@ -19,7 +19,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 class UserSuggestion extends StatefulWidget {
   static final String tag = '/user-suggestion';
 
-  UserSuggestion({Key key}) : super(key: key);
+  UserSuggestion({Key? key}) : super(key: key);
 
   @override
   _UserSuggestionState createState() => _UserSuggestionState();
@@ -33,7 +33,7 @@ class _UserSuggestionState extends State<UserSuggestion>
 
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
+    SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
       FeatureDiscovery.discoverFeatures(context, <String>{steps.toString()});
     });
     super.initState();
@@ -47,14 +47,14 @@ class _UserSuggestionState extends State<UserSuggestion>
 
   mobile() {
     var topText = {
-      NewsLocalizations.of(context).tellMe,
-      NewsLocalizations.of(context).selectFavorite,
-      NewsLocalizations.of(context).finishSettingsUp
+      NewsLocalizations.of(context)!.tellMe,
+      NewsLocalizations.of(context)!.selectFavorite,
+      NewsLocalizations.of(context)!.finishSettingsUp
     };
     var topDescription = {
-      NewsLocalizations.of(context).chooseCategories,
-      NewsLocalizations.of(context).clickAndLinger,
-      NewsLocalizations.of(context).justMakeSure
+      NewsLocalizations.of(context)!.chooseCategories,
+      NewsLocalizations.of(context)!.clickAndLinger,
+      NewsLocalizations.of(context)!.justMakeSure
     };
 
     final screenHeight = MediaQuery.of(context).size.height;
@@ -65,7 +65,7 @@ class _UserSuggestionState extends State<UserSuggestion>
           ..add(UserSuggestionEvent.init),
         builder: (c, state) {
           var inStackPlaceWidget =
-              (state.categories == null || state.categories.isEmpty)
+              (state.categories == null || state.categories!.isEmpty)
                   ? CustomProgress()
                   : StackMatrix(
                       startSize: itemSize,
@@ -86,7 +86,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                         duration: const Duration(milliseconds: 600),
                         switchInCurve: Curves.easeInQuart,
                         child: AutoSizeText(
-                          topText.elementAt(steps - 1),
+                          topText.elementAt(steps - 1)!,
                           maxLines: 2,
                           key: ValueKey(topText.elementAt(steps - 1)),
                           style: Theme.of(context).textTheme.headline1,
@@ -98,7 +98,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                 AnimatedSwitcher(
                         duration: const Duration(milliseconds: 800),
                         child: AutoSizeText(
-                          topDescription.elementAt(steps - 1),
+                          topDescription.elementAt(steps - 1)!,
                           key: ValueKey(topDescription.elementAt(steps - 1)),
                           style: Theme.of(context).textTheme.bodyText2,
                         ))
@@ -167,7 +167,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                                                   steps.toString(),
                                                   style: Theme.of(context)
                                                       .textTheme
-                                                      .headline6
+                                                      .headline6!
                                                       .copyWith(
                                                           fontSize: 22,
                                                           color: Colors.black),
@@ -176,11 +176,11 @@ class _UserSuggestionState extends State<UserSuggestion>
                                                   opacity: 0.6,
                                                   child: AutoSizeText(
                                                     NewsLocalizations.of(
-                                                            context)
-                                                        .lastPage,
+                                                            context)!
+                                                        .lastPage!,
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .headline5
+                                                        .headline5!
                                                         .copyWith(
                                                             fontSize: 14,
                                                             color:
@@ -194,7 +194,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                                   : Container(
                                       child: GradientButton(
                                         innerText:
-                                            NewsLocalizations.of(context).next,
+                                            NewsLocalizations.of(context)!.next,
                                         padding: 60,
                                       ).addOnTap(onTap: navigateToNextScreen),
                                     ),
@@ -212,8 +212,8 @@ class _UserSuggestionState extends State<UserSuggestion>
 
   discoveryNextPress() {
     return DescribedFeatureOverlay(
-      title: AutoSizeText(NewsLocalizations.of(context).steps),
-      description: AutoSizeText(NewsLocalizations.of(context).clickHere),
+      title: AutoSizeText(NewsLocalizations.of(context)!.steps!),
+      description: AutoSizeText(NewsLocalizations.of(context)!.clickHere!),
       featureId: 'next_arrow',
       tapTarget: const Icon(Icons.arrow_forward),
       textColor: Theme.of(context).colorScheme.background,
@@ -235,14 +235,14 @@ class _UserSuggestionState extends State<UserSuggestion>
 
   discoveryMatrixWidget() {
     final text = steps == 1
-        ? NewsLocalizations.of(context).chooseCategories
-        : NewsLocalizations.of(context).clickAndLinger;
+        ? NewsLocalizations.of(context)!.chooseCategories!
+        : NewsLocalizations.of(context)!.clickAndLinger!;
 
     return Align(
       alignment: Alignment.centerRight,
       child: DescribedFeatureOverlay(
         contentLocation: ContentLocation.above,
-        title: AutoSizeText(NewsLocalizations.of(context).tellMe),
+        title: AutoSizeText(NewsLocalizations.of(context)!.tellMe!),
         description: AutoSizeText(text),
         featureId: steps.toString(),
         tapTarget: Container(

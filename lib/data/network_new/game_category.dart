@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class GameCategory extends Equatable {
-  String id;
-  String name;
-  String snapshotID;
+  String? id;
+  String? name;
+  String? snapshotID;
   GameCategory();
   
   GameCategory.fromSnapshot(DocumentSnapshot snapshot) {
@@ -14,7 +14,7 @@ class GameCategory extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         name,
         snapshotID,

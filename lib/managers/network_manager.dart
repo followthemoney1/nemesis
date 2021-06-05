@@ -5,7 +5,7 @@ import 'package:sport_news/data/network/firebase_news.dart';
 import 'dart:developer' as developer;
 
 class NetworkManager {
-  Future<List<FirebaseNews>> getTopNewsByGroupKey(String key) async {
+  Future<List<FirebaseNews>?> getTopNewsByGroupKey(String key) async {
     var url =
         'https://us-central1-sportnews-8bbab.cloudfunctions.net/getTopNews';
     var response = await http.post(Uri.parse(url), body: {"group_key": "$key"});

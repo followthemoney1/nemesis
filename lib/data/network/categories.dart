@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseCategories {
-  String key;
-  String iconPreview;
-  String iconUrl;
-  String idkey;
-  String imageUrl;
-  String title;
+  String? key;
+  String? iconPreview;
+  String? iconUrl;
+  String? idkey;
+  String? imageUrl;
+  String? title;
 
   FirebaseCategories(this.key, this.iconPreview, this.iconUrl, this.idkey,
       this.imageUrl, this.title);

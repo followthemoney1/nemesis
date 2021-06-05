@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sport_news/pr_extension.dart';
 
 class GradientButton extends StatefulWidget {
-  final String innerText;
+  final String? innerText;
   final double padding;
-  const GradientButton({@required this.innerText, @required this.padding});
+  const GradientButton({required this.innerText, required this.padding});
 
   @override
   _GradientButtonState createState() => _GradientButtonState();
@@ -13,11 +13,11 @@ class GradientButton extends StatefulWidget {
 
 class _GradientButtonState extends State<GradientButton>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation animation;
+  late AnimationController _animationController;
+  late Animation animation;
 
-  Color beginColor;
-  Color endColor;
+  Color? beginColor;
+  Color? endColor;
 
   @override
   void dispose() {
@@ -54,12 +54,12 @@ class _GradientButtonState extends State<GradientButton>
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(widget.padding),
                   ),
-                  color: (animation.value as Color),
+                  color: (animation.value as Color?),
                   child: AutoSizeText(
-                    widget.innerText,
+                    widget.innerText!,
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle2
+                        .subtitle2!
                         .copyWith(fontSize: 17, color: Colors.white),
                   ).paddingOnly(
                       left: widget.padding,

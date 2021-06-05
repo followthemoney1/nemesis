@@ -8,7 +8,7 @@ import 'package:sport_news/managers/firebase_manager.dart';
 import 'create_new_team/create_team_controller.dart';
 
 class AdminPanelController extends GetxController {
-  FirebaseManager firebase;
+  FirebaseManager? firebase;
 
   AdminPanelController({this.firebase});
   MatchEvent match = MatchEvent();
@@ -22,7 +22,7 @@ class AdminPanelController extends GetxController {
 
   createMatch(CreateTeamController firstTeam, CreateTeamController secondTeam,) {
     print(
-        "first team : ${firstTeam.selectedTeam.name} vs second team: ${secondTeam.selectedTeam.name}");
+        "first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}");
     match
     ..team1 = firstTeam.selectedTeam
     ..team2 = secondTeam.selectedTeam
@@ -30,7 +30,7 @@ class AdminPanelController extends GetxController {
     ..matchStreamUrl = 'fff'
     ..bo = 1;
 
-    firebase.createMatch(match:match);
+    firebase!.createMatch(match:match);
   }
 
   // setStartTime(DateTime t){

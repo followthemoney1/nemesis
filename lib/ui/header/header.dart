@@ -12,9 +12,9 @@ import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_controller.dart';
 import '../../constants.dart';
 
 class Header extends GetWidget<HeaderController> {
-  Widget child;
+  Widget? child;
   static final double topHeight = 60;
-  Header({Widget child, Key key}) : super(key: key) {
+  Header({Widget? child, Key? key}) : super(key: key) {
     this.child = child;
   }
   final controller = Get.put(HeaderController(firebaseManager: Get.find(),userManager: Get.find()));
@@ -28,7 +28,7 @@ class Header extends GetWidget<HeaderController> {
       padding: EdgeInsets.only(bottom: 6),
       child: GetBuilder(
         init: controller,
-        builder: (_) => Material(
+        builder: (dynamic _) => Material(
           color: Theme.of(context).backgroundColor,
           type: MaterialType.card,
           elevation: 6,
@@ -81,7 +81,7 @@ class Header extends GetWidget<HeaderController> {
                 'Registration',
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText1
+                    .bodyText1!
                     .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
@@ -94,7 +94,7 @@ class Header extends GetWidget<HeaderController> {
                 RegistrationPage.route(
                   context,
                   key,
-                  // args: newsElement,
+                  args: {},
                 ),
               );
             },
@@ -107,7 +107,7 @@ class Header extends GetWidget<HeaderController> {
                 'Sign In',
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText1
+                    .bodyText1!
                     .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
@@ -120,7 +120,7 @@ class Header extends GetWidget<HeaderController> {
                 LoginPage.route(
                   context,
                   key,
-                  // args: newsElement,
+                  args: {},
                 ),
               );
             },

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseLanguagesGroups {
-  String key;
-  List<LangGroup> langGroup;
+  String? key;
+  List<LangGroup>? langGroup;
 
   FirebaseLanguagesGroups(this.key, this.langGroup);
 

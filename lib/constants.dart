@@ -48,6 +48,8 @@ Widget loadImageStateFunction(ExtendedImageState state) {
         fit: BoxFit.fitWidth,
       );
   }
+
+  return Container();
 }
 
 //

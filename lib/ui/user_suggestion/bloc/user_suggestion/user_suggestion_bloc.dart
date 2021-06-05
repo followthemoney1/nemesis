@@ -43,9 +43,9 @@ class UserSuggestionBloc
 
   updateCategory(SuggestionItem i) async {
     if (i.selected || i.superLike) {
-      await sharedPreferenceManager.saveCategory(i.data.key);
+      await sharedPreferenceManager.saveCategory(i.data!.key!);
     } else {
-      await sharedPreferenceManager.deleteCategory(i.data.key);
+      await sharedPreferenceManager.deleteCategory(i.data!.key);
     }
   }
 }

@@ -4,12 +4,12 @@ import 'package:sport_news/data/local/local_team.dart';
 import 'package:sport_news/data/network_new/game_category.dart';
 
 class MatchEvent {
-  String snapshotId;
-  LocalTeam team1;
-  LocalTeam team2;
-  DateTime schedule;
-  int bo;
-  String matchStreamUrl;
+  late String snapshotId;
+  LocalTeam? team1;
+  LocalTeam? team2;
+  late DateTime schedule;
+  int? bo;
+  String? matchStreamUrl;
 
   MatchEvent();
 
@@ -28,8 +28,8 @@ class MatchEvent {
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> snapshot = new Map<String, dynamic>();
-    snapshot['team1'] = this.team1.snapshotId;
-    snapshot['team2'] = this.team2.snapshotId;
+    snapshot['team1'] = this.team1!.snapshotId;
+    snapshot['team2'] = this.team2!.snapshotId;
     snapshot['schedule'] = Timestamp.fromDate(this.schedule);
     snapshot['bo'] = this.bo;
     snapshot['matchStreamUrl'] = this.matchStreamUrl;

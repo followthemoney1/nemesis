@@ -4,14 +4,14 @@ import 'package:sport_news/pr_extension.dart';
 import 'package:sport_news/ui/widgets/staggered_user_suggestion.dart';
 
 class StackMatrix extends StatefulWidget {
-  final List<FirebaseCategories> items;
-  final Function itemSelected;
+  final List<FirebaseCategories>? items;
+  final Function? itemSelected;
   final startSize;
   final deltaSize;
   final deltaSizeBig;
 
   const StackMatrix(
-      {Key key,
+      {Key? key,
       this.items,
       this.itemSelected,
       this.startSize = 100.0,
@@ -35,8 +35,8 @@ class _StackMatrixState extends State<StackMatrix>
   var needUpdateScrollWidth = true;
   var maxHeight = 0;
 
-  var startSize;
-  var deltaSize;
+  double startSize = 0;
+  late var deltaSize;
   var deltaSizeBig;
 
   @override
@@ -48,17 +48,17 @@ class _StackMatrixState extends State<StackMatrix>
     deltaSize = widget.deltaSize;
     deltaSizeBig = widget.deltaSizeBig;
 
-    int rowCount = (widget.items.length / 4).round();
+    int rowCount = (widget.items!.length / 4).round();
     suggestionMatrix = Map.from(suggestionMatrix.map((key, value) {
       final endIndex = (rowCount * (key + 1));
       return MapEntry(
           key,
-          widget.items
+          widget.items!
               .getRange(
                   rowCount * key,
-                  endIndex < widget.items.length
+                  endIndex < widget.items!.length
                       ? endIndex
-                      : widget.items.length)
+                      : widget.items!.length)
               .toList()
               .asMap()
               .entries
@@ -87,8 +87,8 @@ class _StackMatrixState extends State<StackMatrix>
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Container(
-          width: maxHeight * startSize,
-          height: 4 * deltaSizeBig,
+          width: maxHeight * startSize as double?,
+          height: 4 * deltaSizeBig as double?,
           child: Stack(
             fit: StackFit.expand,
             alignment: Alignment.topCenter,
@@ -141,12 +141,12 @@ class _StackMatrixState extends State<StackMatrix>
         setState(() {
           if (currentRow.iColumn > 0) {
             calcOverflowTop(
-                suggestionMatrix[currentRow.iColumn - 1]
+                suggestionMatrix[currentRow.iColumn - 1]!
                     .elementAt(currentRow.iRow),
                 currentRow);
 
             calcOverflowClosestElement(
-                line: suggestionMatrix[currentRow.iColumn - 1],
+                line: suggestionMatrix[currentRow.iColumn - 1]!,
                 current: currentRow);
           }
         });
@@ -169,8 +169,8 @@ class _StackMatrixState extends State<StackMatrix>
   }
 
   bool calcOverflowClosestElement(
-      {@required List<SuggestionItem> line,
-      @required SuggestionItem current,
+      {required List<SuggestionItem> line,
+      required SuggestionItem current,
       bool check = false}) {
     for (SuggestionItem element in line) {
       if (current.rect.intersect(element.rect).height > 0 &&
@@ -186,7 +186,7 @@ class _StackMatrixState extends State<StackMatrix>
   }
 
   void calcOverflowLeft(SuggestionItem prev, SuggestionItem current,
-      {bool withGravity}) {
+      {bool? withGravity}) {
     if (prev.right > current.left) {
       current.x += prev.right - current.left;
     } else if (prev.right < current.left) {
@@ -236,8 +236,8 @@ class _StackMatrixState extends State<StackMatrix>
 
   onTapItem(SuggestionItem e) {
     setState(() {
-      if (e.currentWeight <= 1) {
-        e.currentWeight = e.currentWeight + 1;
+      if (e.currentWeight! <= 1) {
+        e.currentWeight = e.currentWeight! + 1;
         e.height = e.height + deltaSize;
         e.width = e.width + deltaSize;
       } else {
@@ -246,14 +246,14 @@ class _StackMatrixState extends State<StackMatrix>
         e.width = startSize;
       }
     });
-    widget.itemSelected(e);
+    widget.itemSelected!(e);
   }
 
   onLongPressItem(
     SuggestionItem e,
   ) {
     setState(() {
-      if (e.currentWeight < 3) {
+      if (e.currentWeight! < 3) {
         e.currentWeight = 3;
         e.height = deltaSizeBig;
         e.width = deltaSizeBig;
@@ -263,6 +263,6 @@ class _StackMatrixState extends State<StackMatrix>
         e.width = startSize;
       }
     });
-    widget.itemSelected(e);
+    widget.itemSelected!(e);
   }
 }

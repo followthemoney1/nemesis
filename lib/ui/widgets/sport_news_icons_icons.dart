@@ -23,7 +23,7 @@ class SportNewsIcons {
   SportNewsIcons._();
 
   static const _kFontFam = 'SportNewsIcons';
-  static const _kFontPkg = null;
+  static const dynamic _kFontPkg = null;
 
   static const IconData filter = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
