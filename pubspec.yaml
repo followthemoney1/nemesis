@@ -19,8 +19,9 @@ dependencies:
   #firebase_database: 6.1.2
   cloud_firestore:
   firebase_analytics:
-  firebase_auth: "^1.2.0"
-  firebase_storage:
+  firebase_auth: 
+  firebase_storage: "^7.0.0"
+  # firebase_storage_web: ^1.1.1
   #firebase_crashlytics: ^0.1.4+1
   flare_flutter: ^2.0.6
 
@@ -48,15 +49,13 @@ dependencies:
   flutter_svg: ^0.22.0
   extended_image: ^4.1.0
   flutter_swiper: ^1.1.6
-  #flutter_widget_from_html_core: ^0.6.1+1
   streams_channel: 0.3.0
   flutter_inappwebview: ^5.3.2
-  #deeplinks
-  #facebook_deeplinks: ^0.1.0
-  #flutter_facebook_app_links: ^1.1.1+4
+
   get:
   flutter_datetime_picker: ^1.5.1
   google_sign_in: ^5.0.4
+  image_picker: 
 
 dependency_overrides:
   

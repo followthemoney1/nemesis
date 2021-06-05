@@ -6,8 +6,10 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sport_news/data/helper/pair.dart';
 import 'package:sport_news/data/local/local_team.dart';
 import 'package:sport_news/data/network/categories.dart';
 import 'package:sport_news/data/network/firebase_languages.dart';
@@ -16,15 +18,18 @@ import 'package:sport_news/data/network/group_news.dart';
 import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
 import 'package:sport_news/data/network_new/game_category.dart';
+import 'package:sport_news/data/network_new/local_user.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
 
 final GAME_CATEGORY = 'all_game_categoryes';
 final ALL_TEAMS = 'all_teams';
 final MATCHES = "all_matches";
+final USERS = "all_users";
 
 class FirebaseManager {
   FirebaseFirestore database = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
 
   String currentLanguage;
   FirebaseLanguages langKey;
@@ -64,34 +69,32 @@ class FirebaseManager {
     }
   }
 
-  Future<String> createUserWithEmailAndPassword(
-      String email, String password) async {
+  Future<Pair<String, User>> createUserWithEmailAndPassword(
+      {String email, String password}) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      return '';
+      return Pair('', userCredential.user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
-        return 'weak-password';
+        return Pair('weak-password', null);
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
-        return 'email-already-in-use';
+        return Pair('email-already-in-use', null);
       }
     } catch (e) {
       print(e);
-      return e.toString();
+      return Pair(e.toString(), null);
     }
   }
 
 //login
   Future<String> signInWithEmailAndPassword(
-      String email, String password) async {
+      {String email, String password}) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: "barry.allen@example.com",
-              password: "SuperSecretPassword!");
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
       return '';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -101,6 +104,8 @@ class FirebaseManager {
         print('Wrong password provided for that user.');
         return 'user-not-found';
       }
+    } catch (e) {
+      return e.toString();
     }
   }
 
@@ -112,8 +117,31 @@ class FirebaseManager {
     return auth.authStateChanges();
   }
 
+//mark: users data
+  updateUserData({LocalUser user}) async {
+    await database.collection(USERS).add(user.toMap());
+  }
+
+  Future<LocalUser> getUserDataByID({String id}) async {
+    final doc = await database.collection(USERS).doc(id).get();
+    final users = LocalUser.fromSnapshot(doc);
+
+    return users;
+  }
+
+  Future<bool> updateUserDataByID({String id, LocalUser user}) async {
+    developer.log('user id updating with $id');
+    final res = await database.collection(USERS).doc(id).set(user.toMap());
+    return true;
+  }
+
+  // Future<bool> createUserDataByID({String id, LocalUser user})async{
+  //   database.collection(USERS).add(id);
+  //   await database.collection(USERS).doc(id).update(user.toMap());
+  // }
+
 //MARK: match
-  createMatch(MatchEvent match) async {
+  createMatch({MatchEvent match}) async {
     await database.collection(MATCHES).add(match.toMap());
   }
 
@@ -136,7 +164,7 @@ class FirebaseManager {
     return teams;
   }
 
-  addNewTeam(LocalTeam team) async {
+  addNewTeam({LocalTeam team}) async {
     await database.collection(ALL_TEAMS).add(team.toMap());
   }
 
@@ -151,8 +179,21 @@ class FirebaseManager {
     return categoryes;
   }
 
-  addNewCategory(String category) async {
+  addNewCategory({String category}) async {
     await database.collection(GAME_CATEGORY).add(
         {"name": category, "id": category.toLowerCase().replaceAll(" ", "_")});
+  }
+
+  Future<String> uploadImage({String folder, String name, File file}) async {
+    //  final metadata = SettableMetadata(
+    //     contentType: 'image/png',
+    //     customMetadata: {'picked-file-path': file.path});
+   
+    final task =
+         storage.ref().child(folder).child(name + '.png').putFile(file);
+    // final res = await task.future.whenComplete(() => {
+
+    // });
+    // return res.downloadUrl.toString();
   }
 }

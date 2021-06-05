@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
+import 'package:sport_news/managers/user_manager.dart';
 
-class AuthController extends GetxController with SingleGetTickerProviderMixin {
+class RegistrationController extends GetxController with SingleGetTickerProviderMixin {
   FirebaseManager firebaseManager;
-  AuthController({@required this.firebaseManager});
+  UserManager userManager;
+  RegistrationController({@required this.firebaseManager, @required this.userManager});
 
   AnimationController animationController;
   Animation animation;
@@ -52,10 +54,12 @@ class AuthController extends GetxController with SingleGetTickerProviderMixin {
     }
 
     final result = await firebaseManager.createUserWithEmailAndPassword(
-        user.email, user.password);
-    if (result.isEmpty) {
+        email:user.email, password:user.password);
+    if (result.a.isEmpty && result.b!=null) {
+      await userManager.updateFirstCreateUser(result.b,nickName: user.nickName);
+      Get.back();
     } else {
-      Get.snackbar('Registration Error', result);
+      Get.snackbar('Registration Error', result.a);
     }
   }
 

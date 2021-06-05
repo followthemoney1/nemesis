@@ -42,7 +42,7 @@ class CreateTeamController extends GetxController {
 
   addNewTeam() async {
     if (!createTeam.isBlank) {
-      await firebaseManager.addNewTeam(createTeam);
+      await firebaseManager.addNewTeam(team:createTeam);
       Get.snackbar("Added", "teamName.value ${selectedTeam.name}");
     } else {
       Get.snackbar("Error", "teamName.value is empty");

@@ -15,58 +15,68 @@ class AdminPanel extends GetView<AdminPanelController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        Flexible(
-          child: Row(
-            children: [
-              Flexible(
-                  child: CreateTeam(
-                tag: firstTeamTAG,
-              )),
-              Flexible(
-                  child: CreateTeam(
-                tag: secondTeamTAG,
-              ))
-            ],
-          ),
-        ),
-        Obx(
-          () => TextButton(
-            onPressed: () {
-              DatePicker.showDateTimePicker(context,
-                  showTitleActions: true,
-                  minTime: DateTime(2018, 3, 5),
-                  maxTime: DateTime(2022, 6, 7), onChanged: (date) {
-                print('change $date');
-              }, onConfirm: (date) {
-                print('confirm $date');
-                // controller.setStartTime(date);
-                controller.startTime.value = date;
-              }, currentTime: DateTime.now(), locale: LocaleType.ru);
-            },
-            child: Text(
-              'Picked date   :::   Date - ${controller.startTime.value.month}:${controller.startTime.value.day} Time - ${controller.startTime.value.hour}:${controller.startTime.value.minute}',
-              style: TextStyle(color: Colors.blue),
+      body: CustomScrollView(slivers: [
+        SliverList(delegate: SliverChildListDelegate([
+
+       
+        // SliverFillRemaining(
+        //   hasScrollBody: false,
+        //   child: Column(children: [
+           Container(height: 600,width: double.infinity,child: Row(
+                children: [
+                  Flexible(
+                      child: CreateTeam(
+                    tag: firstTeamTAG,
+                  )),
+                  Flexible(
+                      child: CreateTeam(
+                    tag: secondTeamTAG,
+                  ))
+                ],
+              ),),
+            
+            Obx(
+              () => TextButton(
+                onPressed: () {
+                  DatePicker.showDateTimePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime(2018, 3, 5),
+                      maxTime: DateTime(2022, 6, 7), onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                    // controller.setStartTime(date);
+                    controller.startTime.value = date;
+                  }, currentTime: DateTime.now(), locale: LocaleType.ru);
+                },
+                child: Text(
+                  'Picked date   :::   Date - ${controller.startTime.value.month}:${controller.startTime.value.day} Time - ${controller.startTime.value.hour}:${controller.startTime.value.minute}',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
             ),
-          ),
+            TextFormField(
+              decoration: InputDecoration(hintText: "How many BO we got"),
+              onChanged: (value) {
+                //mark:
+              },
+            ),
+            TextFormField(
+              decoration: InputDecoration(hintText: "Match URL"),
+              onChanged: (value) {
+                //mark:
+              },
+            ),
+            MaterialButton(
+                child: Text("Create a match"),
+                onPressed: () {
+                  controller.createMatch(
+                      Get.find<CreateTeamController>(tag: firstTeamTAG),
+                      Get.find<CreateTeamController>(tag: secondTeamTAG));
+                }),
+            // ]),
+          ]),
         ),
-        TextFormField(
-          decoration: InputDecoration(hintText: "How many BO we got"),
-          onChanged: (value) {
-            //mark:
-          },
-        ),
-        TextFormField(
-          decoration: InputDecoration(hintText: "Match URL"),
-          onChanged: (value) {
-            //mark:
-          },
-        ),
-        MaterialButton(
-            child: Text("Create a match"),
-            onPressed: () {
-              controller.createMatch(Get.find<CreateTeamController>(tag: firstTeamTAG),Get.find<CreateTeamController>(tag: secondTeamTAG));
-            })
       ]),
     );
   }

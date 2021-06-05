@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/sockets/src/socket_notifier.dart';
 import 'package:get/route_manager.dart';
-import 'package:sport_news/ui/auth/auth_controller.dart';
+import 'package:sport_news/ui/auth/registration/registration_controller.dart';
 import 'package:sport_news/ui/widgets/expand_item_transition.dart';
 import 'package:sport_news/ui/widgets/my_text_field.dart';
 import 'package:sport_news/ui/widgets/pimp_left.dart';
 
-class AuthPage extends GetView<AuthController> {
-  static final String page = '/auth_page';
+import 'login_controller.dart';
+
+class LoginPage extends GetView<LoginController> {
+  static final String page = '/login_page';
 
   final arguments;
   final widgetKey;
 
-  AuthPage({Key key, this.arguments, this.widgetKey})
+  LoginPage({Key key, this.arguments, this.widgetKey})
       : //assert(parentContext != null),
         super(key: key);
 
@@ -25,7 +27,7 @@ class AuthPage extends GetView<AuthController> {
     return PageRouteBuilder<void>(
         pageBuilder: (BuildContext context, _, __) => ExpandItemPageTransition(
               source: sourceRect,
-              child: AuthPage(
+              child: LoginPage(
                 arguments: args,
                 widgetKey: key,
               ),
@@ -38,7 +40,7 @@ class AuthPage extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AuthController>(
+    return GetBuilder<LoginController>(
       init: controller,
       builder: (controller) => AnimatedBuilder(
         animation: controller.animationController,
@@ -76,7 +78,7 @@ class AuthPage extends GetView<AuthController> {
                                 Padding(
                                   padding: EdgeInsets.only(left: 20),
                                   child: AutoSizeText(
-                                    "Registration",
+                                    "Sign In",
                                     minFontSize: 8,
                                     style: Theme.of(context)
                                         .textTheme
@@ -90,22 +92,7 @@ class AuthPage extends GetView<AuthController> {
                               ]),
                             ),
                             //text
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 20, right: 20, bottom: 20),
-                              child: MyTextFormField(
-                                  hint: "Create a login",
-                                  validator: (v) {
-                                    return (v.isEmpty ||
-                                            controller.user.nickName.isEmpty)
-                                        ? '***'
-                                        : null;
-                                  },
-                                  onChange: (v) {
-                                    controller.user.nickName = v;
-                                  },
-                                  prefixIcon: Icons.person),
-                            ),
+                           
                             Padding(
                               padding: EdgeInsets.only(
                                   left: 20, right: 20, bottom: 20),
@@ -138,30 +125,14 @@ class AuthPage extends GetView<AuthController> {
                                   },
                                   prefixIcon: Icons.password),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 20, right: 20, bottom: 20),
-                              child: MyTextFormField(
-                                  hint: "Confirm password",
-                                  validator: (v) {
-                                    return (v.isEmpty ||
-                                            controller.user.password != v)
-                                        ? 'You should confirm the password'
-                                        : null;
-                                  },
-                                  onChange: (v) {
-                                    // controller.user.nickName = v;
-                                  },
-                                  prefixIcon: Icons.password),
-                            ),
-
+                           
                             MaterialButton(
                                 color: Color(0xff404751),
                                 child: Padding(
                                   padding: EdgeInsets.only(
                                       left: 45, right: 45, top: 6, bottom: 6),
                                   child: AutoSizeText(
-                                    'Registration',
+                                    'Sign In',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1
@@ -169,7 +140,7 @@ class AuthPage extends GetView<AuthController> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  controller.createUser();
+                                  controller.loginUser();
                                 }),
 
                             Padding(

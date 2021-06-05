@@ -30,7 +30,7 @@ class AdminPanelController extends GetxController {
     ..matchStreamUrl = 'fff'
     ..bo = 1;
 
-    firebase.createMatch(match);
+    firebase.createMatch(match:match);
   }
 
   // setStartTime(DateTime t){

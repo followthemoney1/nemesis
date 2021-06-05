@@ -6,13 +6,11 @@ import 'package:sport_news/ui/admin/admin_panel.dart';
 import 'package:sport_news/ui/admin/admin_panel_controller.dart';
 import 'package:sport_news/ui/admin/create_new_team/create_new_team.dart';
 import 'package:sport_news/ui/admin/create_new_team/create_team_controller.dart';
-import 'package:sport_news/ui/auth/auth_controller.dart';
 import 'package:sport_news/ui/home/home_page.dart';
 import 'package:sport_news/ui/news_detail/news_detail_page.dart';
 import 'package:sport_news/ui/user_suggestion/user_suggestion.dart';
 
 import 'di/root_binding.dart';
-import 'ui/auth/auth_page.dart';
 
 typedef PathWidgetBuilder = Widget Function(BuildContext, String);
 

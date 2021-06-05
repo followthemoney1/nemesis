@@ -7,6 +7,8 @@ import 'package:sport_news/data/local/local_team.dart';
 import 'package:sport_news/data/network_new/game_category.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/admin/create_category/create_category.dart';
+import 'package:sport_news/ui/widgets/image_picker/image_picker.dart';
+import 'package:sport_news/ui/widgets/image_picker/image_picker_controller.dart';
 import 'create_team_controller.dart';
 
 class CreateTeam extends StatelessWidget {
@@ -15,6 +17,8 @@ class CreateTeam extends StatelessWidget {
     @required this.tag,
   }) : super();
 
+ ImagePickerController imageController =  Get.put<ImagePickerController>(ImagePickerController(
+            firebaseManager: Get.find()),);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -90,9 +94,13 @@ class CreateTeam extends StatelessWidget {
                           onChanged: (value) {
                             controller.createTeam.name = value;
                             controller.update();
-                            print('$tag = ${controller.selectedTeam.name}');
+                            imageController.imageName = value;
+                            print('$tag = ${controller.createTeam.name}');
                           },
                         ),
+                        ImagePickerWidget(imageUrl: (url){
+                            controller.createTeam.imageUrl = url;
+                        },),
                         TextFormField(
                           controller: TextEditingController(),
                           onChanged: (value) {},

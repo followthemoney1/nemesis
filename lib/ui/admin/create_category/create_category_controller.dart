@@ -42,7 +42,7 @@ class CreateCategoryController extends GetxController {
 
   addCategory() async {
     if (!teamName.text.isEmpty) {
-      await firebaseManager.addNewCategory(teamName.text);
+      await firebaseManager.addNewCategory(category:teamName.text);
       Get.snackbar("Added", "teamName.value ${teamName.text}");
     } else {
       Get.snackbar("Error", "teamName.value is empty");

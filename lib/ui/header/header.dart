@@ -1,8 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:sport_news/ui/auth/auth_controller.dart';
-import 'package:sport_news/ui/auth/auth_page.dart';
+import 'package:sport_news/ui/auth/login/login_controller.dart';
+import 'package:sport_news/ui/auth/login/login_page.dart';
+import 'package:sport_news/ui/auth/registration/registration_controller.dart';
+import 'package:sport_news/ui/auth/registration/registration_page.dart';
 import 'package:sport_news/ui/header/header_controller.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_controller.dart';
 
@@ -14,7 +17,7 @@ class Header extends GetWidget<HeaderController> {
   Header({Widget child, Key key}) : super(key: key) {
     this.child = child;
   }
-  final controller = Get.put(HeaderController(firebaseManager: Get.find()));
+  final controller = Get.put(HeaderController(firebaseManager: Get.find(),userManager: Get.find()));
   var context;
 
   @override
@@ -36,7 +39,9 @@ class Header extends GetWidget<HeaderController> {
   }
 
   Widget header() {
-    return Container(
+    return Padding(
+      padding: EdgeInsets.only(left: 26,right: 26),
+      child: Container(
       height: topHeight,
       width: double.infinity,
       child: Row(
@@ -47,20 +52,16 @@ class Header extends GetWidget<HeaderController> {
             width: topHeight,
           ),
           //logo
-          Expanded(child: logo()),
-          Flexible(
-            flex: 4,
-            child: userMenu(),
-          )
+          logo(),
+          Spacer(),
+          userMenu(),
         ],
       ),
-    );
+    ),);
   }
 
   Widget logo() {
-    return Padding(
-      padding: EdgeInsets.only(left: 26),
-      child: Image.asset("assets/images/logotype.png"),
+    return Image.asset("assets/images/logotype.png"
     );
   }
 
@@ -69,21 +70,62 @@ class Header extends GetWidget<HeaderController> {
     if (controller.loginState == LoggedState.loggin) {
       return Icon(Icons.verified_user);
     } else {
-      return IconButton(
-        key: key,
-        onPressed: () {
-          Get.put<AuthController>(AuthController(firebaseManager: Get.find()));
-
-          // Get.toNamed(AuthPage.page);
-          Navigator.of(context).push<void>(
-            AuthPage.route(
-              context,
-              key,
-              // args: newsElement,
+      return Row(
+        children: [
+          MaterialButton(
+            key: key,
+            focusColor: Color(0xff404751),
+            child: Padding(
+              padding: EdgeInsets.only(left: 10, right: 10, top: 6, bottom: 6),
+              child: AutoSizeText(
+                'Registration',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
             ),
-          );
-        },
-        icon: Icon(Icons.access_alarm),
+            onPressed: () {
+              Get.put<RegistrationController>(
+                  RegistrationController(firebaseManager: Get.find(), userManager: Get.find()));
+
+              // Get.toNamed(AuthPage.page);
+              Navigator.of(context).push<void>(
+                RegistrationPage.route(
+                  context,
+                  key,
+                  // args: newsElement,
+                ),
+              );
+            },
+          ),
+          MaterialButton(
+            focusColor: Color(0xff404751),
+            child: Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 6, bottom: 6),
+              child: AutoSizeText(
+                'Sign In',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ),
+            onPressed: () {
+              Get.put<LoginController>(
+                  LoginController(firebaseManager: Get.find()));
+
+              // Get.toNamed(AuthPage.page);
+              Navigator.of(context).push<void>(
+                LoginPage.route(
+                  context,
+                  key,
+                  // args: newsElement,
+                ),
+              );
+            },
+          ),
+        ],
       );
     }
   }

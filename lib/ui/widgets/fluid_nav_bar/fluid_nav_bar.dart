@@ -57,11 +57,11 @@ class FluidNavBar extends GetWidget<FluidController> {
         color: backgroundColor,
         boxShadow: [
           controller.widthChange
-              ? BoxShadow()
+              ? BoxShadow(color: Colors.transparent)
               : BoxShadow(
                   color: Colors.black38,
                   blurRadius: 12.0,
-                  offset: Offset(3.0, -1),
+                  offset: Offset(4, -1),
                 )
         ],
       ),

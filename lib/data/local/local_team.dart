@@ -7,6 +7,7 @@ class LocalTeam {
   String name;
   String image;
   String snapshotId;
+  String imageUrl;
 
   LocalTeam();
 
@@ -15,6 +16,7 @@ class LocalTeam {
     this.image = snapshot['image'];
     this.name = snapshot['name'];
     this.gameCategoryId = snapshot['game_category_id'];
+    this.imageUrl = snapshot['imageUrl'];
   }
 
   Map<String, dynamic> toMap() {
@@ -22,6 +24,7 @@ class LocalTeam {
     data['image'] = this.image;
     data['name'] = this.name;
     data['game_category_id'] = this.gameCategory.snapshotID;
+    data['imageUrl'] = this.imageUrl;
     return data;
   }
 
