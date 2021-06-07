@@ -61,7 +61,7 @@ class _GradientButtonState extends State<GradientButton>
                         .textTheme
                         .subtitle2!
                         .copyWith(fontSize: 17, color: Colors.white),
-                  ).paddingOnly(
+                  ).padOnly(
                       left: widget.padding,
                       right: widget.padding,
                       top: widget.padding / 4,

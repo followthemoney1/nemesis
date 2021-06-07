@@ -160,6 +160,10 @@ class FirebaseManager {
     return matches;
   }
 
+  updateMatchById({required MatchEvent match}) async{
+    await database.collection(MATCHES).doc(match.snapshotId).update(match.toMap());
+  }
+
 //MARK: teams
   Future<List<LocalTeam>> getTeams() async {
     final doc = await database.collection(ALL_TEAMS).get();
@@ -174,6 +178,12 @@ class FirebaseManager {
     await database.collection(ALL_TEAMS).add(team.toMap());
   }
 
+  Future<LocalTeam> getTeamById({required String teamId})async{
+    final snapshot = await database.collection(ALL_TEAMS).doc(teamId).get();
+    final team = 
+       LocalTeam.fromSnapshot(snapshot);
+    return team;
+  }
 //MARK: category
 
   Future<List<GameCategory>> getGameCategoryes() async {

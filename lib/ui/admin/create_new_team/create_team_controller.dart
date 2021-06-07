@@ -30,6 +30,7 @@ class CreateTeamController extends GetxController {
 
   selectTeam(LocalTeam? c) {
     selectedTeam = c;
+    print('team selected = ${selectedTeam!.name}');
     update();
   }
 
@@ -42,10 +43,12 @@ class CreateTeamController extends GetxController {
 
   addNewTeam() async {
     if (!createTeam.isBlank!) {
-      await firebaseManager.addNewTeam(team:createTeam);
-      Get.snackbar("Added", "teamName.value ${selectedTeam!.name}");
+      await firebaseManager.addNewTeam(team: createTeam);
+      Get.showSnackbar(GetBar(
+          title: "Added", message: "teamName.value ${selectedTeam!.name}"));
     } else {
-      Get.snackbar("Error", "teamName.value is empty");
+      Get.showSnackbar(
+          GetBar(title: "Error", message: "teamName.value is empty"));
     }
   }
 }

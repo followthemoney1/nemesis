@@ -102,7 +102,7 @@ class _BBCReferenceNewsButtonState extends State<BBCReferenceNewsButton>
                           .textTheme
                           .headline5!
                           .copyWith(fontWeight: FontWeight.w600),
-                    ).paddingOnly(left: 6, right: 6),
+                    ).padOnly(left: 6, right: 6),
                   )),
             );
           }),

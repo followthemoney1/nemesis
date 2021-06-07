@@ -5,10 +5,12 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 import 'package:sport_news/managers/user_manager.dart';
 
-class RegistrationController extends GetxController with SingleGetTickerProviderMixin {
+class RegistrationController extends GetxController
+    with SingleGetTickerProviderMixin {
   FirebaseManager firebaseManager;
   UserManager userManager;
-  RegistrationController({required this.firebaseManager, required this.userManager});
+  RegistrationController(
+      {required this.firebaseManager, required this.userManager});
 
   AnimationController? animationController;
   late Animation animation;
@@ -48,18 +50,21 @@ class RegistrationController extends GetxController with SingleGetTickerProvider
         user.email.isEmpty ||
         user.password!.isEmpty ||
         user.nickName!.isEmpty) {
-      Get.snackbar(
-          'Some field isn\'t correct', "Please fill all fields in correct way");
+      Get.showSnackbar(GetBar(
+          title: 'Some field isn\'t correct',
+          message: "Please fill all fields in correct way"));
+
       return;
     }
 
     final result = await firebaseManager.createUserWithEmailAndPassword(
-        email:user.email, password:user.password!);
-    if (result.a.isEmpty && result.b!=null) {
-      await userManager.updateFirstCreateUser(result.b!,nickName: user.nickName);
+        email: user.email, password: user.password!);
+    if (result.a.isEmpty && result.b != null) {
+      await userManager.updateFirstCreateUser(result.b!,
+          nickName: user.nickName);
       Get.back();
     } else {
-      Get.snackbar('Registration Error', result.a);
+      Get.showSnackbar(GetBar(title: 'Registration Error', message: result.a));
     }
   }
 

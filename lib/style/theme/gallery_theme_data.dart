@@ -34,6 +34,8 @@ class NewsThemeData {
   static final Color bottomBarBackgroundColor = Color(0xFF0C0B0B);
 
   static final Color buttonMainColor = Color(0xFF9B51E0);
+  static final Color accentColor = Color(0xFF03a9f4);
+
   static final Color _bottomAppBarColor = Color(0xFFA1A1A1);
   static ThemeData lightThemeData =
       themeData(lightColorScheme, _lightFocusColor);
@@ -52,7 +54,7 @@ class NewsThemeData {
         textTheme: _textThemeGoogle.apply(displayColor: colorScheme.primary),
 //      // Matches manifest.json colors and background color.
         primaryColor: colorScheme.primary,
-        cardColor: Color(0xFF323a45),//colorScheme.onBackground,
+        cardColor: Color(0xFF323a45), //colorScheme.onBackground,
         appBarTheme: AppBarTheme(
           textTheme: _textThemeGoogle.apply(bodyColor: colorScheme.primary),
           color: colorScheme.background,
@@ -86,7 +88,6 @@ class NewsThemeData {
               _textThemeGoogle.subtitle1!.apply(color: _darkFillColor),
         ),
         dialogBackgroundColor: colorScheme.surface,
-      
         errorColor: saveButtonColor,
         hintColor: colorScheme.primary.withOpacity(0.3),
         splashColor: Colors.transparent);
@@ -124,7 +125,7 @@ class NewsThemeData {
     brightness: Brightness.dark,
   );
 
-
-  static final TextTheme _textThemeGoogle = GoogleFonts.comfortaaTextTheme();
-
-  }
+  // static final TextTheme _textThemeGoogle = GoogleFonts.comfortaaTextTheme();
+  static final TextTheme _textThemeGoogle = GoogleFonts.jostTextTheme();
+  // static final TextTheme _textThemeGoogle = GoogleFonts.mulishTextTheme();
+}

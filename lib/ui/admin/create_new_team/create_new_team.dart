@@ -16,8 +16,11 @@ class CreateTeam extends StatelessWidget {
   final String tag;
   CreateTeam({
     required this.tag,
-  }) : super();
+  }) : super(){
+    Get.put(CreateTeamController(Get.find<FirebaseManager>(),tag: tag),tag: tag);
+  }
 
+  get controller => Get.find<CreateTeamController>(tag: tag);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,10 +28,10 @@ class CreateTeam extends StatelessWidget {
       child: Material(
         type: MaterialType.card,
         color: Theme.of(context).colorScheme.surface,
-        child: GetX<CreateTeamController>(
+        child: GetBuilder<CreateTeamController>(
           tag: tag,
-          init: CreateTeamController(Get.find<FirebaseManager>(),tag: tag),
-          builder: (controller) => Container(
+          init: controller,
+          builder: (_) => Container(
             child: Padding(
               padding: EdgeInsets.all(
                   MediaQuery.of(context).size.shortestSide * 0.02),

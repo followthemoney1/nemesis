@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
@@ -20,7 +22,7 @@ class AdminPanelController extends GetxController {
     super.onInit();
   }
 
-  createMatch(CreateTeamController firstTeam, CreateTeamController secondTeam,) {
+  createMatch(CreateTeamController firstTeam, CreateTeamController secondTeam,) async{
     print(
         "first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}");
     match
@@ -30,7 +32,8 @@ class AdminPanelController extends GetxController {
     ..matchStreamUrl = 'fff'
     ..bo = 1;
 
-    firebase!.createMatch(match:match);
+    await firebase!.createMatch(match:match);
+    Get.showSnackbar(GetBar(title: 'Team created',message: 'Match with teams ::::first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}:::: was created',));
   }
 
   // setStartTime(DateTime t){

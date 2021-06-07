@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_news/ui/widgets/animated_on_click_widget.dart';
@@ -9,13 +10,28 @@ import 'package:sport_news/ui/widgets/visibility.dart';
  * Created by Dmitry Diachenko on Feb 18, 2020
  * powered by leaditteam.com
  **/
-extension FileExtention on FileSystemEntity{
+
+extension SnapshotExt on DocumentSnapshot {
+  bool hasKey(String key) {
+    try {
+      this[key];
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+}
+
+extension FileExtention on FileSystemEntity {
   String get name {
     return this.path.split("/").last;
   }
 }
-extension BuildC on BuildContext{
-  bool get isDesktop => (Platform.isAndroid || Platform.isIOS) && MediaQuery.of(this).size.width < 800;
+
+extension BuildC on BuildContext {
+  bool get isDesktop =>
+      (Platform.isAndroid || Platform.isIOS) &&
+      MediaQuery.of(this).size.width < 800;
 }
 
 extension StringExt on String {
@@ -39,14 +55,14 @@ extension WidgetExtension on Widget {
     return Expanded(child: this);
   }
 
-  Widget paddingAll(double value) {
+  Widget padAll(double value) {
     return Padding(
       padding: EdgeInsets.all(value),
       child: this,
     );
   }
 
-  Widget paddingOnly(
+  Widget padOnly(
       {double left = 0, double right = 0, double top = 0, double bottom = 0}) {
     return Container(
       color: Colors.transparent,
@@ -61,8 +77,6 @@ extension WidgetExtension on Widget {
       ),
     );
   }
-
-
 
   Widget addOnTap({required Function onTap, Function? onLongPress}) {
     return GestureDetector(

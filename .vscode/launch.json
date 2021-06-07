@@ -2,11 +2,11 @@
   "version": "0.2.0",
   "configurations": [
       {
-          "name": "Flutter Web",
+          "name": "Nemessis",
           "type": "dart",
           "request": "launch",
           "program": "lib/main.dart",
-          "args": ["--web-renderer", "html"]
+           "args": ["--web-renderer", "html"]
       }
   ]
 }

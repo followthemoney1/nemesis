@@ -119,7 +119,8 @@ class SharedPreferenceManager {
 
   Stream<List<String>> getAllLikedNewsStream() async* {
     await checkPrefs();
-    yield* _rxSharedPreferences!.getStringListStream(LIKED_NEWS) as Stream<List<String>>;
+    yield* _rxSharedPreferences!.getStringListStream(LIKED_NEWS)
+        as Stream<List<String>>;
   }
 
   Future likeNews(String newsKey, bool liked) async {
@@ -136,7 +137,8 @@ class SharedPreferenceManager {
 
   Stream<bool> getLikeNewsRX(String newsKey) async* {
     await checkPrefs();
-    yield* _rxSharedPreferences!.getBoolStream(newsKey + "likeNews") as Stream<bool>;
+    yield* _rxSharedPreferences!.getBoolStream(newsKey + "likeNews")
+        as Stream<bool>;
   }
 
   pickLightTheme() async {

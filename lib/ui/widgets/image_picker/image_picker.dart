@@ -22,14 +22,24 @@ class ImagePickerWidget extends GetWidget<ImagePickerController> {
           if (controller.imageUrl!=null && controller.imageUrl!.isNotEmpty) {
             imageUrl(controller.imageUrl);
           }
-          return MaterialButton(
+          return 
+          Row(children:[
+          Text('Team Image: ', style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.white),),  
+          Flexible(child:MaterialButton(
             child: controller.imageUrl == null || controller.imageUrl!.isEmpty
                 ? Text("Pick Image")
-                : Container(width: 100,height:100 ,child:Image.network(controller.imageUrl!),),
+                : Container(
+              width: 60,
+              height: 60,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: Image.network(controller.imageUrl!),),
             onPressed: () {
               controller.pickImage();
             },
-          );
+          ),),]);
         });
   }
 }

@@ -144,7 +144,7 @@ class CardItemWidgetState extends State<CardItemWidget>
                     child: AutoSizeText(
                       widget.el!.name!,
                       maxLines: 1,
-                    ).paddingAll(selected ? 14 : 8)),
+                    ).padAll(selected ? 14 : 8)),
               ),
               Positioned(
                   bottom: 10,

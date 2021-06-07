@@ -91,7 +91,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                           key: ValueKey(topText.elementAt(steps - 1)),
                           style: Theme.of(context).textTheme.headline1,
                         ))
-                    .paddingOnly(
+                    .padOnly(
                         top: PADDING_TOP_BIG_SUGGESTION,
                         left: PADDING_LR_MEDIUM,
                         right: PADDING_LR_MEDIUM),
@@ -102,7 +102,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                           key: ValueKey(topDescription.elementAt(steps - 1)),
                           style: Theme.of(context).textTheme.bodyText2,
                         ))
-                    .paddingOnly(
+                    .padOnly(
                         top: 4,
                         left: PADDING_LR_MEDIUM,
                         right: PADDING_LR_MEDIUM),
@@ -128,8 +128,8 @@ class _UserSuggestionState extends State<UserSuggestion>
                                   Icons.arrow_back,
                                   color: Colors.black,
                                   size: 20,
-                                ).paddingAll(10),
-                              ).paddingOnly(left: 10).addOnTap(onTap: () {
+                                ).padAll(10),
+                              ).padOnly(left: 10).addOnTap(onTap: () {
                                 if (steps > 1)
                                   setState(() {
                                     steps--;
@@ -185,7 +185,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                                                             fontSize: 14,
                                                             color:
                                                                 Colors.black),
-                                                  ).paddingOnly(right: 4),
+                                                  ).padOnly(right: 4),
                                                 ),
                                               ]),
                                         ],
@@ -200,7 +200,7 @@ class _UserSuggestionState extends State<UserSuggestion>
                                     ),
                               discoveryNextPress(),
                             ],
-                          ).paddingAll(6),
+                          ).padAll(6),
                         ),
                       ),
                     ],
@@ -228,8 +228,8 @@ class _UserSuggestionState extends State<UserSuggestion>
           Icons.arrow_forward,
           color: Colors.black,
           size: 20,
-        ).paddingAll(10),
-      ).paddingAll(10).addOnTap(onTap: onTapNext),
+        ).padAll(10),
+      ).padAll(10).addOnTap(onTap: onTapNext),
     );
   }
 
@@ -265,7 +265,7 @@ class _UserSuggestionState extends State<UserSuggestion>
         targetColor: Theme.of(context).colorScheme.background.withOpacity(0.5),
         overflowMode: OverflowMode.ignore,
         child: SizedBox.shrink(),
-      ).paddingOnly(right: 70, top: 50),
+      ).padOnly(right: 70, top: 50),
     );
   }
 

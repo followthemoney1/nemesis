@@ -45,17 +45,19 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     if (!formKey.currentState!.validate() ||
         user.email.isEmpty ||
         user.password.isEmpty) {
-      Get.snackbar(
-          'Some field isn\'t correct', "Please fill all fields in correct way");
+      Get.showSnackbar(GetBar(
+          title: 'Some field isn\'t correct',
+          message: "Please fill all fields in correct way"));
+
       return;
     }
 
     final result = await firebaseManager.signInWithEmailAndPassword(
-        email:user.email, password:user.password);
+        email: user.email, password: user.password);
     if (result.isEmpty) {
       Get.back();
     } else {
-      Get.snackbar('Login Error', result);
+      Get.showSnackbar(GetBar(title: "Login Error", message: result));
     }
   }
 

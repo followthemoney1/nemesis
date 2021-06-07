@@ -16,7 +16,8 @@ class LocalTeam {
     this.image = snapshot['image'];
     this.name = snapshot['name'];
     this.gameCategoryId = snapshot['game_category_id'];
-    // this.imageUrl = snapshot['imageUrl'] ?? '';
+    this.imageUrl = snapshot['imageUrl'] ?? '';
+    print(imageUrl);
   }
 
   Map<String, dynamic> toMap() {

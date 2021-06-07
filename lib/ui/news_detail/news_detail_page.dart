@@ -16,7 +16,7 @@ import 'package:sport_news/ui/news_detail/news_detail/news_detail_bloc.dart';
 import 'package:sport_news/ui/widgets/b_b_c_reference_news_button.dart';
 import 'package:sport_news/ui/widgets/expand_item_transition.dart';
 import 'package:sport_news/ui/widgets/gradient_button.dart';
-import 'package:sport_news/ui/widgets/like_widget.dart';
+import 'package:sport_news/ui/widgets/like_widget/like_widget.dart';
 import 'package:sport_news/ui/widgets/visibility.dart';
 
 import '../../constants.dart';
@@ -241,7 +241,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                                     topImagesDetailScreenPageController,
                               ),
                             ),
-                          ).paddingAll(PADDING_LR_MEDIUM),
+                          ).padAll(PADDING_LR_MEDIUM),
                           dateAndLikeWidgetMobile(news: arguments!),
                           Container(
                             child: Column(
@@ -272,7 +272,7 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                                                   arguments!.channelType == 'tg'
                                               ? VisibilityFlag.visible
                                               : VisibilityFlag.gone),
-                                ]).paddingOnly(top: PADDING_TOP_SMALL),
+                                ]).padOnly(top: PADDING_TOP_SMALL),
 
                                 // AnimatedSize(
                                 //   vsync: this,
@@ -308,10 +308,10 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                                     : Container(),
                               ],
                             ),
-                          ).paddingAll(8),
+                          ).padAll(8),
                         ],
                       )),
-                ).paddingOnly(bottom: 4),
+                ).padOnly(bottom: 4),
               ),
             ),
           ]),
@@ -406,9 +406,9 @@ class _NewsDetailPageState extends State<NewsDetailPage>
                 TextStyle(color: Theme.of(context).buttonColor, fontSize: 12),
           ),
         ),
-        LikeWidget(firebaseNews: news),
+        // EventStatisticWidget(match: news),
       ],
-    ).paddingOnly(left: PADDING_LR_MEDIUM, right: PADDING_LR_MEDIUM);
+    ).padOnly(left: PADDING_LR_MEDIUM, right: PADDING_LR_MEDIUM);
   }
 }
 
