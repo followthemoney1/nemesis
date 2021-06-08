@@ -7,13 +7,14 @@ import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_controller.dart';
 import 'package:sport_news/ui/widgets/pimp_left.dart';
 
-class FluidNavBar extends GetWidget<FluidController> {
-  Function(int)? onChange;
+class FluidNavBar extends StatelessWidget {
+  final Function(int) onChange;
+  final int selectedIndex;
   final Color backgroundColor = Color(0xFF363c45);
-  FluidNavBar({Function(int)? onChange}) {
-    this.onChange = onChange;
-  }
-  final controller = Get.put(FluidController());
+
+  FluidNavBar({required this.selectedIndex,required Function(int) this.onChange});
+  
+  final controller = Get.find<FluidController>();
   late var context;
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,12 @@ class FluidNavBar extends GetWidget<FluidController> {
                   children: [
                     menuIcon(
                         icon: Icons.email_outlined,
-                        isSelected: controller.isSelected,
+                        index: 0,
                         sectionName: 'Dota 2'),
+                     menuIcon(
+                        icon: Icons.email_outlined,
+                        index: 1,
+                        sectionName: 'Counter-Strike: Global Offensive'),
                   ],
                 )
               ],
@@ -57,7 +62,65 @@ class FluidNavBar extends GetWidget<FluidController> {
     );
   }
 
-  Widget icon() {
+ 
+  Widget menuIcon(
+      {required IconData icon,
+      required String sectionName,
+      required int index,}) {
+        bool isSelected = selectedIndex == index;
+    return Container(
+      width: controller.nominalWidth,
+      height: Header.topHeight,
+      child: MaterialButton(
+         padding: EdgeInsets.zero,
+          onPressed: () {
+            onChange(index);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              PimpLeft(
+                height: Header.topHeight - 10,
+                width: isSelected ? 3 : 0,
+              ),
+              
+              Padding(padding: EdgeInsets.only(left: 6,right: 6),child:AnimatedContainer(
+                width: Header.topHeight - 20,
+                height: Header.topHeight - 20,
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? NewsThemeData.accentColor
+                      : NewsThemeData.iconBackgroundDisabled,
+                  borderRadius: BorderRadius.circular(isSelected ? 8 : 30),
+                ),
+                duration: Duration(seconds: 1),
+                curve: Curves.fastOutSlowIn,
+                child: Icon(
+                  icon,
+                  color: Colors.white,
+                ),
+              ),),
+             
+              controller.widthChange
+                  ? Expanded(
+                    
+                      child: AutoSizeText(
+                        sectionName,
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w100
+                            ),
+                      ),
+                    )
+                  : Container(),
+             
+            ],
+          )),
+    );
+  }
+
+   Widget icon() {
     return Container(
       width: controller.nominalWidth,
       height: Header.topHeight,
@@ -89,59 +152,4 @@ class FluidNavBar extends GetWidget<FluidController> {
     );
   }
 
-  Widget menuIcon(
-      {required IconData icon,
-      required String sectionName,
-      required bool isSelected}) {
-    return Container(
-      width: controller.nominalWidth,
-      height: Header.topHeight,
-      child: MaterialButton(
-         padding: EdgeInsets.zero,
-          onPressed: () {
-            controller.select();
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              PimpLeft(
-                height: Header.topHeight - 10,
-                width: isSelected ? 3 : 0,
-              ),
-              
-              Padding(padding: EdgeInsets.only(left: 6,right: 6),child:AnimatedContainer(
-                width: Header.topHeight - 20,
-                height: Header.topHeight - 20,
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? NewsThemeData.accentColor
-                      : NewsThemeData.iconBackgroundDisabled,
-                  borderRadius: BorderRadius.circular(isSelected ? 8 : 30),
-                ),
-                duration: Duration(milliseconds: 600),
-                curve: Curves.fastOutSlowIn,
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                ),
-              ),),
-             
-              controller.widthChange
-                  ? Expanded(
-                    
-                      child: AutoSizeText(
-                        sectionName,
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w100
-                            ),
-                      ),
-                    )
-                  : Container(),
-             
-            ],
-          )),
-    );
-  }
 }

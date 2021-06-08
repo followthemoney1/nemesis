@@ -45,7 +45,7 @@ class RouteConfiguration {
   ///
   static final pages = [
     GetPage(
-      name: HomePage.tag,
+      name: HomePage.page,
       page: () => HomePage(),
       binding: RootBinding(),
     ),
@@ -70,18 +70,18 @@ class RouteConfiguration {
   ];
 
   static List<Path> paths = [
-    Path(
-      HomePage.tag, //+ r'([\w-]+)$',
-      (context, match) => HomePage(),
-    ),
-    Path(
-      NewsDetailPage.tag, //+ r'/([\w-]+)$',
-      (context, match) => NewsDetailPage(),
-    ),
-    Path(
-      UserSuggestion.tag, //+ r'/([\w-]+)$',
-      (context, match) => UserSuggestion(),
-    ),
+    // Path(
+    //   HomePage.tag, //+ r'([\w-]+)$',
+    //   (context, match) => HomePage(),
+    // ),
+    // Path(
+    //   NewsDetailPage.tag, //+ r'/([\w-]+)$',
+    //   (context, match) => NewsDetailPage(),
+    // ),
+    // Path(
+    //   UserSuggestion.tag, //+ r'/([\w-]+)$',
+    //   (context, match) => UserSuggestion(),
+    // ),
     // Path(
     //   FilterPage.tag, //+ r'/([\w-]+)$',
     //   (context, match) => FilterPage(),

@@ -3,7 +3,9 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:sport_news/ui/admin/create_category/create_category_controller.dart';
+import 'package:sport_news/ui/home/home_controller.dart';
 import 'package:sport_news/ui/news_list/news_list_controller.dart';
+import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_controller.dart';
 
 class RootBinding implements Bindings {
   @override
@@ -13,6 +15,8 @@ class RootBinding implements Bindings {
     // Get.create<CreateCategoryController>(() => c);
     // Get.put<CreateCategoryController>(c, tag: c.tag);
     // Get.create<CreateTeamController>(() => CreateTeamController(Get.find()));
+    Get.put<HomeController>(HomeController());
+    Get.put<FluidController>(FluidController());
     Get.lazyPut(() => MatchesListController(firebaseManager: Get.find()));
     log("root binding");
   }

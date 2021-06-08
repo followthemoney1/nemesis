@@ -14,7 +14,6 @@ import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/admin/admin_panel.dart';
 import 'package:sport_news/ui/admin/admin_panel_controller.dart';
 import 'package:sport_news/ui/header/header.dart';
-import 'package:sport_news/ui/home/home_b/home_bloc.dart';
 import 'package:sport_news/ui/home/home_page.dart';
 import 'package:sport_news/ui/news_detail/news_detail/news_detail_bloc.dart';
 import 'package:sport_news/ui/news_detail/news_detail_page.dart';
@@ -51,15 +50,15 @@ class _SportNewsState extends State<SportNews> {
   void initState() {
     super.initState();
 
-    sharedPreferenceManager.getThemeStream().listen((event) {
-      setState(() {
-        if (event == 0) {
-          _themeMode = ThemeMode.light;
-        } else if (event != null) {
-          _themeMode = ThemeMode.dark;
-        }
-      });
-    });
+    // sharedPreferenceManager.getThemeStream().listen((event) {
+    //   setState(() {
+    //     if (event == 0) {
+    //       _themeMode = ThemeMode.light;
+    //     } else if (event != null) {
+    //       _themeMode = ThemeMode.dark;
+    //     }
+    //   });
+    // });
   }
 
   @override
@@ -86,7 +85,7 @@ class _SportNewsState extends State<SportNews> {
               getPages: RouteConfiguration.pages,
               // onGenerateRoute: RouteConfiguration.onGenerateRoute,
               initialBinding: InitialBinding(),
-              initialRoute: HomePage.tag,
+              initialRoute: HomePage.page,
               // initialRoute: AdminPanel.page,
               debugShowCheckedModeBanner: false,
               themeMode: _themeMode != null

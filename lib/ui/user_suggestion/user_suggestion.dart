@@ -292,6 +292,6 @@ class _UserSuggestionState extends State<UserSuggestion>
   }
 
   navigateToNextScreen() {
-    Navigator.pushNamedAndRemoveUntil(context, HomePage.tag, (route) => false);
+    // Navigator.pushNamedAndRemoveUntil(context, HomePage.tag, (route) => false);
   }
 }

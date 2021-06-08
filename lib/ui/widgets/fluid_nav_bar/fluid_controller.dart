@@ -24,8 +24,5 @@ class FluidController extends GetxController with SingleGetTickerProviderMixin{
 
   }
 
-  select(){
-    isSelected = !isSelected;
-    update();
-  }
+ 
 }
