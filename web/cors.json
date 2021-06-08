@@ -1,0 +1,14 @@
+[
+    {
+        "origin": [
+            "http://nemesis-b1957.web.app",
+            "http://nemesis-b1957.firebaseapp.com",
+            "http://localhost:4204"
+        ],
+        "method": [
+            "GET"
+        ],
+        "maxAgeSeconds": 3600
+    }
+    
+]

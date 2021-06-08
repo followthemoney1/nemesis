@@ -15,6 +15,7 @@ class SharedPreferenceManager {
   final SUGGESTION_KEYS = "SUGGESTION_KEYS";
   final DEEPLINK_DATA = "DEEPLINK_DATA";
   final SUBSCRIBED_TO_NOTIFICATION = "SUBSCRIBED_TO_NOTIFICATION";
+  final SELECTED_MENU_ITEM = 'SELECTED_MENU_ITEM'; 
 
   static SharedPreferences? _prefs;
   static RxSharedPreferences? _rxSharedPreferences;
@@ -25,6 +26,16 @@ class SharedPreferenceManager {
 
   checkPrefs() async {
     if (_prefs == null || _rxSharedPreferences == null) await init();
+  }
+
+  setectMenuItem(int index)async{
+   await checkPrefs();
+    await _prefs!.setInt(SELECTED_MENU_ITEM, index);
+  }
+
+  Future<int?> getSelectedMenuItem()async{
+await checkPrefs();
+  return await _prefs!.getInt(SELECTED_MENU_ITEM);
   }
 
   Future<bool?> subscribedToNotification() async {
