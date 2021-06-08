@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,8 +11,7 @@ import 'package:sport_news/managers/firebase_manager.dart';
 
 class CreateTeamController extends GetxController {
   FirebaseManager firebaseManager;
-  final String? tag;
-  CreateTeamController(this.firebaseManager, {this.tag});
+  CreateTeamController(this.firebaseManager, );
 
   LocalTeam? selectedTeam = LocalTeam();
   LocalTeam createTeam = LocalTeam();
@@ -30,14 +31,14 @@ class CreateTeamController extends GetxController {
 
   selectTeam(LocalTeam? c) {
     selectedTeam = c;
-    print('team selected = ${selectedTeam!.name}');
+    log('team selected = ${selectedTeam!.name}');
     update();
   }
 
   loadTeams() async {
     teams = await firebaseManager.getTeams();
     selectedTeam = teams.first;
-    print(teams.length);
+    log(teams.length.toString());
     update();
   }
 

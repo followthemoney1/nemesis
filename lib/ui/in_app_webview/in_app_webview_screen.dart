@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -16,17 +18,17 @@ class _InAppWebViewState extends State<InAppWebView> {
         id: 1,
         label: 'Custom item menu 1',
         action: (url, title) {
-          print('Custom item menu 1 clicked!');
-          print(url);
-          print(title);
+          log('Custom item menu 1 clicked!');
+          log(url);
+          log(title);
         }));
     browser.addMenuItem(new ChromeSafariBrowserMenuItem(
         id: 2,
         label: 'Custom item menu 2',
         action: (url, title) {
-          print('Custom item menu 2 clicked!');
-          print(url);
-          print(title);
+          log('Custom item menu 2 clicked!');
+          log(url);
+          log(title);
         }));
     super.initState();
   }

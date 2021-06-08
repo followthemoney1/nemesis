@@ -36,18 +36,18 @@ class CreateCategoryController extends GetxController {
   loadCategory() async {
     categoryes = await firebaseManager!.getGameCategoryes();
     // chosenCategory = categoryes.first;
-    print(categoryes.length);
+    log(categoryes.length);
     update();
   }
 
   addCategory() async {
     if (!teamName.text.isEmpty) {
-      await firebaseManager!.addNewCategory(category:teamName.text);
-      Get.showSnackbar(GetBar(title: "Added",message:"teamName.value ${teamName.text}"));
-     
+      await firebaseManager!.addNewCategory(category: teamName.text);
+      Get.showSnackbar(
+          GetBar(title: "Added", message: "teamName.value ${teamName.text}"));
     } else {
-       Get.showSnackbar(GetBar(title: "Error", message:"teamName.value is empty"));
-     
+      Get.showSnackbar(
+          GetBar(title: "Error", message: "teamName.value is empty"));
     }
   }
 }

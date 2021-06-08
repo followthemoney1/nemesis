@@ -12,8 +12,7 @@ class CreateCategory extends StatelessWidget {
   final String tag;
 
   CreateCategory(
-      {required this.tag,
-      required Function(GameCategory?) this.pickedCategory})
+      {required this.tag, required Function(GameCategory?) this.pickedCategory})
       : super();
 
   @override
@@ -25,7 +24,8 @@ class CreateCategory extends StatelessWidget {
         color: Theme.of(context).colorScheme.primary,
         child: GetBuilder<CreateCategoryController>(
           tag: tag,
-          init: CreateCategoryController(firebaseManager: Get.find<FirebaseManager>()),
+          init: CreateCategoryController(
+              firebaseManager: Get.find<FirebaseManager>()),
           builder: (controller) => Column(children: [
             TextFormField(
               controller: controller.teamName,
@@ -54,7 +54,6 @@ class CreateCategory extends StatelessWidget {
                   ),
                   onChanged: (GameCategory? value) {
                     controller.selectCategory(value);
-                    print('${controller} ' + controller.chosenCategory!.name!);
                     pickedCategory(value);
                   },
                 ),

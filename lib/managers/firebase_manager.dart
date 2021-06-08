@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -81,14 +81,14 @@ class FirebaseManager {
       return Pair('', userCredential.user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        log('The password provided is too weak.');
         return Pair('weak-password', null);
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        log('The account already exists for that email.');
         return Pair('email-already-in-use', null);
       }
     } catch (e) {
-      print(e);
+      log(e.toString());
       return Pair(e.toString(), null);
     }
     return Pair('', null);
@@ -103,10 +103,10 @@ class FirebaseManager {
       return '';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        log('No user found for that email.');
         return 'user-not-found';
       } else if (e.code == 'user-not-found') {
-        print('Wrong password provided for that user.');
+        log("Wrong password provided for that user.");
         return 'user-not-found';
       }
     } catch (e) {
@@ -160,8 +160,11 @@ class FirebaseManager {
     return matches;
   }
 
-  updateMatchById({required MatchEvent match}) async{
-    await database.collection(MATCHES).doc(match.snapshotId).update(match.toMap());
+  updateMatchById({required MatchEvent match}) async {
+    await database
+        .collection(MATCHES)
+        .doc(match.snapshotId)
+        .update(match.toMap());
   }
 
 //MARK: teams
@@ -178,10 +181,9 @@ class FirebaseManager {
     await database.collection(ALL_TEAMS).add(team.toMap());
   }
 
-  Future<LocalTeam> getTeamById({required String teamId})async{
+  Future<LocalTeam> getTeamById({required String teamId}) async {
     final snapshot = await database.collection(ALL_TEAMS).doc(teamId).get();
-    final team = 
-       LocalTeam.fromSnapshot(snapshot);
+    final team = LocalTeam.fromSnapshot(snapshot);
     return team;
   }
 //MARK: category
@@ -204,8 +206,7 @@ class FirebaseManager {
       {required String folder, required html.File file}) async {
     // final meta = core.UploadMetadata(contentEncoding: "image/png");
 
-    final task =
-        storage.ref().child(folder).child(file.name).put(file);
+    final task = storage.ref().child(folder).child(file.name).put(file);
 
     final res = await task.future;
 

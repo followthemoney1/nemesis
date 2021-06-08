@@ -17,13 +17,13 @@ import 'dart:developer' as developer;
 import 'package:sport_news/pr_extension.dart';
 import '../../../constants.dart';
 
-class EventStatisticWidget extends GetWidget<EventStatisticController> {
+class EventStatisticWidget extends StatelessWidget {
   late String tag;
   EventStatisticWidget({
     required MatchEvent match,
   }) {
     this.tag = match.snapshotId + '_EventStatisticWidget';
-    Get.put(EventStatisticController(match: match, tag: tag), tag: tag);
+    Get.put(EventStatisticController(match: match,), tag: tag);
   }
 
   get controller => Get.find<EventStatisticController>(tag: tag);
@@ -31,6 +31,7 @@ class EventStatisticWidget extends GetWidget<EventStatisticController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EventStatisticController>(
+      tag: tag,
       init: controller,
       builder: (_) {
         return Center(

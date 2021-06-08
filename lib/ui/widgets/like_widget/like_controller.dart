@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
@@ -5,8 +7,7 @@ import 'package:sport_news/managers/shared_preference_manager.dart';
 
 class EventStatisticController extends GetxController {
   MatchEvent match;
-  String tag;
-  EventStatisticController({required this.match, required this.tag});
+  EventStatisticController({required this.match,});
 
   FirebaseManager firebaseManager = Get.find<FirebaseManager>();
   SharedPreferenceManager sharedPreferenceManager =
@@ -32,5 +33,6 @@ class EventStatisticController extends GetxController {
 
     await firebaseManager.updateMatchById(match: match);
     update();
+    log('updated like=${likedByUser} in match = ${match.snapshotId} and count =${match.likeCount}');
   }
 }

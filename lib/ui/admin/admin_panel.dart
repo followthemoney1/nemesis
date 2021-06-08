@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -16,13 +18,15 @@ class AdminPanel extends GetView<AdminPanelController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(slivers: [
-        SliverList(delegate: SliverChildListDelegate([
-
-       
-        // SliverFillRemaining(
-        //   hasScrollBody: false,
-        //   child: Column(children: [
-           Container(height: 600,width: double.infinity,child: Row(
+        SliverList(
+          delegate: SliverChildListDelegate([
+            // SliverFillRemaining(
+            //   hasScrollBody: false,
+            //   child: Column(children: [
+            Container(
+              height: 600,
+              width: double.infinity,
+              child: Row(
                 children: [
                   Flexible(
                       child: CreateTeam(
@@ -33,8 +37,9 @@ class AdminPanel extends GetView<AdminPanelController> {
                     tag: secondTeamTAG,
                   ))
                 ],
-              ),),
-            
+              ),
+            ),
+
             Obx(
               () => TextButton(
                 onPressed: () {
@@ -42,9 +47,9 @@ class AdminPanel extends GetView<AdminPanelController> {
                       showTitleActions: true,
                       minTime: DateTime(2018, 3, 5),
                       maxTime: DateTime(2022, 6, 7), onChanged: (date) {
-                    print('change $date');
+                    log('change $date');
                   }, onConfirm: (date) {
-                    print('confirm $date');
+                    log('confirm $date');
                     // controller.setStartTime(date);
                     controller.startTime.value = date;
                   }, currentTime: DateTime.now(), locale: LocaleType.ru);

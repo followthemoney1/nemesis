@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
@@ -22,18 +23,24 @@ class AdminPanelController extends GetxController {
     super.onInit();
   }
 
-  createMatch(CreateTeamController firstTeam, CreateTeamController secondTeam,) async{
-    print(
-        "first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}");
+  createMatch(
+    CreateTeamController firstTeam,
+    CreateTeamController secondTeam,
+  ) async {
+    log("first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}");
     match
-    ..team1 = firstTeam.selectedTeam
-    ..team2 = secondTeam.selectedTeam
-    ..schedule = startTime.value
-    ..matchStreamUrl = 'fff'
-    ..bo = 1;
+      ..team1 = firstTeam.selectedTeam
+      ..team2 = secondTeam.selectedTeam
+      ..schedule = startTime.value
+      ..matchStreamUrl = 'fff'
+      ..bo = 1;
 
-    await firebase!.createMatch(match:match);
-    Get.showSnackbar(GetBar(title: 'Team created',message: 'Match with teams ::::first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}:::: was created',));
+    await firebase!.createMatch(match: match);
+    Get.showSnackbar(GetBar(
+      title: 'Team created',
+      message:
+          'Match with teams ::::first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}:::: was created',
+    ));
   }
 
   // setStartTime(DateTime t){

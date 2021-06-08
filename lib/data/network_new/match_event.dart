@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sport_news/data/helper/pair.dart';
 import 'package:sport_news/data/local/local_team.dart';
@@ -33,7 +35,7 @@ class MatchEvent {
     this.shareCount =
         snapshot.hasKey('share_count') ? snapshot['share_count'] : 0;
 
-    print(likeCount);
+    log(likeCount.toString());
   }
 
   Map<String, dynamic> toMap() {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -127,7 +129,7 @@ class RouteConfiguration {
           settings: settings,
         );
       } else {
-        print("4040404040404040");
+        log("4040404040404040");
       }
     }
 

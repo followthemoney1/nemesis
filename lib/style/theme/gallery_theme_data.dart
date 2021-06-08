@@ -35,6 +35,7 @@ class NewsThemeData {
 
   static final Color buttonMainColor = Color(0xFF9B51E0);
   static final Color accentColor = Color(0xFF03a9f4);
+  static final Color iconBackgroundDisabled = Color(0xFF404751);
 
   static final Color _bottomAppBarColor = Color(0xFFA1A1A1);
   static ThemeData lightThemeData =

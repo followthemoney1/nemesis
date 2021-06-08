@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -22,8 +24,11 @@ class HeaderController extends GetxController {
   }
 
   checkLoginState() async {
-    firebaseManager.subscribeToLogginState().asBroadcastStream().listen((user) async{
-      print('handle login = $user');
+    firebaseManager
+        .subscribeToLogginState()
+        .asBroadcastStream()
+        .listen((user) async {
+      log('handle login = $user');
       if (user != null) {
         loginState = LoggedState.loggin;
         LocalUser localUser = await userManager.getUserData(user);

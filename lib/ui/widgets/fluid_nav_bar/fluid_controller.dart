@@ -5,6 +5,8 @@ import 'package:sport_news/ui/header/header.dart';
 class FluidController extends GetxController with SingleGetTickerProviderMixin{
   double nominalWidth = Header.topHeight;
   var widthChange = false;
+    var isSelected = false;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -20,5 +22,10 @@ class FluidController extends GetxController with SingleGetTickerProviderMixin{
     }
     update();
 
+  }
+
+  select(){
+    isSelected = !isSelected;
+    update();
   }
 }

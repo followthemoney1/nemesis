@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sport_news/data/network_new/game_category.dart';
 
@@ -17,7 +19,7 @@ class LocalTeam {
     this.name = snapshot['name'];
     this.gameCategoryId = snapshot['game_category_id'];
     this.imageUrl = snapshot['imageUrl'] ?? '';
-    print(imageUrl);
+    log(imageUrl.toString());
   }
 
   Map<String, dynamic> toMap() {

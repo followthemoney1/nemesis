@@ -16,8 +16,9 @@ class CreateTeam extends StatelessWidget {
   final String tag;
   CreateTeam({
     required this.tag,
-  }) : super(){
-    Get.put(CreateTeamController(Get.find<FirebaseManager>(),tag: tag),tag: tag);
+  }) : super() {
+    Get.put(CreateTeamController(Get.find<FirebaseManager>(),),
+        tag: tag);
   }
 
   get controller => Get.find<CreateTeamController>(tag: tag);
@@ -96,12 +97,14 @@ class CreateTeam extends StatelessWidget {
                           onChanged: (value) {
                             controller.createTeam.name = value;
                             controller.update();
-                            print('$tag = ${controller.createTeam.name}');
+                            // log('${tag.toString()} = ${controller.createTeam.name.toString()}');
                           },
                         ),
-                        ImagePickerWidget(imageUrl: (url){
+                        ImagePickerWidget(
+                          imageUrl: (url) {
                             controller.createTeam.imageUrl = url;
-                        },),
+                          },
+                        ),
                         TextFormField(
                           controller: TextEditingController(),
                           onChanged: (value) {},
