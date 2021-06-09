@@ -8,6 +8,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sport_news/ui/admin/create_new_team/create_team_controller.dart';
 
 import 'admin_panel_controller.dart';
+import 'create_league/create_league.dart';
 import 'create_new_team/create_new_team.dart';
 
 class AdminPanel extends GetView<AdminPanelController> {
@@ -20,9 +21,10 @@ class AdminPanel extends GetView<AdminPanelController> {
       body: CustomScrollView(slivers: [
         SliverList(
           delegate: SliverChildListDelegate([
-            // SliverFillRemaining(
-            //   hasScrollBody: false,
-            //   child: Column(children: [
+            Container(height: 300,child:CreateLeague(onSelect: (league){
+              controller.selectedLeagueId = league!.snapshotID;
+              log('selected league id = ${controller.selectedLeagueId }');
+            },),).paddingAll(80),
             Container(
               height: 600,
               width: double.infinity,
@@ -38,7 +40,7 @@ class AdminPanel extends GetView<AdminPanelController> {
                   ))
                 ],
               ),
-            ),
+            ).paddingAll(80),
 
             Obx(
               () => TextButton(
@@ -65,13 +67,13 @@ class AdminPanel extends GetView<AdminPanelController> {
               onChanged: (value) {
                 //mark:
               },
-            ),
+            ).paddingOnly(left:80,right: 80),
             TextFormField(
               decoration: InputDecoration(hintText: "Match URL"),
               onChanged: (value) {
                 //mark:
               },
-            ),
+            ).paddingOnly(left:80,right: 80),
             MaterialButton(
                 child: Text("Create a match"),
                 onPressed: () {

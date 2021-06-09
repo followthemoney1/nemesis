@@ -27,6 +27,7 @@ launchURL(String url, {autolaunch = true}) async {
 Widget loadImageStateFunction(ExtendedImageState state) {
   switch (state.extendedImageLoadState) {
     case LoadState.loading:
+
       return Image.asset(
         DRAWABLE_NEWS_PLACEHOLDER,
         fit: BoxFit.cover,
@@ -34,7 +35,8 @@ Widget loadImageStateFunction(ExtendedImageState state) {
       break;
 
     case LoadState.completed:
-      state.completedWidget;
+    
+      return state.completedWidget;
       break;
     case LoadState.failed:
       return Image.asset(

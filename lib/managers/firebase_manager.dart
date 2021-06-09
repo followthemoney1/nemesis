@@ -18,6 +18,7 @@ import 'package:sport_news/data/network/group_news.dart';
 import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
 import 'package:sport_news/data/network_new/game_category.dart';
+import 'package:sport_news/data/network_new/league.dart';
 import 'package:sport_news/data/network_new/local_user.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:firebase/firebase.dart' as core;
@@ -26,6 +27,7 @@ import 'dart:html' as html;
 
 final GAME_CATEGORY = 'all_game_categoryes';
 final ALL_TEAMS = 'all_teams';
+final ALL_LEAGUE = 'all_league';
 final MATCHES = "all_matches";
 final USERS = "all_users";
 
@@ -165,6 +167,26 @@ class FirebaseManager {
         .collection(MATCHES)
         .doc(match.snapshotId)
         .update(match.toMap());
+  }
+
+//MARK: leagues
+  Future<List<League>> getLeagues() async {
+    final doc = await database.collection(ALL_LEAGUE).get();
+    final leagues = doc.docs.map((snapshot) {
+      return League.fromSnapshot(snapshot);
+    }).toList();
+
+    return leagues;
+  }
+
+  addNewLeague({required League league}) async {
+    await database.collection(ALL_LEAGUE).add(league.toMap());
+  }
+
+ Future<League> getLeagueById({required String leagueId})async{
+   final snapshot = await database.collection(ALL_LEAGUE).doc(leagueId).get();
+    final league = League.fromSnapshot(snapshot);
+    return league;
   }
 
 //MARK: teams

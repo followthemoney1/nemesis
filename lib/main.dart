@@ -26,8 +26,11 @@ import 'di/initial_binding.dart';
 import 'pr_extension.dart';
 import 'managers/firebase_manager.dart';
 import 'managers/shared_preference_manager.dart';
+import 'dart:html';
 
 void main() async {
+  window.document.onContextMenu.listen((evt) => evt.preventDefault());
+
   WidgetsFlutterBinding.ensureInitialized();
 
   GoogleFonts.config.allowRuntimeFetching = true;

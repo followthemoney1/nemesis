@@ -16,7 +16,7 @@ class AdminPanelController extends GetxController {
   AdminPanelController({this.firebase});
   MatchEvent match = MatchEvent();
   Rx<DateTime> startTime = DateTime.now().obs;
-
+  String? selectedLeagueId;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -33,6 +33,7 @@ class AdminPanelController extends GetxController {
       ..team2 = secondTeam.selectedTeam
       ..schedule = startTime.value
       ..matchStreamUrl = 'fff'
+      ..leagueId = selectedLeagueId
       ..bo = 1;
 
     await firebase!.createMatch(match: match);
