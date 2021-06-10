@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:rive/rive.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_controller.dart';
+import 'package:sport_news/ui/widgets/menu/menu_icon.dart';
+import 'package:sport_news/ui/widgets/menu/menu_icon_controller.dart';
 import 'package:sport_news/ui/widgets/pimp_left.dart';
 
 class FluidNavBar extends StatelessWidget {
@@ -17,6 +20,8 @@ class FluidNavBar extends StatelessWidget {
       {required this.selectedIndex, required Function(int) this.onChange});
 
   final controller = Get.find<FluidController>();
+  final menuIconController = Get.put<MenuIconController>(MenuIconController());
+
   late var context;
   @override
   Widget build(BuildContext context) {
@@ -50,21 +55,25 @@ class FluidNavBar extends StatelessWidget {
                 child: Column(
                   children: [
                     menuIcon(
+                        assetName: 'assets/icons/home_icon.svg',
+                        sectionName: 'Home',
+                        index: 0,
+                        procentIconSize: 0.35),
+                    menuIcon(
                         assetName: 'assets/icons/dota-2.svg',
                         sectionName: 'Dota 2',
-                        index: 0,
+                        index: 1,
                         procentIconSize: 0.40),
                     menuIcon(
                         assetName: 'assets/icons/csgo.svg',
                         sectionName: 'Counter-Strike: GO',
-                        index: 1,
+                        index: 2,
                         procentIconSize: 0.54),
                     menuIcon(
                         assetName: 'assets/icons/league-of-legends.svg',
                         sectionName: 'League of Legends',
-                        index: 2,
-                        procentIconSize: 0.50
-                        ),
+                        index: 3,
+                        procentIconSize: 0.50),
                   ],
                 ),
               )
@@ -75,12 +84,11 @@ class FluidNavBar extends StatelessWidget {
     );
   }
 
-  Widget menuIcon({
-    required String assetName,
-    required String sectionName,
-    required int index,
-    required double procentIconSize
-  }) {
+  Widget menuIcon(
+      {required String assetName,
+      required String sectionName,
+      required int index,
+      required double procentIconSize}) {
     bool isSelected = selectedIndex == index;
     return Container(
       width: controller.nominalWidth,
@@ -116,7 +124,6 @@ class FluidNavBar extends StatelessWidget {
                       assetName,
                       semanticsLabel: sectionName,
                       color: Colors.white,
-                      
                     ),
                   ),
                 ),
@@ -155,17 +162,21 @@ class FluidNavBar extends StatelessWidget {
         padding: EdgeInsets.zero,
         onPressed: () {
           controller.click();
+          menuIconController.toggle(controller.widthChange);
         },
         child: AnimatedAlign(
           duration: const Duration(milliseconds: 400),
           alignment:
               controller.widthChange ? Alignment.centerLeft : Alignment.center,
           child: Padding(
-            padding: EdgeInsets.only(left: controller.widthChange ? 16 : 0),
-            child: Icon(
-              Icons.ac_unit,
-            ),
-          ),
+              padding: EdgeInsets.only(left: controller.widthChange ? 16 : 0),
+              child: Container(
+                height: 30,
+                width: 30,
+                child: MenuIcon(
+                  controller: menuIconController,
+                ),
+              )),
         ),
       ),
     );

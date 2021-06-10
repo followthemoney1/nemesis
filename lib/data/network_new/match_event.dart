@@ -18,6 +18,7 @@ class MatchEvent {
   LocalTeam? team1;
   LocalTeam? team2;
   String? leagueId;
+  String? categoryId;
   MatchEvent();
 
   MatchEvent.fromSnapshot(DocumentSnapshot snapshot) {
@@ -36,6 +37,7 @@ class MatchEvent {
     this.shareCount =
         snapshot.hasKey('share_count') ? snapshot['share_count'] : 0;
     this.leagueId = snapshot.hasKey('league_id') ?  snapshot['league_id'] : null;
+    this.categoryId = snapshot.hasKey('category_id') ? snapshot['category_id'] : null;
     log(likeCount.toString());
   }
 
@@ -50,6 +52,7 @@ class MatchEvent {
     snapshot['view_count'] = this.viewCount;
     snapshot['share_count'] = this.shareCount;
     snapshot['league_id'] = this.leagueId;
+    snapshot['category_id'] = this.categoryId;
     return snapshot;
   }
 

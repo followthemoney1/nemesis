@@ -69,13 +69,14 @@ class CardListNews extends GetWidget<MatchCardController> {
                               duration: const Duration(microseconds: 800),
                               width: double.infinity,
                               child: Material(
-                                elevation: controller.hoverItem?6:0,
+                                elevation: controller.hoverItem ? 6 : 0,
                                 type: MaterialType.transparency,
                                 child: Hero(
                                   tag: controller.match.snapshotId + "image_",
                                   child: ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(controller.hoverItem ?6:3)),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            controller.hoverItem ? 6 : 3)),
                                     child: ExtendedImage.network(
                                         controller.league != null &&
                                                 controller.league!.imageUrl !=
@@ -95,19 +96,26 @@ class CardListNews extends GetWidget<MatchCardController> {
                             Positioned(
                               bottom: 0,
                               child: Chip(
-                                elevation: controller.hoverItem? 6:4,
-                                label:AnimatedPadding(curve: Curves.fastOutSlowIn,padding: EdgeInsetsDirectional.all(controller.hoverItem? 2:0),duration: const Duration(milliseconds: 200),child: AutoSizeText(
-                                  controller.match.isStarted().b,
-                                  maxLines: 1,
-                                  minFontSize: 8,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
-                                          fontSize: 14,
-                                          color: controller.match.isStarted().a
-                                              ? Colors.red
-                                              : Colors.white60),),
+                                elevation: controller.hoverItem ? 6 : 4,
+                                label: AnimatedPadding(
+                                  curve: Curves.fastOutSlowIn,
+                                  padding: EdgeInsetsDirectional.all(
+                                      controller.hoverItem ? 2 : 0),
+                                  duration: const Duration(milliseconds: 200),
+                                  child: AutoSizeText(
+                                    controller.match.isStarted().b,
+                                    maxLines: 1,
+                                    minFontSize: 8,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .copyWith(
+                                            fontSize: 14,
+                                            color:
+                                                controller.match.isStarted().a
+                                                    ? Colors.red
+                                                    : Colors.white60),
+                                  ),
                                 ),
                               ),
                             )

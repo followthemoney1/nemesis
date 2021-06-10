@@ -14,14 +14,13 @@ import 'create_team_controller.dart';
 
 class CreateTeam extends StatelessWidget {
   final String tag;
+  final controller;
+
   CreateTeam({
     required this.tag,
-  }) : super() {
-    Get.put(CreateTeamController(Get.find<FirebaseManager>(),),
-        tag: tag);
-  }
+    required this.controller 
+  });
 
-  get controller => Get.find<CreateTeamController>(tag: tag);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -109,12 +108,12 @@ class CreateTeam extends StatelessWidget {
                           controller: TextEditingController(),
                           onChanged: (value) {},
                         ),
-                        CreateCategory(
-                            tag: tag + "_category",
-                            pickedCategory: (value) {
-                              controller.createTeam.gameCategory = value;
-                              controller.update();
-                            }),
+                        // CreateCategory(
+                        //     tag: tag + "_category",
+                        //     pickedCategory: (value) {
+                        //       controller.createTeam.gameCategory = value;
+                        //       controller.update();
+                        //     }),
                       ],
                     ),
                   ),

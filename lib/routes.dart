@@ -54,7 +54,7 @@ class RouteConfiguration {
       page: () => AdminPanel(),
       binding: BindingsBuilder(
         () => Get.lazyPut<AdminPanelController>(() => AdminPanelController(
-              firebase: Get.find<FirebaseManager>(),
+              
             )),
       ),
     ),

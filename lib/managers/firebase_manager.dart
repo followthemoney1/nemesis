@@ -153,8 +153,17 @@ class FirebaseManager {
     await database.collection(MATCHES).add(match.toMap());
   }
 
-  Future<List<MatchEvent>> getMatches() async {
+  Future<List<MatchEvent>> getAllMatches() async {
     final doc = await database.collection(MATCHES).get();
+    final matches = doc.docs.map((snapshot) {
+      return MatchEvent.fromSnapshot(snapshot);
+    }).toList();
+
+    return matches;
+  }
+
+  Future<List<MatchEvent>> getMatchesByCategory({required String categoryId}) async {
+    final doc = await database.collection(MATCHES).where('category_id',isEqualTo: categoryId).get();
     final matches = doc.docs.map((snapshot) {
       return MatchEvent.fromSnapshot(snapshot);
     }).toList();
@@ -192,6 +201,15 @@ class FirebaseManager {
 //MARK: teams
   Future<List<LocalTeam>> getTeams() async {
     final doc = await database.collection(ALL_TEAMS).get();
+    final teams = doc.docs.map((snapshot) {
+      return LocalTeam.fromSnapshot(snapshot);
+    }).toList();
+
+    return teams;
+  }
+
+  Future<List<LocalTeam>> getTeamsByCategory({required String gameCategoryId}) async {
+    final doc = await database.collection(ALL_TEAMS).where("game_category_id",isEqualTo: gameCategoryId).get();
     final teams = doc.docs.map((snapshot) {
       return LocalTeam.fromSnapshot(snapshot);
     }).toList();

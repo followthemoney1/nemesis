@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sport_news/constants.dart';
 import 'package:sport_news/managers/campaign_manager.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 import 'package:sport_news/managers/shared_preference_manager.dart';
@@ -22,8 +23,10 @@ class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   static final List<Widget> _menuWidgets = <Widget>[
-    MatchesListPage(),
-    MatchesListPage(),
+    Container(),
+    MatchesListPage(tag: TeamsCategoryConstants.DOTA2,),
+    MatchesListPage(tag: TeamsCategoryConstants.CSGO,),
+    MatchesListPage(tag: TeamsCategoryConstants.LEAGUE_OF_LEGENDS,),
     // SavedNewsPage(),
     // RecommendationsPage(),
     // SettingsPage()

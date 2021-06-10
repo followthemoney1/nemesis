@@ -17,10 +17,10 @@ import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_nav_bar.dart';
 import 'package:sport_news/ui/widgets/news_widget_mobile.dart';
 
 class MatchesListPage extends GetWidget<MatchesListController> {
+  final String tag;
+  MatchesListPage({required this.tag});
+
   ScrollController scrollController = ScrollController();
-  // GlobalKey ctkey = GlobalKey();
-  // final controller =
-  //     Get.put(MatchesListController(firebaseManager: Get.find()));
   var context;
   @override
   Widget build(BuildContext c) {
@@ -32,7 +32,8 @@ class MatchesListPage extends GetWidget<MatchesListController> {
 
   mobile() {
     return GetBuilder<MatchesListController>(
-      init: Get.find<MatchesListController>(),
+      tag: tag,
+      init: Get.find<MatchesListController>(tag: tag),
       builder: (_) => Container(
         // key: ctkey,
         child: CustomScrollView(

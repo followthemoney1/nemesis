@@ -8,6 +8,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sport_news/ui/admin/create_new_team/create_team_controller.dart';
 
 import 'admin_panel_controller.dart';
+import 'create_category/create_category.dart';
 import 'create_league/create_league.dart';
 import 'create_new_team/create_new_team.dart';
 
@@ -15,16 +16,35 @@ class AdminPanel extends GetView<AdminPanelController> {
   static final String page = "/admin";
   final String firstTeamTAG = "firstT";
   final String secondTeamTAG = "secondT";
+
+ final firstTeamController =  Get.put(CreateTeamController(),
+        tag: "firstT");
+
+  final secondTeamController =  Get.put(CreateTeamController(),
+        tag: "secondT");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(slivers: [
         SliverList(
           delegate: SliverChildListDelegate([
-            Container(height: 300,child:CreateLeague(onSelect: (league){
-              controller.selectedLeagueId = league!.snapshotID;
-              log('selected league id = ${controller.selectedLeagueId }');
-            },),).paddingAll(80),
+            Container(
+              height: 300,
+              child: CreateLeague(
+                onSelect: (league) {
+                  controller.selectedLeagueId = league!.snapshotID;
+                  log('selected league id = ${controller.selectedLeagueId}');
+                },
+              ),
+            ).paddingAll(80),
+
+         CreateCategory(
+                tag: "team_category",
+                pickedCategory: (value) {
+                  controller.selectedGameCategory = value;
+                  firstTeamController.gameCategory = value;
+                   secondTeamController.gameCategory = value;
+                }),
             Container(
               height: 600,
               width: double.infinity,
@@ -33,10 +53,13 @@ class AdminPanel extends GetView<AdminPanelController> {
                   Flexible(
                       child: CreateTeam(
                     tag: firstTeamTAG,
+                     controller: firstTeamController,
                   )),
                   Flexible(
                       child: CreateTeam(
                     tag: secondTeamTAG,
+                    controller: secondTeamController,
+                   
                   ))
                 ],
               ),
@@ -67,13 +90,13 @@ class AdminPanel extends GetView<AdminPanelController> {
               onChanged: (value) {
                 //mark:
               },
-            ).paddingOnly(left:80,right: 80),
+            ).paddingOnly(left: 80, right: 80),
             TextFormField(
               decoration: InputDecoration(hintText: "Match URL"),
               onChanged: (value) {
                 //mark:
               },
-            ).paddingOnly(left:80,right: 80),
+            ).paddingOnly(left: 80, right: 80),
             MaterialButton(
                 child: Text("Create a match"),
                 onPressed: () {

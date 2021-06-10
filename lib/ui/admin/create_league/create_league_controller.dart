@@ -5,7 +5,7 @@ import 'package:sport_news/managers/firebase_manager.dart';
 
 class CreateLeagueController extends GetxController {
   FirebaseManager firebaseManager = Get.find<FirebaseManager>();
-  League? selectedLeague = League();
+  League? selectedLeague;
   League createLeague = League();
 
  List<League> _leagues = <League>[].obs;
@@ -24,9 +24,7 @@ class CreateLeagueController extends GetxController {
   }
 
   loadLeague() async {
-    leagues = await firebaseManager.getLeagues();
-    selectedLeague = leagues.first;
-    
+    leagues = await firebaseManager.getLeagues();    
     update();
   }
 

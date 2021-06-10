@@ -10,8 +10,16 @@ import 'package:sport_news/data/network_new/game_category.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 
 class CreateTeamController extends GetxController {
-  FirebaseManager firebaseManager;
-  CreateTeamController(this.firebaseManager, );
+  FirebaseManager firebaseManager = Get.find<FirebaseManager>();
+  CreateTeamController();
+
+  GameCategory? _gameCategory;
+   set gameCategory(GameCategory? c){
+     _gameCategory = c;
+     createTeam.gameCategory=c;
+     update();
+   }
+  GameCategory? get gameCategory => _gameCategory;
 
   LocalTeam? selectedTeam = LocalTeam();
   LocalTeam createTeam = LocalTeam();
@@ -36,10 +44,19 @@ class CreateTeamController extends GetxController {
   }
 
   loadTeams() async {
-    teams = await firebaseManager.getTeams();
-    selectedTeam = teams.first;
-    log(teams.length.toString());
-    update();
+    if (gameCategory != null) {
+      teams = await firebaseManager.getTeamsByCategory(
+          gameCategoryId: gameCategory!.snapshotID!);
+      selectedTeam = teams.first;
+      log(teams.length.toString());
+      update();
+    } else {
+      
+      // Get.showSnackbar(GetBar(
+      //   title: 'Cannot get teams',
+      //   message: 'Game category null',
+      // ));
+    }
   }
 
   addNewTeam() async {

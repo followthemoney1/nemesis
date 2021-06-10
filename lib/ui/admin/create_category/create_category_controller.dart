@@ -7,11 +7,11 @@ import 'package:sport_news/data/network_new/game_category.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 
 class CreateCategoryController extends GetxController {
-  FirebaseManager? firebaseManager;
+  FirebaseManager firebaseManager = Get.find<FirebaseManager>();
 
-  CreateCategoryController({this.firebaseManager});
+  CreateCategoryController();
 
-  TextEditingController teamName = TextEditingController();
+  TextEditingController categoryName = TextEditingController();
 
   GameCategory? chosenCategory;
 
@@ -34,17 +34,16 @@ class CreateCategoryController extends GetxController {
   }
 
   loadCategory() async {
-    categoryes = await firebaseManager!.getGameCategoryes();
-    // chosenCategory = categoryes.first;
+    categoryes = await firebaseManager.getGameCategoryes();
     log(categoryes.length);
     update();
   }
 
   addCategory() async {
-    if (!teamName.text.isEmpty) {
-      await firebaseManager!.addNewCategory(category: teamName.text);
+    if (!categoryName.text.isEmpty) {
+      await firebaseManager.addNewCategory(category: categoryName.text);
       Get.showSnackbar(
-          GetBar(title: "Added", message: "teamName.value ${teamName.text}"));
+          GetBar(title: "Added", message: "teamName.value ${categoryName.text}"));
     } else {
       Get.showSnackbar(
           GetBar(title: "Error", message: "teamName.value is empty"));

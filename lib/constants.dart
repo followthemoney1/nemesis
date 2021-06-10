@@ -10,6 +10,12 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
+class TeamsCategoryConstants{
+  static final DOTA2 = 'ZFP7tRnG0Z8HgOzua9Mi';
+  static final CSGO = 'kBequSKya9RKn8Wnee8N';
+  static final LEAGUE_OF_LEGENDS = 'RENus071K9skU6ZKX0gT';
+}
+
 launchURL(String url, {autolaunch = true}) async {
   if (await canLaunch(url)) {
     //await launch(url);

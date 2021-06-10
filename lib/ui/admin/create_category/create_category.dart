@@ -24,11 +24,10 @@ class CreateCategory extends StatelessWidget {
         color: Theme.of(context).colorScheme.primary,
         child: GetBuilder<CreateCategoryController>(
           tag: tag,
-          init: CreateCategoryController(
-              firebaseManager: Get.find<FirebaseManager>()),
+          init: CreateCategoryController( ),
           builder: (controller) => Column(children: [
             TextFormField(
-              controller: controller.teamName,
+              controller: controller.categoryName,
               style: Theme.of(context).textTheme.bodyText2,
             ),
             Row(children: [

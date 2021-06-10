@@ -5,21 +5,30 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:sport_news/data/network_new/game_category.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 
 import 'create_new_team/create_team_controller.dart';
 
 class AdminPanelController extends GetxController {
-  FirebaseManager? firebase;
+  FirebaseManager? firebase = Get.find<FirebaseManager>();
 
-  AdminPanelController({this.firebase});
+  AdminPanelController();
   MatchEvent match = MatchEvent();
   Rx<DateTime> startTime = DateTime.now().obs;
   String? selectedLeagueId;
+
+  GameCategory? _selectedGameCategory;
+  set selectedGameCategory(GameCategory? c){
+_selectedGameCategory = c;
+update();
+  }
+  GameCategory? get selectedGameCategory => _selectedGameCategory;
+
+
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
   }
 
@@ -34,6 +43,7 @@ class AdminPanelController extends GetxController {
       ..schedule = startTime.value
       ..matchStreamUrl = 'fff'
       ..leagueId = selectedLeagueId
+      ..categoryId = selectedGameCategory!.snapshotID
       ..bo = 1;
 
     await firebase!.createMatch(match: match);
