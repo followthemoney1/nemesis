@@ -67,6 +67,11 @@ class _SportNewsState extends State<SportNews> {
   @override
   Widget build(BuildContext context) {
     return OKToast(
+      dismissOtherOnShow: true,
+      
+      duration: const Duration(seconds: 5),
+      position: ToastPosition.bottom,
+      backgroundColor: NewsThemeData.buttonMainColor.withOpacity(0.8),
       /// set toast style, optional
       child: ModelBinding(
         initialModel: GalleryOptions(

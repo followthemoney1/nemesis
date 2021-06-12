@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:sport_news/data/local/local_team.dart';
 import 'package:sport_news/data/network_new/game_category.dart';
 
@@ -14,14 +15,16 @@ class CreateTeamController extends GetxController {
   CreateTeamController();
 
   GameCategory? _gameCategory;
-   set gameCategory(GameCategory? c){
-     _gameCategory = c;
-     createTeam.gameCategory=c;
-     update();
-   }
+  set gameCategory(GameCategory? c) {
+    _gameCategory = c;
+    createTeam.gameCategory = c;
+    update();
+    loadTeams();
+  }
+
   GameCategory? get gameCategory => _gameCategory;
 
-  LocalTeam? selectedTeam = LocalTeam();
+  LocalTeam? selectedTeam;
   LocalTeam createTeam = LocalTeam();
 
   List<LocalTeam> _teams = <LocalTeam>[].obs;
@@ -34,7 +37,6 @@ class CreateTeamController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await loadTeams();
   }
 
   selectTeam(LocalTeam? c) {
@@ -47,26 +49,19 @@ class CreateTeamController extends GetxController {
     if (gameCategory != null) {
       teams = await firebaseManager.getTeamsByCategory(
           gameCategoryId: gameCategory!.snapshotID!);
-      selectedTeam = teams.first;
       log(teams.length.toString());
       update();
     } else {
-      
-      // Get.showSnackbar(GetBar(
-      //   title: 'Cannot get teams',
-      //   message: 'Game category null',
-      // ));
+      showToast("Game category null");
     }
   }
 
   addNewTeam() async {
-    if (!createTeam.isBlank!) {
+    if (!createTeam.isBlank! && !createTeam.checkIfAnyIsNull()) {
       await firebaseManager.addNewTeam(team: createTeam);
-      Get.showSnackbar(GetBar(
-          title: "Added", message: "teamName.value ${selectedTeam!.name}"));
+      showToast("added teamName.value ${selectedTeam!.name}");
     } else {
-      Get.showSnackbar(
-          GetBar(title: "Error", message: "teamName.value is empty"));
+      showToast("teamName.value is empty");
     }
   }
 }

@@ -35,7 +35,7 @@ class NewsWidgetMobile extends StatelessWidget {
               child: SlideAnimation(
                 verticalOffset: 50.0,
                 child: FadeInAnimation(
-                  child: CardListNews(el: el),
+                  child: MatchCard(el: el),
                 ),
               ),
             );

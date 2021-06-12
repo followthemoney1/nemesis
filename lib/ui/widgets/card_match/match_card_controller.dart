@@ -32,11 +32,11 @@ class MatchCardController extends GetxController {
 
   getMatchData() async {
     team1 =
-        await firebaseManager.getTeamById(teamId: match!.team1!.snapshotId!);
+        await firebaseManager.getTeamById(teamId: match.team1!.snapshotId!);
     team2 =
-        await firebaseManager.getTeamById(teamId: match!.team2!.snapshotId!);
+        await firebaseManager.getTeamById(teamId: match.team2!.snapshotId!);
     if (match.leagueId != null) {
-      league = await firebaseManager.getLeagueById(leagueId: match!.leagueId!);
+      league = await firebaseManager.getLeagueById(leagueId: match.leagueId!);
       log(league!.imageUrl!);
     }
     update();

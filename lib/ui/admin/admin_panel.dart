@@ -43,7 +43,7 @@ class AdminPanel extends GetView<AdminPanelController> {
                 pickedCategory: (value) {
                   controller.selectedGameCategory = value;
                   firstTeamController.gameCategory = value;
-                   secondTeamController.gameCategory = value;
+                  secondTeamController.gameCategory = value;
                 }),
             Container(
               height: 600,

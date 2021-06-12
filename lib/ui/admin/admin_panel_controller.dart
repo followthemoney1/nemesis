@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:sport_news/data/network_new/game_category.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
@@ -20,12 +21,12 @@ class AdminPanelController extends GetxController {
   String? selectedLeagueId;
 
   GameCategory? _selectedGameCategory;
-  set selectedGameCategory(GameCategory? c){
-_selectedGameCategory = c;
-update();
+  set selectedGameCategory(GameCategory? c) {
+    _selectedGameCategory = c;
+    update();
   }
-  GameCategory? get selectedGameCategory => _selectedGameCategory;
 
+  GameCategory? get selectedGameCategory => _selectedGameCategory;
 
   @override
   void onInit() {
@@ -46,12 +47,15 @@ update();
       ..categoryId = selectedGameCategory!.snapshotID
       ..bo = 1;
 
-    await firebase!.createMatch(match: match);
-    Get.showSnackbar(GetBar(
-      title: 'Team created',
-      message:
-          'Match with teams ::::first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}:::: was created',
-    ));
+    if (!match.checkIfAnyIsNull()) {
+      await firebase!.createMatch(match: match);
+      showToast(
+            'Match with teams ::::first team : ${firstTeam.selectedTeam!.name} vs second team: ${secondTeam.selectedTeam!.name}:::: was created',
+      );
+    } else {
+     showToast('Some field is null ' + match.toMap().toString(),
+      );
+    }
   }
 
   // setStartTime(DateTime t){

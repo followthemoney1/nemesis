@@ -80,7 +80,11 @@ class MatchEvent {
       return Pair(true, 'online');
     }
   }
+   bool checkIfAnyIsNull() {
+    return [team1, team2, bo, matchStreamUrl,schedule,likeCount,viewCount,shareCount,leagueId,categoryId].contains(null);
+  }
 
+  
   // @override
-  // List<Object> get props => [image, name, snapshotId, gameCategoryId];
+  // List<Object> get props => [team1, team2, bo, matchStreamUrl,schedule,likeCount,viewCount,shareCount,leagueId,categoryId];
 }

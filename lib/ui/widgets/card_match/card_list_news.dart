@@ -18,9 +18,9 @@ import 'package:sport_news/ui/widgets/mouse/mouse_position.dart';
 import '../../../constants.dart';
 import '../like_widget/like_widget.dart';
 
-class CardListNews extends GetWidget<MatchCardController> {
+class MatchCard extends GetWidget<MatchCardController> {
   late String tag;
-  CardListNews({required MatchEvent el}) {
+  MatchCard({required MatchEvent el}) {
     this.tag = el.snapshotId + '_CardListNews';
     Get.put(MatchCardController(match: el, tag: tag), tag: tag);
   }
@@ -232,17 +232,37 @@ class CardListNews extends GetWidget<MatchCardController> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Expanded(
-                          child: AutoSizeText(
-                            'DOTA 2 ASIAN CHANMPIONSHIP',
-                            minFontSize: 3,
-                            maxFontSize: 10,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context)
-                                .textTheme
-                                .caption!
-                                .copyWith(color: Colors.white54),
-                          ).paddingOnly(left: 6, right: 6),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AutoSizeText(
+                                  controller.league != null &&
+                                          controller.league!.name != null
+                                      ? controller.league!.name!
+                                      : '',
+                                  minFontSize: 10,
+                                  maxFontSize: 14,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .caption!
+                                      .copyWith(
+                                          color: Colors.white54,
+                                          fontWeight: FontWeight.bold),
+                                ).paddingOnly(left: 6, right: 6),
+                                AutoSizeText(
+                                  controller.match.schedule.toUtc().toString(),
+                                  minFontSize: 5,
+                                  maxFontSize: 8,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .caption!
+                                      .copyWith(color: Colors.white54),
+                                ).paddingOnly(left: 6, right: 6, bottom: 6),
+                              ]),
                         ),
                         EventStatisticWidget(
                           match: controller.match,

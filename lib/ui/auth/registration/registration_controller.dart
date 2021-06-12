@@ -50,6 +50,7 @@ class RegistrationController extends GetxController
         user.email.isEmpty ||
         user.password!.isEmpty ||
         user.nickName!.isEmpty) {
+          
       Get.showSnackbar(GetBar(
           title: 'Some field isn\'t correct',
           message: "Please fill all fields in correct way"));

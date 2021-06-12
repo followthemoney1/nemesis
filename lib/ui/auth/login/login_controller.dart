@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 
 class LoginController extends GetxController with SingleGetTickerProviderMixin {
@@ -45,9 +46,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     if (!formKey.currentState!.validate() ||
         user.email.isEmpty ||
         user.password.isEmpty) {
-      Get.showSnackbar(GetBar(
-          title: 'Some field isn\'t correct',
-          message: "Please fill all fields in correct way"));
+      showToast("Please fill all fields in correct way");
 
       return;
     }
@@ -57,7 +56,7 @@ class LoginController extends GetxController with SingleGetTickerProviderMixin {
     if (result.isEmpty) {
       Get.back();
     } else {
-      Get.showSnackbar(GetBar(title: "Login Error", message: result));
+      showToast(result.toString());
     }
   }
 

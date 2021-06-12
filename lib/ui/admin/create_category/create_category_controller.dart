@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:sport_news/data/network_new/game_category.dart';
 import 'package:sport_news/managers/firebase_manager.dart';
 
@@ -42,11 +43,9 @@ class CreateCategoryController extends GetxController {
   addCategory() async {
     if (!categoryName.text.isEmpty) {
       await firebaseManager.addNewCategory(category: categoryName.text);
-      Get.showSnackbar(
-          GetBar(title: "Added", message: "teamName.value ${categoryName.text}"));
+     showToast("added teamName.value ${categoryName.text}");
     } else {
-      Get.showSnackbar(
-          GetBar(title: "Error", message: "teamName.value is empty"));
+      showToast("teamName.value is empty");
     }
   }
 }
