@@ -10,13 +10,14 @@ import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:sport_news/managers/app_type_checker.dart';
 import 'package:sport_news/managers/campaign_manager.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
-import 'package:sport_news/ui/news_detail/news_detail/news_detail_bloc.dart';
-import 'package:sport_news/ui/news_detail/news_detail_page.dart';
+import 'package:sport_news/ui/match_detail/match_detail.dart';
+
 import 'package:sport_news/ui/widgets/card_match/match_card_controller.dart';
 import 'package:sport_news/ui/widgets/mouse/mouse_position.dart';
 
 import '../../../constants.dart';
 import '../like_widget/like_widget.dart';
+import 'package:sport_news/pr_extension.dart';
 
 class MatchCard extends GetWidget<MatchCardController> {
   late String tag;
@@ -271,54 +272,14 @@ class MatchCard extends GetWidget<MatchCardController> {
                     )
                   ],
                 ),
-              ),
+              ).addOnTapAnimation(animation_miliseconds: 100,onTap: (){
+                _onTapCard();
+              }),
             )));
   }
 
-  cardHintWidget(FirebaseNews el, BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Flexible(
-        flex: 3,
-        child: el.channelType == 'rss' || el.channelType == 'tg'
-            ? AutoSizeText(
-                el.channelName!,
-                style: Theme.of(context)
-                    .textTheme
-                    .overline!
-                    .apply(color: Theme.of(context).bottomAppBarColor),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              )
-            : Container(),
-      ),
-      Flexible(
-        flex: 2,
-        child: AutoSizeText(
-          el.creationDate,
-          textAlign: TextAlign.right,
-          style: Theme.of(context)
-              .textTheme
-              .overline!
-              .apply(color: Theme.of(context).bottomAppBarColor),
-          maxLines: 1,
-        ),
-      ),
-    ]).paddingOnly(left: PADDING_LR_VERY_SMALL, right: PADDING_LR_MEDIUM);
+  _onTapCard(){
+    Get.toNamed(MatchDetail.page + "?matchId=${controller.match.snapshotId}");
+    
   }
-
-  // _tapOnCard({
-  //   bool? isDesktop,
-  //   GlobalKey? key,
-  //   required FirebaseNews newsElement,
-  // }) async {
-  //   await CampaignManager().updateViewCount(firebaseNews: newsElement);
-
-  //   Navigator.of(context).push<void>(
-  //     NewsDetailPage.route(
-  //       context,
-  //       GlobalKey(),
-  //       args: newsElement,
-  //     ),
-  //   );
-  // }
 }

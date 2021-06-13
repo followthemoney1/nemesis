@@ -9,8 +9,7 @@ import 'package:sport_news/managers/app_type_checker.dart';
 import 'package:sport_news/managers/campaign_manager.dart';
 import 'package:sport_news/pr_extension.dart';
 import 'package:sport_news/style/locale/localization.dart';
-import 'package:sport_news/ui/news_detail/news_detail/news_detail_bloc.dart';
-import 'package:sport_news/ui/news_detail/news_detail_page.dart';
+
 import 'package:sport_news/ui/news_list/news_list_controller.dart';
 import 'package:sport_news/ui/widgets/custom_progress.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_nav_bar.dart';
@@ -54,15 +53,15 @@ class MatchesListPage extends GetWidget<MatchesListController> {
     );
   }
 
-  openDetailPage({FirebaseNews? newsElement}) {
-    Navigator.of(context).push<void>(
-      NewsDetailPage.route(
-        context,
-        GlobalKey(),
-        args: newsElement,
-      ),
-    );
-  }
+  // openDetailPage({FirebaseNews? newsElement}) {
+  //   Navigator.of(context).push<void>(
+  //     NewsDetailPage.route(
+  //       context,
+  //       GlobalKey(),
+  //       args: newsElement,
+  //     ),
+  //   );
+  // }
 
   // bottomWidgetMobile({NewsListState state}) {
   //   return SliverList(

@@ -6,11 +6,11 @@ import 'package:rive/rive.dart';
 
 class MenuIconController extends GetxController {
   Artboard? riveArtboard;
- 
 
+  SimpleAnimation close = SimpleAnimation('close');
+  SimpleAnimation open = SimpleAnimation('open');
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     rootBundle.load('assets/animations/menu.riv').then(
       (data) async {
@@ -19,10 +19,11 @@ class MenuIconController extends GetxController {
         // The artboard is the root of the animation and gets drawn in the
         // Rive widget.
         final artboard = file.mainArtboard;
-        // Add a controller to play back a known animation on the main/default
-        // artboard.We store a reference to it so we can toggle playback.
-        // artboard.addController(closeController = SimpleAnimation('close'));
-        // artboard.addController(openController = SimpleAnimation('open'));
+        
+        artboard.addController(open);
+        artboard.addController(close);
+        close.isActive = false;
+        open.isActive = false;
 
         riveArtboard = artboard;
 
@@ -31,11 +32,11 @@ class MenuIconController extends GetxController {
     );
   }
 
-  toggle(bool open) {
-    if (!open) {
-      riveArtboard!.addController(SimpleAnimation('close'));
+  toggle(bool toggle) {
+    if (!toggle) {
+      close.isActive = true;
     } else {
-            riveArtboard!.addController(SimpleAnimation('open'));
+      open.isActive = true;
     }
 
     log('menu toggle');

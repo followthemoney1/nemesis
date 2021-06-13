@@ -3,7 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sport_news/data/network/firebase_news.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:sport_news/managers/app_type_checker.dart';
-import 'card_match/card_list_news.dart';
+import 'card_match/match_card.dart';
 
 class NewsWidgetMobile extends StatelessWidget {
   final List<MatchEvent> matches;

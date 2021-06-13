@@ -7,17 +7,30 @@ import 'package:sport_news/ui/auth/login/login_page.dart';
 import 'package:sport_news/ui/auth/registration/registration_controller.dart';
 import 'package:sport_news/ui/auth/registration/registration_page.dart';
 import 'package:sport_news/ui/header/header_controller.dart';
+import 'package:sport_news/ui/widgets/animated_icons/back_icon/back_icon.dart';
+import 'package:sport_news/ui/widgets/animated_icons/back_icon/back_icon_controller.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_controller.dart';
 
 import '../../constants.dart';
+import 'package:sport_news/pr_extension.dart';
 
 class Header extends GetWidget<HeaderController> {
   Widget? child;
   static final double topHeight = 60;
-  Header({Widget? child, Key? key}) : super(key: key) {
+  bool onBackEnabled = false;
+  Function()? onBackPress;
+  Header({Widget? child, Key? key, Function()? this.onBackPress})
+      : super(key: key) {
     this.child = child;
+    if (onBackPress != null) {
+      onBackEnabled = true;
+    }
   }
-  final controller = Get.put(HeaderController(firebaseManager: Get.find(),userManager: Get.find()));
+  final controller = Get.put(
+      HeaderController(firebaseManager: Get.find(), userManager: Get.find()));
+
+  final BackIconController backIconController =
+      Get.put<BackIconController>(BackIconController());
   var context;
 
   @override
@@ -40,29 +53,46 @@ class Header extends GetWidget<HeaderController> {
 
   Widget header() {
     return Padding(
-      padding: EdgeInsets.only(left: 26,right: 26),
+      padding: EdgeInsets.only(right: 26),
       child: Container(
-      height: topHeight,
-      width: double.infinity,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            height: topHeight,
-            width: topHeight,
-          ),
-          //logo
-          logo(),
-          Spacer(),
-          userMenu(),
-        ],
+        height: topHeight,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              height: topHeight,
+              width: topHeight,
+              child: onBackEnabled
+                  ? Container(child: backIcon()).addOnTap(onTap: onBackPress!)
+                  : Container(),
+            ),
+            //logo
+            logo().padOnly(left: 26),
+            Spacer(),
+            userMenu(),
+          ],
+        ),
       ),
-    ),);
+    );
+  }
+
+  backIcon() {
+    return MouseRegion(
+      onEnter: (v) {
+        backIconController.toggle(true);
+      },
+      onExit: (v) {
+        backIconController.toggle(false);
+      },
+      child: BackIcon(
+        controller: backIconController,
+      ),
+    );
   }
 
   Widget logo() {
-    return Image.asset("assets/images/logotype.png"
-    );
+    return Image.asset("assets/images/logotype.png");
   }
 
   Widget userMenu() {
@@ -86,8 +116,8 @@ class Header extends GetWidget<HeaderController> {
               ),
             ),
             onPressed: () {
-              Get.put<RegistrationController>(
-                  RegistrationController(firebaseManager: Get.find(), userManager: Get.find()));
+              Get.put<RegistrationController>(RegistrationController(
+                  firebaseManager: Get.find(), userManager: Get.find()));
 
               // Get.toNamed(AuthPage.page);
               Navigator.of(context).push<void>(

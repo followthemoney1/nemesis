@@ -8,8 +8,7 @@ import 'package:sport_news/managers/firebase_manager.dart';
 import 'package:sport_news/managers/shared_preference_manager.dart';
 import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/home/home_controller.dart';
-import 'package:sport_news/ui/news_detail/news_detail/news_detail_bloc.dart';
-import 'package:sport_news/ui/news_detail/news_detail_page.dart';
+
 import 'package:sport_news/ui/news_list/news_list_page.dart';
 
 import 'package:sport_news/ui/settings/settings_page.dart';

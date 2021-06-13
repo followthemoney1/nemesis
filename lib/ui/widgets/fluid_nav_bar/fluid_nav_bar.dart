@@ -6,9 +6,10 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:rive/rive.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/header/header.dart';
+import 'package:sport_news/ui/widgets/animated_icons/menu/menu_icon.dart';
+import 'package:sport_news/ui/widgets/animated_icons/menu/menu_icon_controller.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_controller.dart';
-import 'package:sport_news/ui/widgets/menu/menu_icon.dart';
-import 'package:sport_news/ui/widgets/menu/menu_icon_controller.dart';
+
 import 'package:sport_news/ui/widgets/pimp_left.dart';
 
 class FluidNavBar extends StatelessWidget {
@@ -108,16 +109,18 @@ class FluidNavBar extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 6, right: 6),
                 child: AnimatedContainer(
+                  
                   width: Header.topHeight - 20,
                   height: Header.topHeight - 20,
+                  
                   decoration: BoxDecoration(
                     color: isSelected
                         ? NewsThemeData.accentColor
                         : NewsThemeData.iconBackgroundDisabled,
-                    borderRadius: BorderRadius.circular(isSelected ? 8 : 30),
+                    borderRadius: BorderRadius.circular(isSelected ? 10 : 50),
                   ),
                   duration: Duration(seconds: 1),
-                  curve: Curves.fastOutSlowIn,
+                  curve: Curves.easeOutBack,
                   child: FractionallySizedBox(
                     heightFactor: procentIconSize,
                     child: SvgPicture.asset(

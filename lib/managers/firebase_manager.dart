@@ -51,7 +51,7 @@ class FirebaseManager {
     // if (langKey == null) langKey = await getFirebaseLangKeyByLang();
     // if (newData == null) newData = await getNewsGroupsWithReturn();
 
-    await FirebaseAuth.instance.setPersistence(Persistence.SESSION);
+    await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
   }
 
   //registration
@@ -169,6 +169,12 @@ class FirebaseManager {
     }).toList();
 
     return matches;
+  }
+
+  Future<MatchEvent> getMatchesById({required String matchId}) async {
+    final snapshot = await database.collection(MATCHES).doc(matchId).get();
+    final match = MatchEvent.fromSnapshot(snapshot);
+    return match;
   }
 
   updateMatchById({required MatchEvent match}) async {

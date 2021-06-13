@@ -15,8 +15,6 @@ import 'package:sport_news/ui/admin/admin_panel.dart';
 import 'package:sport_news/ui/admin/admin_panel_controller.dart';
 import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/home/home_page.dart';
-import 'package:sport_news/ui/news_detail/news_detail/news_detail_bloc.dart';
-import 'package:sport_news/ui/news_detail/news_detail_page.dart';
 
 import 'package:sport_news/ui/settings/settings/settings_bloc.dart';
 import 'package:sport_news/ui/user_suggestion/bloc/user_suggestion/user_suggestion_bloc.dart';
