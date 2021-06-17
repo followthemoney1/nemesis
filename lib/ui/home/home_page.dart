@@ -24,7 +24,7 @@ class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   static final List<Widget> _menuWidgets = <Widget>[
-    Container(height: 400,width: 800,child: TwitchPlayer(),),
+    Container(height: 400,width: 800,),
     MatchesListPage(tag: TeamsCategoryConstants.DOTA2,),
     MatchesListPage(tag: TeamsCategoryConstants.CSGO,),
     MatchesListPage(tag: TeamsCategoryConstants.LEAGUE_OF_LEGENDS,),

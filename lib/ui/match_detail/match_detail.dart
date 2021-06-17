@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
+import 'package:measured_size/measured_size.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/match_detail/match_detail_controller.dart';
@@ -9,6 +10,7 @@ import 'package:sport_news/ui/widgets/gradient_button.dart';
 import 'package:sport_news/ui/widgets/my_text_field.dart';
 import 'package:get/get.dart';
 import 'package:sport_news/ui/widgets/pimp_left.dart';
+import 'package:sport_news/ui/widgets/twitch/twitch_player.dart';
 
 class MatchDetail extends GetView<MatchDetailController> {
   static final String page = '/matchDetail';
@@ -72,13 +74,19 @@ class MatchDetail extends GetView<MatchDetailController> {
     );
   }
 
-  rightPanel(){
-    return Column(children: [
-       CardHolder(
+  rightPanel() {
+    return Column(
+      children: [
+        CardHolder(
             secionName: 'game streams',
-            child: Container(),
-       ),
-    ],);
+            child: Container(
+              height: 700,
+              child: TwitchPlayer(
+                streamName: 'weplaydota',
+              ),
+            )),
+      ],
+    );
   }
 
   leftPanel() {
@@ -86,20 +94,18 @@ class MatchDetail extends GetView<MatchDetailController> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CardHolder(
-            secionName: 'match detail',
-            child: Column(children: [
-              matchLogo(),
-              Container(height: 40),
-              teams(),
-              placeABet(),
-            ]),
-          ),
-        
-         CardHolder(
-            secionName: 'teams statistic',
-            child: Column(children: []),
-          ),
-        
+          secionName: 'match detail',
+          child: Column(children: [
+            matchLogo(),
+            Container(height: 40),
+            teams(),
+            placeABet(),
+          ]),
+        ),
+        CardHolder(
+          secionName: 'teams statistic',
+          child: Column(children: []),
+        ),
       ],
     );
   }
@@ -301,35 +307,43 @@ class MatchDetail extends GetView<MatchDetailController> {
 class CardHolder extends StatelessWidget {
   final Widget child;
   final String secionName;
-  const CardHolder(
+
+  CardHolder(
       {required Widget this.child, required String this.secionName, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.all(6),child:Card(
-        child: Column(
-      children: [
-        Padding(padding: EdgeInsets.only(top: 4,bottom: 6),child: Row(
-          children: [
-            PimpLeft(
-              height: 20,
-              width: 3,
+    return Padding(
+      padding: EdgeInsets.all(6),
+      child: Card(
+          child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 4, bottom: 6),
+            child: Row(
+              children: [
+                PimpLeft(
+                  height: 20,
+                  width: 3,
+                ),
+                Container(
+                  width: 8,
+                ),
+                AutoSizeText(
+                  secionName.toUpperCase(),
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13),
+                )
+              ],
             ),
-            Container(
-              width: 8,
-            ),
-            AutoSizeText(
-              secionName.toUpperCase(),
-              style: Theme.of(context).textTheme.headline6!.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13),
-            )
-          ],
-        ),),
-        child
-      ],
-    )),);
+          ),
+          child,
+          Container(height: 6),
+        ],
+      )),
+    );
   }
 }
