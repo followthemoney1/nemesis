@@ -5,7 +5,7 @@ class MyTextFormField extends StatelessWidget {
   final String hint;
   final FormFieldValidator validator;
   final Function(String val) onChange;
-  const MyTextFormField({required this.hint,required this.prefixIcon, Key? key,required this.validator,required this.onChange}) : super(key: key);
+  const MyTextFormField({required String this.hint,required IconData this.prefixIcon, Key? key,required FormFieldValidator this.validator,required this.onChange}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

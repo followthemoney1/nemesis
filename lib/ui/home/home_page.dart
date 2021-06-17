@@ -16,13 +16,15 @@ import 'package:sport_news/ui/user_suggestion/user_suggestion.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_nav_bar.dart';
 import 'dart:developer' as developer;
 
+import 'package:sport_news/ui/widgets/twitch/twitch_player.dart';
+
 class HomePage extends GetView<HomeController> {
   static final page = '/home';
 
   HomePage({Key? key}) : super(key: key);
 
   static final List<Widget> _menuWidgets = <Widget>[
-    Container(),
+    Container(height: 400,width: 800,child: TwitchPlayer(),),
     MatchesListPage(tag: TeamsCategoryConstants.DOTA2,),
     MatchesListPage(tag: TeamsCategoryConstants.CSGO,),
     MatchesListPage(tag: TeamsCategoryConstants.LEAGUE_OF_LEGENDS,),

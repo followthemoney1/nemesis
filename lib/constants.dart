@@ -6,7 +6,6 @@ import 'dart:ui';
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -19,12 +18,7 @@ class TeamsCategoryConstants{
 launchURL(String url, {autolaunch = true}) async {
   if (await canLaunch(url)) {
     //await launch(url);
-    ChromeSafariBrowser().open(
-        url: Uri.parse(url),
-        options: ChromeSafariBrowserClassOptions(
-            android:
-                AndroidChromeCustomTabsOptions(addDefaultShareMenuItem: false),
-            ios: IOSSafariOptions(barCollapsingEnabled: true)));
+   
   } else {
     throw 'Could not launch $url';
   }

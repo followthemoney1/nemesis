@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+ <html>
+
+ <head>
+     <style>
+         html,
+         body {
+             margin: 0;
+             padding: 0;
+             background-color: #000000;
+             overflow: hidden;
+             position: fixed;
+             height: 100%;
+             width: 100%;
+         }
+     </style>
+     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+ </head>
+
+ <body>
+     <div id="player"></div>
+     <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+     <div id="<player div ID>"></div>
+     <script type="text/javascript">
+         var options = {
+             width: window.innerWidth,
+             height: window.innerHeight,
+             video: "335180634",
+             // This should be used locally.
+             // If deployed, i.e not local then the parent should be the url of your website.
+             // For example if the full url of our deployed website is https://www.flutterproject.com then the parent would be
+             // parent: ["flutterproject.com"]
+             parent: ["localhost"]
+         };
+         var player = new Twitch.Player("<player div ID>", options);
+         player.setVolume(0.5);
+     </script>
+ </body>
+
+ </html>

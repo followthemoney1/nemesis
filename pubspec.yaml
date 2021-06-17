@@ -48,12 +48,12 @@ dependencies:
     # git:  
     #   url: https://github.com/dnfield/flutter_svg.git
   extended_image: ^4.1.0
-  flutter_inappwebview: ^5.3.2
   get: ^4.1.4  
   flutter_datetime_picker: ^1.5.1
   google_sign_in: ^5.0.4
   rive: ^0.7.12
   image_picker_web:
+  webviewx: ^0.1.0
 
 dependency_overrides:
   

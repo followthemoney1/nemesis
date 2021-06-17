@@ -1,0 +1,78 @@
+{
+  "allowHttpBackend": false,
+  "backendCommand": "node backend -c \"9cc7xpgn80n99skrd2oj4t3e8yjn9e\" -s \"II4WRNQdNTOGiUEmUwk70Rxe+iOlBy+eJuLZtg08XSs=\"",
+  "backendFolderName": "extension-getting-started/services",
+  "certificateExceptions": [],
+  "extensionViews": [],
+  "manifest": {
+    "anchor": "video_overlay",
+    "assetUrls": [],
+    "authorName": "Dmitry Diachenko",
+    "bitsEnabled": false,
+    "canInstall": true,
+    "configUrl": "https://localhost:8080/config.html",
+    "configurationLocation": "none",
+    "description": "",
+    "eulaTosUrl": "",
+    "hasChatSupport": false,
+    "iconUrl": "",
+    "iconUrls": {},
+    "id": "9cc7xpgn80n99skrd2oj4t3e8yjn9e",
+    "installationCount": -42,
+    "liveConfigUrl": "",
+    "name": "nemesis.app",
+    "panelHeight": 0,
+    "privacyPolicyUrl": "",
+    "requestIdentityLink": false,
+    "requiredBroadcasterAbilities": [],
+    "screenshotUrls": [],
+    "sku": "",
+    "state": "Testing",
+    "subscriptionsSupportLevel": "none",
+    "summary": "Платформа для общения и обмена информацией.",
+    "supportEmail": "dd.dyach@gmail.com",
+    "vendorCode": "",
+    "version": "0.0.1",
+    "viewerSummary": "",
+    "viewerUrl": "",
+    "viewerUrls": {
+      "mobile": "https://localhost:8080/mobile.html",
+      "videoOverlay": "https://localhost:8080/video_overlay.html",
+      "component": "https://localhost:8080/video_component.html"
+    },
+    "views": {
+      "mobile": {
+        "viewerUrl": "https://localhost:8080/mobile.html"
+      },
+      "videoOverlay": {
+        "viewerUrl": "https://localhost:8080/video_overlay.html",
+        "canLinkExternalContent": false
+      },
+      "component": {
+        "viewerUrl": "https://localhost:8080/video_component.html",
+        "aspectWidth": 0,
+        "aspectHeight": 0,
+        "aspectRatioX": 300,
+        "aspectRatioY": 200,
+        "scalePixels": 1024,
+        "targetHeight": 4000,
+        "size": 0,
+        "zoom": false,
+        "zoomPixels": 0,
+        "canLinkExternalContent": false,
+        "autoScale": true
+      },
+      "config": {
+        "viewerUrl": "https://localhost:8080/config.html",
+        "canLinkExternalContent": false
+      }
+    },
+    "whitelistedConfigUrls": [],
+    "whitelistedPanelUrls": []
+  },
+  "frontendCommand": "",
+  "frontendFolderName": "extension-getting-started/public",
+  "name": "nemesis.app",
+  "usingRandomFrontendHostingPort": false,
+  "version": 3
+}

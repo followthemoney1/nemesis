@@ -91,6 +91,7 @@ class NewsThemeData {
         dialogBackgroundColor: colorScheme.surface,
         errorColor: saveButtonColor,
         hintColor: colorScheme.primary.withOpacity(0.3),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         splashColor: Colors.transparent);
   }
 
