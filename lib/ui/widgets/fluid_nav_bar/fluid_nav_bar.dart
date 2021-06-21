@@ -34,7 +34,7 @@ class FluidNavBar extends StatelessWidget {
         duration: Duration(milliseconds: 300),
         curve:
             controller.widthChange ? Curves.easeInToLinear : Curves.easeOutBack,
-        child: Container(
+        child: Hero(tag: 'fluid_naw_bar',child:Container(
           width: controller.nominalWidth,
           decoration: BoxDecoration(
             color: backgroundColor,
@@ -81,7 +81,7 @@ class FluidNavBar extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ),),
     );
   }
 

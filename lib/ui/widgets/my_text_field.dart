@@ -5,11 +5,15 @@ class MyTextFormField extends StatelessWidget {
   final String hint;
   final FormFieldValidator validator;
   final Function(String val) onChange;
-  const MyTextFormField({required String this.hint,required IconData this.prefixIcon, Key? key,required FormFieldValidator this.validator,required this.onChange}) : super(key: key);
+  final TextEditingController? controller;
+  final bool endbled;
+  const MyTextFormField({this.endbled = true, required String this.hint,required IconData this.prefixIcon, Key? key,required FormFieldValidator this.validator,required this.onChange, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      enabled: endbled,
       style: Theme.of(context)
           .textTheme
           .caption!

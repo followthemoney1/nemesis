@@ -11,6 +11,7 @@ import 'package:sport_news/managers/app_type_checker.dart';
 import 'package:sport_news/managers/campaign_manager.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/match_detail/match_detail.dart';
+import 'package:sport_news/ui/widgets/animated_icons/big_progress/big_progress.dart';
 
 import 'package:sport_news/ui/widgets/card_match/match_card_controller.dart';
 import 'package:sport_news/ui/widgets/mouse/mouse_position.dart';
@@ -123,7 +124,7 @@ class MatchCard extends GetWidget<MatchCardController> {
                           ]),
                     ),
                     (controller.team1 == null || controller.team2 == null)
-                        ? CircularProgressIndicator()
+                        ? Flexible(flex: 2, child: BigProgress())
                         : Flexible(
                             flex: 2,
                             child: Row(
@@ -272,14 +273,13 @@ class MatchCard extends GetWidget<MatchCardController> {
                     )
                   ],
                 ),
-              ).addOnTapAnimation(animation_miliseconds: 100,onTap: (){
+              ).addOnTap(onTap: () {
                 _onTapCard();
               }),
             )));
   }
 
-  _onTapCard(){
+  _onTapCard() {
     Get.toNamed(MatchDetail.page + "?matchId=${controller.match.snapshotId}");
-    
   }
 }

@@ -5,7 +5,11 @@ import 'package:get/route_manager.dart';
 import 'package:measured_size/measured_size.dart';
 import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/header/header.dart';
+import 'package:sport_news/ui/home/home_page.dart';
 import 'package:sport_news/ui/match_detail/match_detail_controller.dart';
+import 'package:sport_news/ui/widgets/animated_icons/big_progress/big_progress.dart';
+import 'package:sport_news/ui/widgets/chat_widget/chat_widget.dart';
+import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_nav_bar.dart';
 import 'package:sport_news/ui/widgets/gradient_button.dart';
 import 'package:sport_news/ui/widgets/my_text_field.dart';
 import 'package:get/get.dart';
@@ -24,10 +28,10 @@ class MatchDetail extends GetView<MatchDetailController> {
     return Scaffold(
       body: Center(
         child: Stack(children: [
-          Positioned(
+           Positioned(
             top: Header.topHeight,
             bottom: 0,
-            left: 0,
+            left:  Header.topHeight,
             right: 0,
             child: SafeArea(
               top: true,
@@ -35,7 +39,7 @@ class MatchDetail extends GetView<MatchDetailController> {
               child: body(),
             ),
           ),
-          Positioned(
+             Positioned(
             top: 0,
             right: 0,
             left: 0,
@@ -45,6 +49,18 @@ class MatchDetail extends GetView<MatchDetailController> {
               },
             ),
           ),
+            Positioned(
+              bottom: 0,
+              top: 0,
+              left: 0,
+              //right: 0,
+              child: FluidNavBar(
+                  selectedIndex: -1,
+                  onChange: (index)=>HomePage.onItemTapped(index, null)),
+            )
+            
+         
+         
         ]),
       ),
     );
@@ -57,13 +73,13 @@ class MatchDetail extends GetView<MatchDetailController> {
         SliverList(
           delegate: SliverChildListDelegate([
             Container(
-              height: 1200,
+              height: 2200,
               width: double.infinity,
               child: Row(children: [
-                Expanded(
+                Flexible(
                   child: leftPanel(),
                 ),
-                Expanded(
+                Flexible(
                   child: rightPanel(),
                 ),
               ]),
@@ -83,6 +99,14 @@ class MatchDetail extends GetView<MatchDetailController> {
               height: 700,
               child: TwitchPlayer(
                 streamName: 'weplaydota',
+              ),
+            )),
+        CardHolder(
+            secionName: "Chat",
+            child: Container(
+              height: 800,
+              child: ChatWidget(
+                matchId: controller.matchId,
               ),
             )),
       ],
@@ -112,7 +136,7 @@ class MatchDetail extends GetView<MatchDetailController> {
 
   matchLogo() {
     if (controller.league == null) {
-      return Container();
+      return Container(height:200,child:BigProgress());
     }
     return Container(
       height: 100,
@@ -275,22 +299,23 @@ class MatchDetail extends GetView<MatchDetailController> {
               hint: '1000',
               prefixIcon: Icons.attach_money,
               validator: (v) {
-                if (double.tryParse(v.toString())! < 0.01) {
-                  return 'The value must be greater than 0.01';
-                }
-
+                if (double.tryParse(v) == null)
+                  return 'Write a correct number please';
                 if (v.contains(".") &&
                     v.substring(v.indexOf(".") + 1).length > 2) {
                   return 'You must not use more than 2 decimal places';
                 }
 
-                return !v.toString().isNum
-                    ? 'Write a correct number please'
-                    : null;
+                if (double.tryParse(v)! < 0.01) {
+                  return 'The value must be greater than 0.01';
+                }
+                return null;
               },
               onChange: (v) {
-                v = double.tryParse(v.toString())!.toStringAsPrecision(2);
-                formKey.currentState!.validate();
+                if (formKey.currentState!.validate()) {
+                  final parsed =
+                      double.tryParse(v.toString())!.toStringAsPrecision(2);
+                }
               },
             ),
           ).paddingAll(30),

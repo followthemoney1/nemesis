@@ -36,7 +36,7 @@ class TwitchPlayerState extends State<TwitchPlayer> {
         constraints.maxHeight,
       );
 
-      print('sized changed = ${playerSize.width}');
+      // print('sized changed = ${playerSize.width}');
 
       var loadData =
           """<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
@@ -46,12 +46,13 @@ class TwitchPlayerState extends State<TwitchPlayer> {
                       width: "${playerSize!.width}",
                       height: "${playerSize!.height}",
                       channel: "${widget.streamName}",
+                      autoplay: true,
                       parent: ["nemesis.app",]
                     };
                     var player = new Twitch.Player("${widget.divId}", options);
-                    player.setVolume(0.5);
+                   
                   </script>""";
-                  
+
       if (controller != null) {
         controller!.reload();
         controller!.loadContent(loadData, SourceType.HTML);

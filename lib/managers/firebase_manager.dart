@@ -17,6 +17,7 @@ import 'package:sport_news/data/network/firebase_news.dart';
 import 'package:sport_news/data/network/group_news.dart';
 import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
+import 'package:sport_news/data/network_new/chat_message.dart';
 import 'package:sport_news/data/network_new/game_category.dart';
 import 'package:sport_news/data/network_new/league.dart';
 import 'package:sport_news/data/network_new/local_user.dart';
@@ -30,6 +31,7 @@ final ALL_TEAMS = 'all_teams';
 final ALL_LEAGUE = 'all_league';
 final MATCHES = "all_matches";
 final USERS = "all_users";
+final CHATS = "all_chats";
 
 class FirebaseManager {
   FirebaseFirestore database = FirebaseFirestore.instance;
@@ -162,8 +164,12 @@ class FirebaseManager {
     return matches;
   }
 
-  Future<List<MatchEvent>> getMatchesByCategory({required String categoryId}) async {
-    final doc = await database.collection(MATCHES).where('category_id',isEqualTo: categoryId).get();
+  Future<List<MatchEvent>> getMatchesByCategory(
+      {required String categoryId}) async {
+    final doc = await database
+        .collection(MATCHES)
+        .where('category_id', isEqualTo: categoryId)
+        .get();
     final matches = doc.docs.map((snapshot) {
       return MatchEvent.fromSnapshot(snapshot);
     }).toList();
@@ -198,8 +204,8 @@ class FirebaseManager {
     await database.collection(ALL_LEAGUE).add(league.toMap());
   }
 
- Future<League> getLeagueById({required String leagueId})async{
-   final snapshot = await database.collection(ALL_LEAGUE).doc(leagueId).get();
+  Future<League> getLeagueById({required String leagueId}) async {
+    final snapshot = await database.collection(ALL_LEAGUE).doc(leagueId).get();
     final league = League.fromSnapshot(snapshot);
     return league;
   }
@@ -214,8 +220,12 @@ class FirebaseManager {
     return teams;
   }
 
-  Future<List<LocalTeam>> getTeamsByCategory({required String gameCategoryId}) async {
-    final doc = await database.collection(ALL_TEAMS).where("game_category_id",isEqualTo: gameCategoryId).get();
+  Future<List<LocalTeam>> getTeamsByCategory(
+      {required String gameCategoryId}) async {
+    final doc = await database
+        .collection(ALL_TEAMS)
+        .where("game_category_id", isEqualTo: gameCategoryId)
+        .get();
     final teams = doc.docs.map((snapshot) {
       return LocalTeam.fromSnapshot(snapshot);
     }).toList();
@@ -257,5 +267,34 @@ class FirebaseManager {
     final res = await task.future;
 
     return (await res.ref.getDownloadURL()).normalizePath().toString();
+  }
+
+  //subscribe to chat
+  Stream<QuerySnapshot<Map>> subscribeToChat(
+      {required matchId, }) {
+    return database
+        .collection(CHATS)
+        .doc(matchId)
+        .collection(matchId)
+        .orderBy('timestamp', descending: true)
+        // .limit(limit)
+        .snapshots();
+  }
+
+  sendMessage({required matchId, required ChatMessage message}) async{
+    var documentReference = database
+        .collection(CHATS)
+        .doc(matchId)
+        .collection(matchId)
+        .doc(DateTime.now().millisecondsSinceEpoch.toString());
+
+    database.runTransaction((transaction) async {
+      await transaction.set(
+        documentReference,
+        message.toMap(),
+      );
+    });
+
+    return '';
   }
 }

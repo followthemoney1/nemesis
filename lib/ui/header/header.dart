@@ -26,8 +26,7 @@ class Header extends GetWidget<HeaderController> {
       onBackEnabled = true;
     }
   }
-  final controller = Get.put(
-      HeaderController(firebaseManager: Get.find(), userManager: Get.find()));
+  final controller = Get.find<HeaderController>();
 
   final BackIconController backIconController =
       Get.put<BackIconController>(BackIconController());
@@ -41,13 +40,13 @@ class Header extends GetWidget<HeaderController> {
       padding: EdgeInsets.only(bottom: 6),
       child: GetBuilder(
         init: controller,
-        builder: (dynamic _) => Material(
+        builder: (_) => Material(
           color: Theme.of(context).backgroundColor,
           type: MaterialType.card,
           elevation: 6,
           child: header(),
-        ),
-      ),
+        
+      ),),
     );
   }
 
@@ -60,15 +59,19 @@ class Header extends GetWidget<HeaderController> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              height: topHeight,
-              width: topHeight,
-              child: onBackEnabled
-                  ? Container(child: backIcon()).addOnTap(onTap: onBackPress!)
-                  : Container(),
-            ),
+            !onBackEnabled
+                ? Container(
+                    height: topHeight,
+                    width: topHeight,
+                  )
+                : Container(width: topHeight*2,child:Padding(
+                    padding: EdgeInsets.only(left: topHeight),
+                    child: Container(child: backIcon())
+                        .addOnTap(onTap: onBackPress!),
+                  ),),
+            
             //logo
-            logo().padOnly(left: 26),
+           logo().padOnly(left: 26),
             Spacer(),
             userMenu(),
           ],
@@ -92,7 +95,7 @@ class Header extends GetWidget<HeaderController> {
   }
 
   Widget logo() {
-    return Image.asset("assets/images/logotype.png");
+    return  Hero(tag: 'size_logo',child:Image.asset("assets/images/logotype.png"),);
   }
 
   Widget userMenu() {

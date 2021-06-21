@@ -24,10 +24,19 @@ class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   static final List<Widget> _menuWidgets = <Widget>[
-    Container(height: 400,width: 800,),
-    MatchesListPage(tag: TeamsCategoryConstants.DOTA2,),
-    MatchesListPage(tag: TeamsCategoryConstants.CSGO,),
-    MatchesListPage(tag: TeamsCategoryConstants.LEAGUE_OF_LEGENDS,),
+    Container(
+      height: 400,
+      width: 800,
+    ),
+    MatchesListPage(
+      tag: TeamsCategoryConstants.DOTA2,
+    ),
+    MatchesListPage(
+      tag: TeamsCategoryConstants.CSGO,
+    ),
+    MatchesListPage(
+      tag: TeamsCategoryConstants.LEAGUE_OF_LEGENDS,
+    ),
     // SavedNewsPage(),
     // RecommendationsPage(),
     // SettingsPage()
@@ -35,9 +44,12 @@ class HomePage extends GetView<HomeController> {
 
   // GlobalKey mainWidgetKey = GlobalKey();
 
-  void onItemTapped(int index) {
+  static void onItemTapped(int index, HomeController? controller) async {
     //mark: check recommended is non null
-    controller.selectedMenuPage = index;
+    if (controller == null) {
+      Get.back();
+    }
+    Get.find<HomeController>().selectedMenuPage = index;
   }
 
   @override
@@ -74,7 +86,8 @@ class HomePage extends GetView<HomeController> {
               //right: 0,
               child: FluidNavBar(
                   selectedIndex: controller.selectedMenuPage,
-                  onChange: onItemTapped),
+                  onChange: (index) =>
+                      HomePage.onItemTapped(index, controller)),
             )
           ],
         )),
