@@ -68,30 +68,27 @@ class MatchCard extends GetWidget<MatchCardController> {
                           alignment: AlignmentDirectional.topCenter,
                           children: [
                             AnimatedContainer(
-                              duration: const Duration(microseconds: 800),
+                              duration: const Duration(microseconds: 600),
                               width: double.infinity,
                               child: Material(
                                 elevation: controller.hoverItem ? 6 : 0,
                                 type: MaterialType.transparency,
-                                child: Hero(
-                                  tag: controller.match.snapshotId + "image_",
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                            controller.hoverItem ? 6 : 3)),
-                                    child: ExtendedImage.network(
-                                        controller.league != null &&
-                                                controller.league!.imageUrl !=
-                                                    null
-                                            ? controller.league!.imageUrl!
-                                            : '',
-                                        fit: BoxFit.cover,
-                                        cache: true,
-                                        retries: 3,
-                                        filterQuality: FilterQuality.high,
-                                        loadStateChanged:
-                                            loadImageStateFunction),
-                                  ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          controller.hoverItem ? 6 : 3)),
+                                  child: ExtendedImage.network(
+                                      controller.league != null &&
+                                              controller.league!.imageUrl !=
+                                                  null
+                                          ? controller.league!.imageUrl!
+                                          : '',
+                                      fit: BoxFit.cover,
+                                      cache: true,
+                                      retries: 3,
+                                      filterQuality: FilterQuality.high,
+                                      loadStateChanged: (s)=>
+                                            LoadStateWidget(s)),
                                 ),
                               ),
                             ).paddingOnly(bottom: 13),
@@ -123,9 +120,7 @@ class MatchCard extends GetWidget<MatchCardController> {
                             )
                           ]),
                     ),
-                    (controller.team1 == null || controller.team2 == null)
-                        ? Flexible(flex: 2, child: BigProgress())
-                        : Flexible(
+                    Flexible(
                             flex: 2,
                             child: Row(
                                 mainAxisAlignment:
@@ -138,7 +133,7 @@ class MatchCard extends GetWidget<MatchCardController> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       AutoSizeText(
-                                        controller.team1!.name.toString(),
+                                        controller.team1 == null || controller.team1!.name.toString().isEmpty ? "" : controller.team1!.name.toString(),
                                         group: teamName,
                                         style: Theme.of(context)
                                             .textTheme
@@ -171,8 +166,14 @@ class MatchCard extends GetWidget<MatchCardController> {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Image.network(
-                                        controller.team1!.imageUrl!),
+                                    child: ExtendedImage.network(
+                                        controller.team1 ==null? '':controller.team1!.imageUrl!,
+                                        fit: BoxFit.cover,
+                                        cache: true,
+                                        retries: 3,
+                                        filterQuality: FilterQuality.low,
+                                        loadStateChanged:(s)=>
+                                            LoadStateWidget(s)),
                                   ),
                                   // Spacer(),
                                   AutoSizeText(
@@ -193,8 +194,15 @@ class MatchCard extends GetWidget<MatchCardController> {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Image.network(
-                                        controller.team2!.imageUrl!),
+                                    child: ExtendedImage.network(
+                                        controller.team2==null ? '':controller.team2!.imageUrl!,
+                                        fit: BoxFit.cover,
+                                        cache: true,
+                                        retries: 3,
+                                        filterQuality: FilterQuality.low,
+                                        loadStateChanged:
+                                            (s)=>
+                                            LoadStateWidget(s)),
                                   ),
                                   Column(
                                     crossAxisAlignment:
@@ -202,7 +210,7 @@ class MatchCard extends GetWidget<MatchCardController> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       AutoSizeText(
-                                        controller.team2!.name.toString(),
+                                       controller.team2==null || controller.team2!.name.toString().isEmpty ? "" : controller.team2!.name.toString(),
                                         group: teamName,
                                         style: Theme.of(context)
                                             .textTheme

@@ -10,6 +10,30 @@ import 'package:sport_news/ui/widgets/visibility.dart';
  * Created by Dmitry Diachenko on Feb 18, 2020
  * powered by leaditteam.com
  **/
+// extension FirestoreDocumentExtension on DocumentReference {
+//   Future<DocumentSnapshot> getSavy() async {
+//     try {
+//       DocumentSnapshot ds = await this.get(GetOptions(source: Source.cache));
+//       if (ds == null) return this.get(GetOptions(source: Source.server));
+//       return ds;
+//     } catch (_) {
+//       return this.get(GetOptions(source: Source.server));
+//     }
+//   }
+// }
+
+// // https://github.com/furkansarihan/firestore_collection/blob/master/lib/firestore_query.dart
+// extension FirestoreQueryExtension on Query {
+//   Future<QuerySnapshot> getSavy() async {
+//     try {
+//       QuerySnapshot qs = await this.get(GetOptions(source: Source.cache));
+//       if (qs.docs.isEmpty) return this.get(GetOptions(source: Source.server));
+//       return qs;
+//     } catch (_) {
+//       return this.get(GetOptions(source: Source.server));
+//     }
+//   }
+// }
 
 extension SnapshotExt on DocumentSnapshot {
   bool hasKey(String key) {

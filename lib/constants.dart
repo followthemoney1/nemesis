@@ -2,14 +2,15 @@
 //OTHER
 //
 
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-class TeamsCategoryConstants{
+class TeamsCategoryConstants {
   static final DOTA2 = 'ZFP7tRnG0Z8HgOzua9Mi';
   static final CSGO = 'kBequSKya9RKn8Wnee8N';
   static final LEAGUE_OF_LEGENDS = 'RENus071K9skU6ZKX0gT';
@@ -18,37 +19,66 @@ class TeamsCategoryConstants{
 launchURL(String url, {autolaunch = true}) async {
   if (await canLaunch(url)) {
     //await launch(url);
-   
+
   } else {
     throw 'Could not launch $url';
   }
 }
 
-Widget loadImageStateFunction(ExtendedImageState state) {
+class LoadStateWidget extends StatelessWidget{
+  ExtendedImageState state;
+  LoadStateWidget(this.state);
+
+  @override
+  Widget build(BuildContext context) {
+    final placecholder = ColorFiltered(
+  colorFilter: ColorFilter.mode(
+    Colors.grey,
+    BlendMode.saturation,
+  ),
+  child:Image.asset(
+        PLACEHOLDERS[8],
+        fit: BoxFit.cover,
+        
+      ),);
   switch (state.extendedImageLoadState) {
     case LoadState.loading:
-
-      return Image.asset(
-        DRAWABLE_NEWS_PLACEHOLDER,
-        fit: BoxFit.cover,
-      );
+      return placecholder;
       break;
 
     case LoadState.completed:
-    
       return state.completedWidget;
       break;
     case LoadState.failed:
-      return Image.asset(
-        DRAWABLE_NEWS_PLACEHOLDER,
-        fit: BoxFit.cover,
-      );
+      return placecholder;
       break;
     default:
-      return Image.asset(
-        DRAWABLE_NEWS_PLACEHOLDER,
-        fit: BoxFit.fitWidth,
+      return placecholder;
+  }
+
+  return Container();
+  }
+
+}
+
+Widget loadImageStateFunction(ExtendedImageState state) {
+  final placecholder = Image.asset(
+        PLACEHOLDERS[Random().nextInt(1)],
+        fit: BoxFit.cover,
       );
+  switch (state.extendedImageLoadState) {
+    case LoadState.loading:
+      return placecholder;
+      break;
+
+    case LoadState.completed:
+      return state.completedWidget;
+      break;
+    case LoadState.failed:
+      return placecholder;
+      break;
+    default:
+      return placecholder;
   }
 
   return Container();
@@ -66,6 +96,19 @@ const String DRAWABLE_SUGGESTION_PLACEHOLDER =
     "assets/images/placeholder_suggestion.jpg";
 
 const String DRAWABLE_NEWS_PLACEHOLDER = "assets/drawable/news_placeholder.png";
+const List<String> PLACEHOLDERS = [
+  "assets/placeholders/1.png",
+  "assets/placeholders/2.png",
+  "assets/placeholders/3.png",
+  "assets/placeholders/4.png",
+  "assets/placeholders/5.png",
+  "assets/placeholders/6.png",
+  "assets/placeholders/7.png",
+  "assets/placeholders/8.png",
+  "assets/placeholders/9.png",
+  "assets/placeholders/10.png"
+];
+
 const String DRAWABLE_FILTER_ICON = "assets/icons/filter_icon.svg";
 
 //

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sport_news/pr_extension.dart';
 
 class BBCReferenceNewsButton extends StatefulWidget {
-  String? innerText;
+  Widget? child;
   double padding;
-  BBCReferenceNewsButton({required this.innerText, required this.padding});
+  BBCReferenceNewsButton({required this.child, required this.padding});
 
   @override
   _BBCReferenceNewsButtonState createState() => _BBCReferenceNewsButtonState();
@@ -91,18 +91,7 @@ class _BBCReferenceNewsButtonState extends State<BBCReferenceNewsButton>
                   borderOnForeground: true,
                   color: Colors.transparent,
                   child: Center(
-                    child: AutoSizeText(
-                      widget.innerText!,
-                      maxLines: 2,
-                      maxFontSize: 14,
-                      minFontSize: 6,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.clip,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5!
-                          .copyWith(fontWeight: FontWeight.w600),
-                    ).padOnly(left: 6, right: 6),
+                    child: widget.child
                   )),
             );
           }),

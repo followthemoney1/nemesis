@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -7,7 +9,9 @@ import 'package:sport_news/style/theme/gallery_theme_data.dart';
 import 'package:sport_news/ui/header/header.dart';
 import 'package:sport_news/ui/home/home_page.dart';
 import 'package:sport_news/ui/match_detail/match_detail_controller.dart';
+import 'package:sport_news/ui/widgets/animated_elevation_card.dart';
 import 'package:sport_news/ui/widgets/animated_icons/big_progress/big_progress.dart';
+import 'package:sport_news/ui/widgets/b_b_c_reference_news_button.dart';
 import 'package:sport_news/ui/widgets/chat_widget/chat_widget.dart';
 import 'package:sport_news/ui/widgets/fluid_nav_bar/fluid_nav_bar.dart';
 import 'package:sport_news/ui/widgets/gradient_button.dart';
@@ -28,10 +32,10 @@ class MatchDetail extends GetView<MatchDetailController> {
     return Scaffold(
       body: Center(
         child: Stack(children: [
-           Positioned(
+          Positioned(
             top: Header.topHeight,
             bottom: 0,
-            left:  Header.topHeight,
+            left: Header.topHeight,
             right: 0,
             child: SafeArea(
               top: true,
@@ -39,7 +43,7 @@ class MatchDetail extends GetView<MatchDetailController> {
               child: body(),
             ),
           ),
-             Positioned(
+          Positioned(
             top: 0,
             right: 0,
             left: 0,
@@ -49,18 +53,15 @@ class MatchDetail extends GetView<MatchDetailController> {
               },
             ),
           ),
-            Positioned(
-              bottom: 0,
-              top: 0,
-              left: 0,
-              //right: 0,
-              child: FluidNavBar(
-                  selectedIndex: -1,
-                  onChange: (index)=>HomePage.onItemTapped(index, null)),
-            )
-            
-         
-         
+          Positioned(
+            bottom: 0,
+            top: 0,
+            left: 0,
+            //right: 0,
+            child: FluidNavBar(
+                selectedIndex: -1,
+                onChange: (index) => HomePage.onItemTapped(index, null)),
+          )
         ]),
       ),
     );
@@ -136,7 +137,7 @@ class MatchDetail extends GetView<MatchDetailController> {
 
   matchLogo() {
     if (controller.league == null) {
-      return Container(height:200,child:BigProgress());
+      return Container(height: 200, child: BigProgress());
     }
     return Container(
       height: 100,
@@ -166,57 +167,66 @@ class MatchDetail extends GetView<MatchDetailController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //team 1
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(height: 30),
-              AutoSizeText(
-                controller.team1!.name.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1!
-                    .copyWith(color: NewsThemeData.accentColor, fontSize: 20),
-                maxLines: 1,
-                minFontSize: 5,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-              ),
-              AutoSizeText(
-                '20%',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(color: Colors.white70),
-                maxLines: 1,
-                minFontSize: 3,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-              ),
-              Container(height: 10),
-              TextButton(
-                onPressed: () {},
-                child: AutoSizeText(
-                  'Show Team Info'.toUpperCase(),
-                  minFontSize: 6,
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(color: Colors.white24, fontSize: 8),
+          GestureDetector(
+            onTap: () {
+              controller.onTeam1Select = !controller.onTeam1Select;
+            },
+            child: AnimatedElevationCard(
+              selected: controller.onTeam1Select,
+              child: Row(children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(height: 30),
+                    AutoSizeText(
+                      controller.team1!.name.toString(),
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: NewsThemeData.accentColor, fontSize: 20),
+                      maxLines: 1,
+                      minFontSize: 5,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                    ),
+                    AutoSizeText(
+                      '20%',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2!
+                          .copyWith(color: Colors.white70),
+                      maxLines: 1,
+                      minFontSize: 3,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                    ),
+                    Container(height: 10),
+                    TextButton(
+                      onPressed: () {},
+                      child: AutoSizeText(
+                        'Show Team Info'.toUpperCase(),
+                        minFontSize: 6,
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption!
+                            .copyWith(color: Colors.white24, fontSize: 8),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Container(
-            width: 80,
-            height: 80,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: Image.network(controller.team1!.imageUrl!),
-          ),
 
+                //team 1 icon
+                Container(
+                  width: 80,
+                  height: 80,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.network(controller.team1!.imageUrl!),
+                ),
+              ]),
+            ),
+          ),
           Column(children: [
             AutoSizeText(
               'VS',
@@ -233,56 +243,64 @@ class MatchDetail extends GetView<MatchDetailController> {
                   fontSize: 8),
             ),
           ]),
-
-          Container(
-            width: 80,
-            height: 80,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: Image.network(controller.team2!.imageUrl!),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(height: 30),
-              AutoSizeText(
-                controller.team2!.name.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1!
-                    .copyWith(color: NewsThemeData.accentColor, fontSize: 20),
-                maxLines: 1,
-                minFontSize: 5,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-              ),
-              AutoSizeText(
-                '20%',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(color: Colors.white70),
-                maxLines: 1,
-                minFontSize: 3,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-              ),
-              Container(height: 10),
-              TextButton(
-                onPressed: () {},
-                child: AutoSizeText(
-                  'Show Team Info'.toUpperCase(),
-                  minFontSize: 6,
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(color: Colors.white24, fontSize: 8),
+          GestureDetector(
+            onTap: () {
+              controller.onTeam2Select = !controller.onTeam2Select;
+            },
+            child: AnimatedElevationCard(
+              selected: controller.onTeam2Select,
+             
+              child: Row(children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.network(controller.team2!.imageUrl!),
                 ),
-              ),
-            ],
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(height: 30),
+                    AutoSizeText(
+                      controller.team2!.name.toString(),
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: NewsThemeData.accentColor, fontSize: 20),
+                      maxLines: 1,
+                      minFontSize: 5,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                    ),
+                    AutoSizeText(
+                      '20%',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2!
+                          .copyWith(color: Colors.white70),
+                      maxLines: 1,
+                      minFontSize: 3,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                    ),
+                    Container(height: 10),
+                    TextButton(
+                      onPressed: () {},
+                      child: AutoSizeText(
+                        'Show Team Info'.toUpperCase(),
+                        minFontSize: 6,
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption!
+                            .copyWith(color: Colors.white24, fontSize: 8),
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+            ),
           ),
         ]);
   }

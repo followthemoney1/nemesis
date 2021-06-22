@@ -48,11 +48,9 @@ class FirebaseManager {
     if (currentLanguage == null) {
       String defaultSystemLocale = 'en_US'; //Platform.localeName;
       currentLanguage = defaultSystemLocale.split('_')[0];
-      //developer.log(currentLanguage);
     }
-    // if (langKey == null) langKey = await getFirebaseLangKeyByLang();
-    // if (newData == null) newData = await getNewsGroupsWithReturn();
 
+    await FirebaseFirestore.instance.enablePersistence();
     await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
   }
 

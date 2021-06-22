@@ -15,26 +15,25 @@ class MatchCardController extends GetxController {
   MatchCardController({required this.match, required this.tag});
 
   bool _hoverItem = false;
-  set hoverItem(bool h){
+  set hoverItem(bool h) {
     this._hoverItem = h;
     update();
   }
+
   bool get hoverItem => _hoverItem;
 
   LocalTeam? team1;
   LocalTeam? team2;
   League? league;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     getMatchData();
   }
 
   getMatchData() async {
-    team1 =
-        await firebaseManager.getTeamById(teamId: match.team1!.snapshotId!);
-    team2 =
-        await firebaseManager.getTeamById(teamId: match.team2!.snapshotId!);
+    team1 = await firebaseManager.getTeamById(teamId: match.team1!.snapshotId!);
+    team2 = await firebaseManager.getTeamById(teamId: match.team2!.snapshotId!);
     if (match.leagueId != null) {
       league = await firebaseManager.getLeagueById(leagueId: match.leagueId!);
       log(league!.imageUrl!);
