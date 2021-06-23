@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sport_news/data/helper/pair.dart';
 import 'package:sport_news/data/local/local_team.dart';
@@ -24,7 +25,11 @@ import 'package:sport_news/data/network_new/local_user.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:firebase/firebase.dart' as core;
 import 'package:sport_news/pr_extension.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+
 import 'dart:html' as html;
+
+import 'network_manager.dart';
 
 final GAME_CATEGORY = 'all_game_categoryes';
 final ALL_TEAMS = 'all_teams';
@@ -34,8 +39,12 @@ final USERS = "all_users";
 final CHATS = "all_chats";
 
 class FirebaseManager {
+  NetworkManager networkManager = Get.find<NetworkManager>();
   FirebaseFirestore database = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFunctions functions =
+      FirebaseFunctions.instanceFor(region: 'us-central1');
+
   core.Storage storage = core.storage();
 
   String? currentLanguage;
@@ -50,8 +59,12 @@ class FirebaseManager {
       currentLanguage = defaultSystemLocale.split('_')[0];
     }
 
-    await FirebaseFirestore.instance.enablePersistence();
+    FirebaseFirestore.instance.settings =
+        Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
     await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+    await FirebaseFirestore.instance.enablePersistence();
+
+    functions.useFunctionsEmulator(origin: 'http://localhost:5001');
   }
 
   //registration
@@ -268,8 +281,9 @@ class FirebaseManager {
   }
 
   //subscribe to chat
-  Stream<QuerySnapshot<Map>> subscribeToChat(
-      {required matchId, }) {
+  Stream<QuerySnapshot<Map>> subscribeToChat({
+    required matchId,
+  }) {
     return database
         .collection(CHATS)
         .doc(matchId)
@@ -279,7 +293,7 @@ class FirebaseManager {
         .snapshots();
   }
 
-  sendMessage({required matchId, required ChatMessage message}) async{
+  sendMessage({required matchId, required ChatMessage message}) async {
     var documentReference = database
         .collection(CHATS)
         .doc(matchId)
@@ -294,5 +308,19 @@ class FirebaseManager {
     });
 
     return '';
+  }
+
+  //functions
+  placeABet(
+      {required String userId,
+      required double place,
+      required String matchId,
+      required String onTeamId}) async {
+    await networkManager.placeABet(userId: userId, place: place.toString(), matchId: matchId,onTeamId: onTeamId);
+    // final callable = functions.httpsCallable('placeABet');
+    // final result = await callable
+    //     .call({'userId': userId, "place": place, "onTeamId": onTeamId});
+
+    // print(result);
   }
 }

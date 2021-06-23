@@ -19,6 +19,8 @@ class MatchEvent {
   LocalTeam? team2;
   String? leagueId;
   String? categoryId;
+  List<Placed> placed = [];
+  List<Totals> totals = [];
   MatchEvent();
 
   MatchEvent.fromSnapshot(DocumentSnapshot snapshot) {
@@ -36,9 +38,22 @@ class MatchEvent {
     this.viewCount = snapshot.hasKey('view_count') ? snapshot['view_count'] : 0;
     this.shareCount =
         snapshot.hasKey('share_count') ? snapshot['share_count'] : 0;
-    this.leagueId = snapshot.hasKey('league_id') ?  snapshot['league_id'] : null;
-    this.categoryId = snapshot.hasKey('category_id') ? snapshot['category_id'] : null;
+    this.leagueId = snapshot.hasKey('league_id') ? snapshot['league_id'] : null;
+    this.categoryId =
+        snapshot.hasKey('category_id') ? snapshot['category_id'] : null;
     log(likeCount.toString());
+
+    if (snapshot.hasKey("totals") && ['totals'] != null) {
+      snapshot['totals'].forEach((v) {
+        totals.add(new Totals.fromJson(v));
+      });
+    }
+
+    if (snapshot.hasKey("placed") && snapshot['placed'] != null) {
+      snapshot['placed'].forEach((v) {
+        placed.add(new Placed.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toMap() {
@@ -53,6 +68,28 @@ class MatchEvent {
     snapshot['share_count'] = this.shareCount;
     snapshot['league_id'] = this.leagueId;
     snapshot['category_id'] = this.categoryId;
+    //mark ;totals
+    if (this.totals != null && this.totals.isNotEmpty) {
+    } else {
+      final t1 = Totals()
+        ..onTeamId = this.team1!.snapshotId
+        ..placedTotalCof = 0
+        ..placedTotalSum = 0;
+      this.totals.add(t1);
+      final t2 = Totals()
+        ..onTeamId = this.team2!.snapshotId
+        ..placedTotalCof = 0
+        ..placedTotalSum = 0;
+      this.totals.add(t2);
+    }
+    snapshot['totals'] = this.totals.map((v) => v.toJson()).toList();
+    //mark: placed
+    if (this.placed != null && this.placed.isNotEmpty) {
+      snapshot['placed'] = this.placed.map((v) => v.toJson()).toList();
+    } else {
+      snapshot['placed'] = [];
+    }
+
     return snapshot;
   }
 
@@ -80,11 +117,66 @@ class MatchEvent {
       return Pair(true, 'online');
     }
   }
-   bool checkIfAnyIsNull() {
-    return [team1, team2, bo, matchStreamUrl,schedule,likeCount,viewCount,shareCount,leagueId,categoryId].contains(null);
+
+  bool checkIfAnyIsNull() {
+    return [
+      team1,
+      team2,
+      bo,
+      matchStreamUrl,
+      schedule,
+      likeCount,
+      viewCount,
+      shareCount,
+      leagueId,
+      categoryId
+    ].contains(null);
   }
 
-  
   // @override
   // List<Object> get props => [team1, team2, bo, matchStreamUrl,schedule,likeCount,viewCount,shareCount,leagueId,categoryId];
+}
+
+class Placed {
+  String? userId;
+  double? place;
+  String? onTeamId;
+
+  Placed({this.userId, this.place, this.onTeamId});
+
+  Placed.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    place = json['place'];
+    onTeamId = json['onTeamId'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userId'] = this.userId;
+    data['place'] = this.place;
+    data['onTeamId'] = this.onTeamId;
+    return data;
+  }
+}
+
+class Totals {
+  String? onTeamId;
+  double? placedTotalSum;
+  double? placedTotalCof;
+
+  Totals({this.onTeamId, this.placedTotalSum, this.placedTotalCof});
+
+  Totals.fromJson(Map<String, dynamic> json) {
+    onTeamId = json['on_team_id'];
+    placedTotalSum = json['placed_total_sum'];
+    placedTotalCof = json['placed_total_cof'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['on_team_id'] = this.onTeamId;
+    data['placed_total_sum'] = this.placedTotalSum;
+    data['placed_total_cof'] = this.placedTotalCof;
+    return data;
+  }
 }

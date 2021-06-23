@@ -337,10 +337,12 @@ class MatchDetail extends GetView<MatchDetailController> {
               },
             ),
           ).paddingAll(30),
-          GradientButton(
+          GestureDetector(onTap:(){
+            controller.placeBet();
+          },child:GradientButton(
             innerText: 'Place bet',
             padding: 20,
-          ),
+          ),),
         ],
       ),
     );

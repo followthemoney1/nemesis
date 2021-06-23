@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sport_news/data/local/local_team.dart';
@@ -16,7 +17,8 @@ class MatchDetailController extends GetxController with SingleGetTickerProviderM
   LocalTeam? team1;
   LocalTeam? team2;
   League? league;
-
+  LocalTeam? selectedTeam;
+  TextEditingController placeCountC = TextEditingController();
   // AnimatedElevationCardController team1controller = Get.put<AnimatedElevationCardController>(AnimatedElevationCardController('team1'),tag: 'team1');
   bool _onTeam1Select = false;
   set onTeam1Select(bool select1Team){
@@ -24,6 +26,11 @@ class MatchDetailController extends GetxController with SingleGetTickerProviderM
     // team1controller.updateAnim(selected:_onTeam1Select);
     if(onTeam2Select&&select1Team){
       onTeam2Select = false;
+    }
+     if(select1Team){
+    selectedTeam = team1;
+    }else{
+      selectedTeam = null;
     }
     update();
   }
@@ -37,6 +44,11 @@ class MatchDetailController extends GetxController with SingleGetTickerProviderM
     log(select2Team.toString());
     if(onTeam1Select&&select2Team){
       onTeam1Select = false;
+    }
+    if(select2Team){
+    selectedTeam = team2;
+    }else{
+      selectedTeam = null;
     }
     update();
   }
@@ -76,5 +88,13 @@ class MatchDetailController extends GetxController with SingleGetTickerProviderM
       log(league!.imageUrl!);
     }
     update();
+  }
+
+  placeBet()async{
+    // if (selectedTeam==null || placeCountC.text.isEmpty || selectedTeam==null || selectedTeam.snapshotId == null){
+    //   return ;
+    // }
+
+    await firebaseManager.placeABet(onTeamId: selectedTeam!.snapshotId!,place: 10,matchId: matchId!,userId: "firebaseManager.auth.currentUser!.uid");
   }
 }
