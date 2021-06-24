@@ -189,7 +189,7 @@ class MatchDetail extends GetView<MatchDetailController> {
                       textAlign: TextAlign.left,
                     ),
                     AutoSizeText(
-                      '20%',
+                    controller.match!.getTotalOnTeam(teamId: controller.team1!.snapshotId!).placedTotalCof!.toStringAsFixed(0)+'%',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2!
@@ -249,7 +249,6 @@ class MatchDetail extends GetView<MatchDetailController> {
             },
             child: AnimatedElevationCard(
               selected: controller.onTeam2Select,
-             
               child: Row(children: [
                 Container(
                   width: 80,
@@ -275,7 +274,7 @@ class MatchDetail extends GetView<MatchDetailController> {
                       textAlign: TextAlign.left,
                     ),
                     AutoSizeText(
-                      '20%',
+                      controller.match!.getTotalOnTeam(teamId: controller.team2!.snapshotId!).placedTotalCof!.toStringAsFixed(0)+'%',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2!
@@ -333,16 +332,20 @@ class MatchDetail extends GetView<MatchDetailController> {
                 if (formKey.currentState!.validate()) {
                   final parsed =
                       double.tryParse(v.toString())!.toStringAsPrecision(2);
+                  controller.placeCountC.text = parsed;
                 }
               },
             ),
           ).paddingAll(30),
-          GestureDetector(onTap:(){
-            controller.placeBet();
-          },child:GradientButton(
-            innerText: 'Place bet',
-            padding: 20,
-          ),),
+          GestureDetector(
+            onTap: () {
+              controller.placeBet();
+            },
+            child: GradientButton(
+              innerText: 'Place bet',
+              padding: 20,
+            ),
+          ),
         ],
       ),
     );

@@ -87,8 +87,8 @@ class MatchCard extends GetWidget<MatchCardController> {
                                       cache: true,
                                       retries: 3,
                                       filterQuality: FilterQuality.high,
-                                      loadStateChanged: (s)=>
-                                            LoadStateWidget(s)),
+                                      loadStateChanged: (s) =>
+                                          LoadStateWidget(s)),
                                 ),
                               ),
                             ).paddingOnly(bottom: 13),
@@ -121,123 +121,141 @@ class MatchCard extends GetWidget<MatchCardController> {
                           ]),
                     ),
                     Flexible(
-                            flex: 2,
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                        controller.team1 == null || controller.team1!.name.toString().isEmpty ? "" : controller.team1!.name.toString(),
-                                        group: teamName,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                                color:
-                                                    NewsThemeData.accentColor),
-                                        maxLines: 1,
-                                        minFontSize: 5,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      AutoSizeText(
-                                        '20%',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2!
-                                            .copyWith(color: Colors.white70),
-                                        maxLines: 1,
-                                        minFontSize: 3,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    width: 40,
-                                    height: 40,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: ExtendedImage.network(
-                                        controller.team1 ==null? '':controller.team1!.imageUrl!,
-                                        fit: BoxFit.cover,
-                                        cache: true,
-                                        retries: 3,
-                                        filterQuality: FilterQuality.low,
-                                        loadStateChanged:(s)=>
-                                            LoadStateWidget(s)),
-                                  ),
-                                  // Spacer(),
-                                  AutoSizeText(
-                                    'VS',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1!
-                                        .copyWith(
-                                            color: Colors.white70,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                  ),
-                                  // Spacer(),
-                                  Container(
-                                    width: 40,
-                                    height: 40,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: ExtendedImage.network(
-                                        controller.team2==null ? '':controller.team2!.imageUrl!,
-                                        fit: BoxFit.cover,
-                                        cache: true,
-                                        retries: 3,
-                                        filterQuality: FilterQuality.low,
-                                        loadStateChanged:
-                                            (s)=>
-                                            LoadStateWidget(s)),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AutoSizeText(
-                                       controller.team2==null || controller.team2!.name.toString().isEmpty ? "" : controller.team2!.name.toString(),
-                                        group: teamName,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1!
-                                            .copyWith(
-                                                color:
-                                                    NewsThemeData.accentColor),
-                                        maxLines: 1,
-                                        minFontSize: 5,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      AutoSizeText(
-                                        '20%',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2!
-                                            .copyWith(color: Colors.white70),
-                                        maxLines: 1,
-                                        minFontSize: 3,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ],
-                                  ),
-                                ]),
-                          ),
+                      flex: 2,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AutoSizeText(
+                                  controller.team1 == null ||
+                                          controller.team1!.name
+                                              .toString()
+                                              .isEmpty
+                                      ? ""
+                                      : controller.team1!.name.toString(),
+                                  group: teamName,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
+                                          color: NewsThemeData.accentColor),
+                                  maxLines: 1,
+                                  minFontSize: 5,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                ),
+                                AutoSizeText(
+                                  controller.match
+                                          .getTotalOnTeam(
+                                              teamId:
+                                                  controller.team1!.snapshotId!)
+                                          .placedTotalCof!
+                                          .toStringAsFixed(0) +
+                                      '%',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText2!
+                                      .copyWith(color: Colors.white70),
+                                  maxLines: 1,
+                                  minFontSize: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width: 40,
+                              height: 40,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: ExtendedImage.network(
+                                  controller.team1 == null
+                                      ? ''
+                                      : controller.team1!.imageUrl!,
+                                  fit: BoxFit.cover,
+                                  cache: true,
+                                  retries: 3,
+                                  filterQuality: FilterQuality.low,
+                                  loadStateChanged: (s) => LoadStateWidget(s)),
+                            ),
+                            // Spacer(),
+                            AutoSizeText(
+                              'VS',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(
+                                      color: Colors.white70,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                            ),
+                            // Spacer(),
+                            Container(
+                              width: 40,
+                              height: 40,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: ExtendedImage.network(
+                                  controller.team2 == null
+                                      ? ''
+                                      : controller.team2!.imageUrl!,
+                                  fit: BoxFit.cover,
+                                  cache: true,
+                                  retries: 3,
+                                  filterQuality: FilterQuality.low,
+                                  loadStateChanged: (s) => LoadStateWidget(s)),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AutoSizeText(
+                                  controller.team2 == null ||
+                                          controller.team2!.name
+                                              .toString()
+                                              .isEmpty
+                                      ? ""
+                                      : controller.team2!.name.toString(),
+                                  group: teamName,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
+                                          color: NewsThemeData.accentColor),
+                                  maxLines: 1,
+                                  minFontSize: 5,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                ),
+                                AutoSizeText(
+                                  controller.match
+                                          .getTotalOnTeam(
+                                              teamId:
+                                                  controller.team2!.snapshotId!)
+                                          .placedTotalCof!
+                                          .toStringAsFixed(0) +
+                                      '%',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText2!
+                                      .copyWith(color: Colors.white70),
+                                  maxLines: 1,
+                                  minFontSize: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            ),
+                          ]),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

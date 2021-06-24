@@ -25,7 +25,6 @@ import 'package:sport_news/data/network_new/local_user.dart';
 import 'package:sport_news/data/network_new/match_event.dart';
 import 'package:firebase/firebase.dart' as core;
 import 'package:sport_news/pr_extension.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 
 import 'dart:html' as html;
 
@@ -42,8 +41,8 @@ class FirebaseManager {
   NetworkManager networkManager = Get.find<NetworkManager>();
   FirebaseFirestore database = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseFunctions functions =
-      FirebaseFunctions.instanceFor(region: 'us-central1');
+  // FirebaseFunctions functions =
+  //     FirebaseFunctions.instanceFor(region: 'us-central1');
 
   core.Storage storage = core.storage();
 
@@ -64,7 +63,7 @@ class FirebaseManager {
     await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
     await FirebaseFirestore.instance.enablePersistence();
 
-    functions.useFunctionsEmulator(origin: 'http://localhost:5001');
+    // functions.useFunctionsEmulator(origin: 'http://localhost:5001');
   }
 
   //registration
@@ -311,16 +310,16 @@ class FirebaseManager {
   }
 
   //functions
-  placeABet(
-      {required String userId,
-      required double place,
-      required String matchId,
-      required String onTeamId}) async {
-    await networkManager.placeABet(userId: userId, place: place.toString(), matchId: matchId,onTeamId: onTeamId);
-    // final callable = functions.httpsCallable('placeABet');
-    // final result = await callable
-    //     .call({'userId': userId, "place": place, "onTeamId": onTeamId});
+  // placeABet(
+  //     {required String userId,
+  //     required double place,
+  //     required String matchId,
+  //     required String onTeamId}) async {
+  //   await networkManager.placeABet(userId: userId, place: place.toString(), matchId: matchId,onTeamId: onTeamId);
+  //   // final callable = functions.httpsCallable('placeABet');
+  //   // final result = await callable
+  //   //     .call({'userId': userId, "place": place, "onTeamId": onTeamId});
 
-    // print(result);
-  }
+  //   // print(result);
+  // }
 }

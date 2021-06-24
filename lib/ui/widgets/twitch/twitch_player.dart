@@ -46,7 +46,7 @@ class TwitchPlayerState extends State<TwitchPlayer> {
                       width: "${playerSize!.width}",
                       height: "${playerSize!.height}",
                       channel: "${widget.streamName}",
-                      autoplay: true,
+                      autoplay: false,
                       parent: ["nemesis.app",]
                     };
                     var player = new Twitch.Player("${widget.divId}", options);

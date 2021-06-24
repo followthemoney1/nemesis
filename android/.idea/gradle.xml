@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.6.2+1/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.2.0/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-6.1.2/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage-0.3.2/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_branch_sdk-3.1.0/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_app_links-1.1.1+4/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-5.3.2/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.1/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.5/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/streams_channel-0.3.0/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-6.0.4/android" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

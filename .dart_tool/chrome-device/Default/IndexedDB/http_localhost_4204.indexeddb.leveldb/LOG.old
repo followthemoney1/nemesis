@@ -1,0 +1,57 @@
+2021/06/24-14:57:07.632 e203 Reusing MANIFEST /private/var/folders/nj/nxttjcyx4cg4g352q8gf6fww0000gn/T/flutter_tools.iNXALj/flutter_tools_chrome_device.ELsS7G/Default/IndexedDB/http_localhost_4204.indexeddb.leveldb/MANIFEST-000001
+2021/06/24-14:57:07.634 e203 Recovering log #112
+2021/06/24-14:57:07.634 e203 Reusing old log /private/var/folders/nj/nxttjcyx4cg4g352q8gf6fww0000gn/T/flutter_tools.iNXALj/flutter_tools_chrome_device.ELsS7G/Default/IndexedDB/http_localhost_4204.indexeddb.leveldb/000112.log 
+2021/06/24-14:57:07.634 e203 Delete type=2 #62
+2021/06/24-14:57:07.634 e203 Delete type=2 #77
+2021/06/24-14:57:07.634 e203 Delete type=0 #12
+2021/06/24-14:57:07.634 e203 Delete type=2 #88
+2021/06/24-14:57:07.634 e203 Delete type=2 #103
+2021/06/24-14:57:07.634 e203 Delete type=2 #74
+2021/06/24-14:57:07.634 e203 Delete type=0 #39
+2021/06/24-14:57:07.635 e203 Delete type=2 #48
+2021/06/24-14:57:07.635 e203 Delete type=2 #59
+2021/06/24-14:57:07.635 e203 Delete type=2 #111
+2021/06/24-14:57:07.635 e203 Delete type=2 #107
+2021/06/24-14:57:07.635 e203 Delete type=2 #66
+2021/06/24-14:57:07.635 e203 Delete type=2 #29
+2021/06/24-14:57:07.635 e203 Delete type=0 #64
+2021/06/24-14:57:07.635 e203 Delete type=2 #14
+2021/06/24-14:57:07.635 e203 Delete type=0 #105
+2021/06/24-14:57:07.635 e203 Delete type=0 #102
+2021/06/24-14:57:07.635 e203 Delete type=0 #76
+2021/06/24-14:57:07.635 e203 Delete type=0 #61
+2021/06/24-14:57:07.635 e203 Delete type=2 #11
+2021/06/24-14:57:07.635 e203 Delete type=2 #8
+2021/06/24-14:57:07.635 e203 Delete type=0 #50
+2021/06/24-14:57:07.635 e203 Delete type=0 #87
+2021/06/24-14:57:07.635 e203 Delete type=2 #37
+2021/06/24-14:57:07.635 e203 Delete type=2 #22
+2021/06/24-14:57:07.635 e203 Delete type=0 #90
+2021/06/24-14:57:07.635 e203 Delete type=2 #25
+2021/06/24-14:57:07.635 e203 Delete type=0 #27
+2021/06/24-14:57:07.635 e203 Delete type=2 #40
+2021/06/24-14:57:07.635 e203 Delete type=0 #24
+2021/06/24-14:57:07.635 e203 Delete type=2 #92
+2021/06/24-14:57:07.635 e203 Delete type=2 #51
+2021/06/24-14:57:07.635 e203 Delete type=2 #85
+2021/06/24-14:57:07.803 6e07 Level-0 table #117: started
+2021/06/24-14:57:07.811 6e07 Level-0 table #117: 6528 bytes OK
+2021/06/24-14:57:07.821 6e07 Delete type=0 #112
+2021/06/24-14:57:07.828 6b03 Manual compaction at level-0 from '\x00\x1a\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1b\x00\x00\x00' @ 0 : 0; will stop at '\x00\x1a\x00\x00\x05' @ 1208 : 1
+2021/06/24-14:57:07.828 6b03 Compacting 1@0 + 1@1 files
+2021/06/24-14:57:07.833 6b03 Generated table #118@0: 60 keys, 3630 bytes
+2021/06/24-14:57:07.834 6b03 Compacted 1@0 + 1@1 files => 3630 bytes
+2021/06/24-14:57:07.847 6b03 compacted to: files[ 0 1 1 0 0 0 0 ]
+2021/06/24-14:57:07.848 6b03 Delete type=2 #117
+2021/06/24-14:57:07.850 6e07 Manual compaction at level-0 from '\x00\x1a\x00\x00\x05' @ 1208 : 1 .. '\x00\x1b\x00\x00\x00' @ 0 : 0; will stop at (end)
+2021/06/24-15:01:52.756 14203 Level-0 table #120: started
+2021/06/24-15:01:52.763 14203 Level-0 table #120: 6526 bytes OK
+2021/06/24-15:01:52.773 14203 Delete type=2 #114
+2021/06/24-15:01:52.773 14203 Delete type=0 #116
+2021/06/24-15:01:52.777 14203 Manual compaction at level-0 from '\x00\x1b\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1c\x00\x00\x00' @ 0 : 0; will stop at '\x00\x1b\x00\x00\x05' @ 1277 : 1
+2021/06/24-15:01:52.782 14203 Compacting 1@0 + 1@1 files
+2021/06/24-15:01:52.787 14203 Generated table #121@0: 66 keys, 3723 bytes
+2021/06/24-15:01:52.787 14203 Compacted 1@0 + 1@1 files => 3723 bytes
+2021/06/24-15:01:52.803 14203 compacted to: files[ 0 1 1 0 0 0 0 ]
+2021/06/24-15:01:52.806 14203 Delete type=2 #120
+2021/06/24-15:01:52.807 14203 Manual compaction at level-0 from '\x00\x1b\x00\x00\x05' @ 1277 : 1 .. '\x00\x1c\x00\x00\x00' @ 0 : 0; will stop at (end)

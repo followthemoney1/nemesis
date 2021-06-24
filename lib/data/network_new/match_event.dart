@@ -133,6 +133,10 @@ class MatchEvent {
     ].contains(null);
   }
 
+  Totals getTotalOnTeam({required String teamId}){
+   return this.totals.firstWhere((element) => element.onTeamId == teamId);
+  }
+
   // @override
   // List<Object> get props => [team1, team2, bo, matchStreamUrl,schedule,likeCount,viewCount,shareCount,leagueId,categoryId];
 }

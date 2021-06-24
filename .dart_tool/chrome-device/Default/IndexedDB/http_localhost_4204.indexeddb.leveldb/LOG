@@ -1,0 +1,49 @@
+2021/06/24-15:04:45.043 13a03 Reusing MANIFEST /private/var/folders/nj/nxttjcyx4cg4g352q8gf6fww0000gn/T/flutter_tools.EktyVy/flutter_tools_chrome_device.8ZUcQw/Default/IndexedDB/http_localhost_4204.indexeddb.leveldb/MANIFEST-000001
+2021/06/24-15:04:45.044 13a03 Recovering log #119
+2021/06/24-15:04:45.044 13a03 Reusing old log /private/var/folders/nj/nxttjcyx4cg4g352q8gf6fww0000gn/T/flutter_tools.EktyVy/flutter_tools_chrome_device.8ZUcQw/Default/IndexedDB/http_localhost_4204.indexeddb.leveldb/000119.log 
+2021/06/24-15:04:45.045 13a03 Delete type=2 #62
+2021/06/24-15:04:45.045 13a03 Delete type=2 #77
+2021/06/24-15:04:45.045 13a03 Delete type=0 #12
+2021/06/24-15:04:45.045 13a03 Delete type=2 #88
+2021/06/24-15:04:45.045 13a03 Delete type=2 #103
+2021/06/24-15:04:45.045 13a03 Delete type=2 #74
+2021/06/24-15:04:45.045 13a03 Delete type=0 #39
+2021/06/24-15:04:45.045 13a03 Delete type=2 #48
+2021/06/24-15:04:45.045 13a03 Delete type=2 #114
+2021/06/24-15:04:45.045 13a03 Delete type=2 #59
+2021/06/24-15:04:45.045 13a03 Delete type=2 #111
+2021/06/24-15:04:45.045 13a03 Delete type=2 #107
+2021/06/24-15:04:45.045 13a03 Delete type=2 #66
+2021/06/24-15:04:45.045 13a03 Delete type=2 #29
+2021/06/24-15:04:45.045 13a03 Delete type=0 #64
+2021/06/24-15:04:45.045 13a03 Delete type=2 #14
+2021/06/24-15:04:45.045 13a03 Delete type=0 #105
+2021/06/24-15:04:45.045 13a03 Delete type=0 #112
+2021/06/24-15:04:45.045 13a03 Delete type=0 #102
+2021/06/24-15:04:45.045 13a03 Delete type=0 #76
+2021/06/24-15:04:45.045 13a03 Delete type=0 #61
+2021/06/24-15:04:45.045 13a03 Delete type=2 #11
+2021/06/24-15:04:45.045 13a03 Delete type=2 #8
+2021/06/24-15:04:45.045 13a03 Delete type=0 #50
+2021/06/24-15:04:45.045 13a03 Delete type=0 #87
+2021/06/24-15:04:45.045 13a03 Delete type=2 #37
+2021/06/24-15:04:45.045 13a03 Delete type=2 #22
+2021/06/24-15:04:45.045 13a03 Delete type=0 #90
+2021/06/24-15:04:45.045 13a03 Delete type=2 #25
+2021/06/24-15:04:45.045 13a03 Delete type=0 #27
+2021/06/24-15:04:45.045 13a03 Delete type=2 #40
+2021/06/24-15:04:45.045 13a03 Delete type=0 #24
+2021/06/24-15:04:45.045 13a03 Delete type=2 #92
+2021/06/24-15:04:45.045 13a03 Delete type=2 #51
+2021/06/24-15:04:45.045 13a03 Delete type=2 #118
+2021/06/24-15:04:45.045 13a03 Delete type=2 #85
+2021/06/24-15:04:45.235 14103 Level-0 table #124: started
+2021/06/24-15:04:45.241 14103 Level-0 table #124: 6509 bytes OK
+2021/06/24-15:04:45.253 14103 Delete type=0 #119
+2021/06/24-15:04:45.258 fc03 Manual compaction at level-0 from '\x00\x1c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at '\x00\x1c\x00\x00\x05' @ 1346 : 1
+2021/06/24-15:04:45.258 fc03 Compacting 1@0 + 1@1 files
+2021/06/24-15:04:45.264 fc03 Generated table #125@0: 84 keys, 4180 bytes
+2021/06/24-15:04:45.264 fc03 Compacted 1@0 + 1@1 files => 4180 bytes
+2021/06/24-15:04:45.274 fc03 compacted to: files[ 0 1 1 0 0 0 0 ]
+2021/06/24-15:04:45.275 fc03 Delete type=2 #124
+2021/06/24-15:04:45.276 14103 Manual compaction at level-0 from '\x00\x1c\x00\x00\x05' @ 1346 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at (end)
