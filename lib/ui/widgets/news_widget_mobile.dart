@@ -1,3 +1,4 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sport_news/data/network/firebase_news.dart';
@@ -10,6 +11,7 @@ class NewsWidgetMobile extends StatelessWidget {
   final ScrollController scrollController = ScrollController();
 
   NewsWidgetMobile({required this.matches});
+  final listShowItemDuration = Duration(seconds: 4);
 
   @override
   Widget build(BuildContext context) {
@@ -17,31 +19,18 @@ class NewsWidgetMobile extends StatelessWidget {
       return SliverList(delegate: SliverChildListDelegate([Container()]));
     }
 
-    int _tempIndex = -1;
-    return AnimationLimiter(
-      child: SliverGrid(
-        // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 4),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            
-            crossAxisCount: 4,
-            childAspectRatio: 1.2, ),
-        delegate: SliverChildListDelegate(
-          matches.map((el) {
-            _tempIndex++;
-
-            return AnimationConfiguration.staggeredList(
-              position: _tempIndex,
-              duration: const Duration(milliseconds: 600),
-              child: SlideAnimation(
-                verticalOffset: 50.0,
-                child: FadeInAnimation(
-                  child: MatchCard(el: el),
-                ),
-              ),
-            );
-          }).toList(),
-        ),
+    return LiveSliverGrid(
+      controller: scrollController,
+      // delay: listShowItemDuration * (matches.length + 1),
+      itemCount: matches.length,
+      gridDelegate:
+          // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 4),
+          SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        childAspectRatio: 1.2,
       ),
+      itemBuilder: (context, position, animation) =>
+          MatchCard(el: matches.elementAt(position)),
     );
   }
 }

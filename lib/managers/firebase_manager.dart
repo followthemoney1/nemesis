@@ -187,6 +187,15 @@ class FirebaseManager {
     return matches;
   }
 
+  Stream<QuerySnapshot> getMatchesByCategoryStream(
+      {required String categoryId})  {
+    return  database
+        .collection(MATCHES)
+        .where('category_id', isEqualTo: categoryId)
+        .snapshots().asBroadcastStream();
+   
+  }
+
   Future<MatchEvent> getMatchesById({required String matchId}) async {
     final snapshot = await database.collection(MATCHES).doc(matchId).get();
     final match = MatchEvent.fromSnapshot(snapshot);

@@ -24,21 +24,24 @@ class MatchCard extends GetWidget<MatchCardController> {
   late String tag;
   MatchCard({required MatchEvent el}) {
     this.tag = el.snapshotId + '_CardListNews';
-    Get.put(MatchCardController(match: el, tag: tag), tag: tag);
+     Get.put(MatchCardController(match: el, tag: tag), tag: tag);
   }
   var teamName = AutoSizeGroup();
 
   get controller => Get.find<MatchCardController>(tag: tag);
+    // final key = GlobalKey(debugLabel: tag);
 
   @override
   Widget build(BuildContext context) {
     final isDesktop = isDisplayDesktop(context);
-
-    // final key = GlobalKey(debugLabel: el.title);
+    // print(
+    //     'controller = ${controller.match.getTotalOnTeam(teamId: controller.team1!.snapshotId!)}');
     return GetBuilder(
+        // key: key,
         tag: tag,
         init: controller,
-        builder: (_) => MousePosition(
+        builder: (_) => 
+        MousePosition(
             onEnter: (position) {
               controller.hoverItem = true;
             },
@@ -67,8 +70,8 @@ class MatchCard extends GetWidget<MatchCardController> {
                       child: Stack(
                           alignment: AlignmentDirectional.topCenter,
                           children: [
-                            AnimatedContainer(
-                              duration: const Duration(microseconds: 600),
+                            Container(
+                              
                               width: double.infinity,
                               child: Material(
                                 elevation: controller.hoverItem ? 6 : 0,
@@ -100,7 +103,7 @@ class MatchCard extends GetWidget<MatchCardController> {
                                   curve: Curves.fastOutSlowIn,
                                   padding: EdgeInsetsDirectional.all(
                                       controller.hoverItem ? 2 : 0),
-                                  duration: const Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 100),
                                   child: AutoSizeText(
                                     controller.match.isStarted().b,
                                     maxLines: 1,
@@ -149,13 +152,15 @@ class MatchCard extends GetWidget<MatchCardController> {
                                   textAlign: TextAlign.left,
                                 ),
                                 AutoSizeText(
-                                  controller.match
-                                          .getTotalOnTeam(
-                                              teamId:
-                                                  controller.team1!.snapshotId!)
-                                          .placedTotalCof!
-                                          .toStringAsFixed(0) +
-                                      '%',
+                                  controller.team1 != null
+                                      ? controller.match
+                                              .getTotalOnTeam(
+                                                  teamId: controller
+                                                      .team1!.snapshotId!)!
+                                              .placedTotalCof!
+                                              .toStringAsFixed(0) +
+                                          '%'
+                                      : '0%',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText2!
@@ -236,13 +241,15 @@ class MatchCard extends GetWidget<MatchCardController> {
                                   textAlign: TextAlign.left,
                                 ),
                                 AutoSizeText(
-                                  controller.match
-                                          .getTotalOnTeam(
-                                              teamId:
-                                                  controller.team2!.snapshotId!)
-                                          .placedTotalCof!
-                                          .toStringAsFixed(0) +
-                                      '%',
+                                  controller.team2 != null
+                                      ? controller.match
+                                              .getTotalOnTeam(
+                                                  teamId: controller
+                                                      .team2!.snapshotId!)!
+                                              .placedTotalCof!
+                                              .toStringAsFixed(0) +
+                                          '%'
+                                      : '0%',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText2!

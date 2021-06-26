@@ -27,9 +27,8 @@ import 'managers/shared_preference_manager.dart';
 import 'dart:html';
 
 void main() async {
-  window.document.onContextMenu.listen((evt) => evt.preventDefault());
-
   WidgetsFlutterBinding.ensureInitialized();
+  // window.document.onContextMenu.listen((evt) => evt.preventDefault());
 
   GoogleFonts.config.allowRuntimeFetching = true;
 
@@ -83,13 +82,13 @@ class _SportNewsState extends State<SportNews> {
         child: Builder(builder: (context) {
           return FeatureDiscovery(
             child: GetMaterialApp(
-              localeResolutionCallback:
-                  (Locale? locale, Iterable<Locale> supportedLocales) {
-                return locale;
-              },
-              smartManagement: SmartManagement.full,
+              // localeResolutionCallback:
+              //     (Locale? locale, Iterable<Locale> supportedLocales) {
+              //   return locale;
+              // },
+              smartManagement: SmartManagement.onlyBuilder,
               getPages: RouteConfiguration.pages,
-              // onGenerateRoute: RouteConfiguration.onGenerateRoute,
+              onGenerateRoute: RouteConfiguration.onGenerateRoute,
               initialBinding: InitialBinding(),
               initialRoute: HomePage.page,
               // initialRoute: AdminPanel.page,

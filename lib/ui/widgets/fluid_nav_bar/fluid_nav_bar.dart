@@ -31,6 +31,7 @@ class FluidNavBar extends StatelessWidget {
     return GetBuilder<FluidController>(
       init: controller,
       builder: (_) => AnimatedSize(
+        vsync: controller,
         duration: Duration(milliseconds: 300),
         curve:
             controller.widthChange ? Curves.easeInToLinear : Curves.easeOutBack,

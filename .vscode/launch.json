@@ -7,11 +7,12 @@
           "request": "launch",
           "program": "lib/main.dart",
           "args": [
+            
             "--web-port",
             "4204",
             "--web-renderer",
             "canvaskit",],
-          "flutterMode": "release"
+          "flutterMode": "profile"
       }
   ]
 }

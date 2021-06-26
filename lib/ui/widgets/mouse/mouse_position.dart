@@ -6,7 +6,7 @@ class MousePosition extends StatelessWidget {
   Function(PointerEvent)? onExit;
   Function(PointerEvent)? onHover;
 
-  MousePosition({required this.child, this.onEnter, this.onExit, this.onHover});
+  MousePosition({required this.child, this.onEnter, this.onExit, this.onHover,key}):super(key: key);
 
   void _incrementEnter(PointerEvent details) {
     if (onEnter != null) onEnter!(details);

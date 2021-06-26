@@ -124,7 +124,7 @@ class MatchDetail extends GetView<MatchDetailController> {
             matchLogo(),
             Container(height: 40),
             teams(),
-            placeABet(),
+            AnimatedSize(vsync: controller,duration:const Duration(seconds: 1),child:Container(child: controller.selectedTeam == null ? Container() : placeABet()),)
           ]),
         ),
         CardHolder(
@@ -189,7 +189,16 @@ class MatchDetail extends GetView<MatchDetailController> {
                       textAlign: TextAlign.left,
                     ),
                     AutoSizeText(
-                    controller.match!.getTotalOnTeam(teamId: controller.team1!.snapshotId!).placedTotalCof!.toStringAsFixed(0)+'%',
+                      controller.match!.getTotalOnTeam(
+                                  teamId: controller.team1!.snapshotId!) !=
+                              null
+                          ? controller.match!
+                                  .getTotalOnTeam(
+                                      teamId: controller.team1!.snapshotId!)!
+                                  .placedTotalCof!
+                                  .toStringAsFixed(0) +
+                              '%'
+                          : '0%',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2!
@@ -274,7 +283,16 @@ class MatchDetail extends GetView<MatchDetailController> {
                       textAlign: TextAlign.left,
                     ),
                     AutoSizeText(
-                      controller.match!.getTotalOnTeam(teamId: controller.team2!.snapshotId!).placedTotalCof!.toStringAsFixed(0)+'%',
+                      controller.match!.getTotalOnTeam(
+                                  teamId: controller.team2!.snapshotId!) !=
+                              null
+                          ? controller.match!
+                                  .getTotalOnTeam(
+                                      teamId: controller.team2!.snapshotId!)!
+                                  .placedTotalCof!
+                                  .toStringAsFixed(0) +
+                              '%'
+                          : '0%',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2!

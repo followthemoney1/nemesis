@@ -133,7 +133,7 @@ class MatchEvent {
     ].contains(null);
   }
 
-  Totals getTotalOnTeam({required String teamId}){
+  Totals? getTotalOnTeam({required String teamId}){
    return this.totals.firstWhere((element) => element.onTeamId == teamId);
   }
 

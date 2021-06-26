@@ -9,7 +9,7 @@ class MatchesListController extends GetxController {
   String tag;
   MatchesListController({required this.tag});
 
-  List<MatchEvent> matches = <MatchEvent>[].obs;
+  List<MatchEvent> matches = [];
 
   @override
   void onInit() async {
@@ -19,7 +19,16 @@ class MatchesListController extends GetxController {
   }
 
   getMatches() async {
-    matches = await firebaseManager.getMatchesByCategory(categoryId: tag);
-    update();
+    final s =  firebaseManager.getMatchesByCategoryStream(categoryId: tag);
+    s.forEach((element) {
+      final matches = element.docs.map((snapshot) {
+        return MatchEvent.fromSnapshot(snapshot);
+      }).toList();
+
+      this.matches.clear();
+      this.matches.addAll(matches);
+      update();
+    });
+    // update();
   }
 }
