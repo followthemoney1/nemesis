@@ -6,4 +6,11 @@ In our product, We would like to see opportunities for the user to make a paymen
 
 Now our site is almost ready, but we are already looking for opportunities to implement API. At this stage, we have already attracted investors for the 2nd round of investments. Can we count on interaction?
 
+From design:
 ![index (chat)](https://user-images.githubusercontent.com/8526612/176561160-c430f39d-1c61-4e78-a976-953325f2fbb4.png)
+
+To real project with custom animations:
+
+
+https://user-images.githubusercontent.com/8526612/176649752-62bd72a2-06e2-41e9-a3c2-59d763741b2f.mov
+
